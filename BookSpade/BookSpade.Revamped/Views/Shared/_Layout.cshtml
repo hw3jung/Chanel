@@ -2,32 +2,127 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title BookSpade</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+         <link rel="stylesheet" href="@(Url.Content("http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"))" />
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/effects/stroll/stroll.css")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/Scripts/jquery-1.9.1.js")
+        @Scripts.Render("~/Scripts/jquery-ui-1.10.1.custom.min.js")
+        @Scripts.Render("~/Scripts/stroll.js")
+        @Scripts.Render("~/Scripts/Common.js")
+        
+        <script>
+            $(function () {
+
+                $("#accordion").accordion();
+                $(".accordion").accordion();
+
+                var availableTags = [
+                    "ActionScript",
+                    "AppleScript",
+                    "Asp",
+                    "BASIC",
+                    "C",
+                    "C++",
+                    "Clojure",
+                    "COBOL",
+                    "ColdFusion",
+                    "Erlang",
+                    "Fortran",
+                    "Groovy",
+                    "Haskell",
+                    "Java",
+                    "JavaScript",
+                    "Lisp",
+                    "Perl",
+                    "PHP",
+                    "Python",
+                    "Ruby",
+                    "Scala",
+                    "Scheme"
+                ];
+                $("#autocomplete").autocomplete({
+                    source: availableTags
+                });
+
+                $("input:text").autocomplete({
+                    source: availableTags
+                });
+
+                $("#tabs").tabs();
+
+                $("#dialog").dialog({
+                    autoOpen: false,
+                    width: 400,
+                    buttons: [
+                        {
+                            text: "Ok",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        },
+                        {
+                            text: "Cancel",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+
+                // Link to open the dialog
+                $("#dialog-link").click(function (event) {
+                    $("#dialog").dialog("open");
+                    event.preventDefault();
+                });
+
+
+
+                $("#datepicker").datepicker({
+                    inline: true
+                });
+
+
+
+                $("#slider").slider({
+                    range: true,
+                    values: [17, 67]
+                });
+
+
+
+                $("#progressbar").progressbar({
+                    value: 20
+                });
+
+
+                // Hover states on the static widgets
+                $("#dialog-link, #icons li").hover(
+                    function () {
+                        $(this).addClass("ui-state-hover");
+                    },
+                    function () {
+                        $(this).removeClass("ui-state-hover");
+                    }
+                );
+            });
+        </script>
     </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
+    <header>
+            <div class="headerWrapper">
+                <div class="logoWrapper">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="@(Url.Content("~/Images/logo-booksInSpade_Grey.png"))" />
+                    </a>
                 </div>
             </div>
+        @RenderSection("Script", required: false)
         </header>
+    <body>
+        
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
@@ -42,7 +137,90 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
+
+        <script type="text/ecmascript">
+            $(function () {
+                $(document).on('click', '.reportbug', function () {
+                    var LoginStatus = $("#LoginStatus").text();
+                    if (LoginStatus == "True") {
+                        ReportBugDialog();
+                    }
+                    else {
+                        LoginRequestDialog();
+                    }
+                });
+            });
+
+            function ReportBugDialog() {
+                $("#reportBug").dialog({
+                    height: 550,
+                    width: 800,
+                    modal: true,
+                    buttons: [{
+                        text: "Cancel",
+                        "class": 'EmailCancel',
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }]
+                });
+            }
+
+            function LoginRequestDialog() {
+                $("#mdlLoginRequest").dialog({
+                    height: 200,
+                    width: 500,
+                    modal: true
+                });
+            }
+
+            $(document).on('click', '.btn-submit', function () {
+
+                var bugmsg = $(this).siblings('.bugmsg').val();
+
+                $.ajax({
+                    url: '@Url.Action("ReportABug", "Home")',
+                    data: {
+                        BugMsg: bugmsg
+                    },
+                    type: 'POST',
+                    success: function (result) {
+                        if (result) {
+                            SuccessDialog(this);
+                        } else {
+                            FailDialog(this);
+                        }
+                    }
+                });
+            });
+
+                function SuccessDialog(dialog) {
+                    $("#reportSuccess").dialog({
+                        height: 300,
+                        width: 500,
+                        modal: true,
+                        buttons: {
+                            "OK": function () {
+                                $(".ui-dialog-content").dialog("close");
+                            }
+                        }
+                    });
+                }
+
+                function FailDialog() {
+                    $("#reportFail").dialog({
+                        height: 300,
+                        width: 500,
+                        modal: true,
+                        buttons: {
+                            "OK": function () {
+                                $(".ui-dialog-content").dialog("close");
+                            }
+                        }
+                    });
+                }
+            </script>
+
     </body>
 </html>

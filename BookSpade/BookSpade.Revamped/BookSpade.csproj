@@ -172,6 +172,15 @@
     <Compile Include="RazorEngineCustomized.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\bg_pattern.jpg" />
+    <Content Include="Content\Images\BookStack.png" />
+    <Content Include="Content\Images\bs_btn_login.png" />
+    <Content Include="Content\Images\login-with-facebook.png" />
+    <Content Include="Content\Images\MarketBuy.png" />
+    <Content Include="Content\Images\marketpriceBG.png" />
+    <Content Include="Content\Images\MarketSell.png" />
+    <Content Include="Content\Images\StaticImage.jpg" />
+    <Content Include="Content\Pages\Home.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -229,6 +238,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Images\bookspadeText.png" />
+    <Content Include="Images\fb_button-login.png" />
+    <Content Include="Images\homeImage_bookStand.png" />
+    <Content Include="Images\load.gif" />
+    <Content Include="Images\logo-booksInSpade.png" />
+    <Content Include="Images\logo-booksInSpade_Grey.png" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -284,6 +299,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
