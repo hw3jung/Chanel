@@ -5,141 +5,50 @@
         <title>@ViewBag.Title BookSpade</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-         <link rel="stylesheet" href="@(Url.Content("http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"))" />
+        
         @Styles.Render("~/Content/css")
-        @Styles.Render("~/Content/effects/stroll/stroll.css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/Scripts/jquery-1.9.1.js")
-        @Scripts.Render("~/Scripts/jquery-ui-1.10.1.custom.min.js")
-        @Scripts.Render("~/Scripts/stroll.js")
-        @Scripts.Render("~/Scripts/Common.js")
-        
-        <script>
-            $(function () {
-
-                $("#accordion").accordion();
-                $(".accordion").accordion();
-
-                var availableTags = [
-                    "ActionScript",
-                    "AppleScript",
-                    "Asp",
-                    "BASIC",
-                    "C",
-                    "C++",
-                    "Clojure",
-                    "COBOL",
-                    "ColdFusion",
-                    "Erlang",
-                    "Fortran",
-                    "Groovy",
-                    "Haskell",
-                    "Java",
-                    "JavaScript",
-                    "Lisp",
-                    "Perl",
-                    "PHP",
-                    "Python",
-                    "Ruby",
-                    "Scala",
-                    "Scheme"
-                ];
-                $("#autocomplete").autocomplete({
-                    source: availableTags
-                });
-
-                $("input:text").autocomplete({
-                    source: availableTags
-                });
-
-                $("#tabs").tabs();
-
-                $("#dialog").dialog({
-                    autoOpen: false,
-                    width: 400,
-                    buttons: [
-                        {
-                            text: "Ok",
-                            click: function () {
-                                $(this).dialog("close");
-                            }
-                        },
-                        {
-                            text: "Cancel",
-                            click: function () {
-                                $(this).dialog("close");
-                            }
-                        }
-                    ]
-                });
-
-                // Link to open the dialog
-                $("#dialog-link").click(function (event) {
-                    $("#dialog").dialog("open");
-                    event.preventDefault();
-                });
-
-
-
-                $("#datepicker").datepicker({
-                    inline: true
-                });
-
-
-
-                $("#slider").slider({
-                    range: true,
-                    values: [17, 67]
-                });
-
-
-
-                $("#progressbar").progressbar({
-                    value: 20
-                });
-
-
-                // Hover states on the static widgets
-                $("#dialog-link, #icons li").hover(
-                    function () {
-                        $(this).addClass("ui-state-hover");
-                    },
-                    function () {
-                        $(this).removeClass("ui-state-hover");
-                    }
-                );
-            });
-        </script>
+        @Styles.Render("~/Content/effects/stroll/stroll.min.css")
+        @Styles.Render("~/Content/bootstrap/css/bootstrap.min.css")
+        @Styles.Render("~/Content/bootstrap/css/bootstrap-responsive.min.css")
     </head>
-    <header>
-            <div class="headerWrapper">
-                <div class="logoWrapper">
-                    <a href="@Url.Action("Index", "Home")">
-                        <img src="@(Url.Content("~/Images/logo-booksInSpade_Grey.png"))" />
-                    </a>
-                </div>
-            </div>
-        @RenderSection("Script", required: false)
-        </header>
     <body>
-        
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+        <div class="body container-fluid">
+            <header class="row-fluid">
+                <div class="headerWrapper">
+                    <div class="logoWrapper">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="@(Url.Content("~/Images/logo-booksInSpade_Grey.png"))" />
+                        </a>
+                    </div>
                 </div>
+            </header>
+            <div class="row-fluid">
+                @RenderBody()
             </div>
-        </footer>
+            <footer class="row-fluid">
+                <!--Links and legal disclaimer goes here-->
+                <ul>
+                    <li>BookSpade &copy; @DateTime.Now.Year</li>
+
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    <li><a href="#" class="reportbug">Report a Bug</a></li>
+                </ul>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
+        @Scripts.Render("~/Scripts/stroll.js")
+        @Scripts.Render("~/Scripts/bootstrap/bootstrap.min.js")
 
         @RenderSection("scripts", required: false)
 
-        <script type="text/ecmascript">
+        <script type="text/javascript">
             $(function () {
                 $(document).on('click', '.reportbug', function () {
                     var LoginStatus = $("#LoginStatus").text();
@@ -221,6 +130,5 @@
                     });
                 }
             </script>
-
     </body>
 </html>

@@ -172,6 +172,16 @@
     <Compile Include="RazorEngineCustomized.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\effects\qtip2\jquery.qtip.css" />
+    <Content Include="Content\effects\qtip2\jquery.qtip.min.css" />
+    <Content Include="Content\effects\stroll\stroll.css" />
+    <Content Include="Content\effects\stroll\stroll.min.css" />
     <Content Include="Content\Images\bg_pattern.jpg" />
     <Content Include="Content\Images\BookStack.png" />
     <Content Include="Content\Images\bs_btn_login.png" />
@@ -180,7 +190,9 @@
     <Content Include="Content\Images\marketpriceBG.png" />
     <Content Include="Content\Images\MarketSell.png" />
     <Content Include="Content\Images\StaticImage.jpg" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\Pages\Home.css" />
+    <Content Include="Content\Mobile.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -244,11 +256,20 @@
     <Content Include="Images\load.gif" />
     <Content Include="Images\logo-booksInSpade.png" />
     <Content Include="Images\logo-booksInSpade_Grey.png" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.0.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.qtip.js" />
+    <Content Include="Scripts\jquery.qtip.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -258,6 +279,8 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\stroll.js" />
+    <Content Include="Scripts\stroll.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
