@@ -11,7 +11,7 @@ footer {
     height: 100%;
     text-align: center;
     vertical-align: middle;
-    padding: 140px 0;
+    padding: 131px 0;
 }
 
 #foregroundWrapper {
@@ -21,7 +21,8 @@ footer {
 #foreLeft {
     width: 530px;
     display: inline-block;
-    padding: 2em;
+    padding: 30px;
+    margin: 0 50px;
     vertical-align: middle;
     text-align: left;
     background: url('../images/marketpriceBG.png') repeat;
@@ -37,7 +38,7 @@ footer {
 #foreRight {
     display: inline-block;
     text-align: right;
-    margin-left: 100px;
+    margin: 30px 30px 0 30px;
 }
 
     #foreRight img {
@@ -88,12 +89,6 @@ a {
     font: 24px calibri bold;
     color: #ccc;
 }
-
-#loginHome {
-    text-align: right;
-    padding: 1% 2% 0 0
-}
-
 
 
 

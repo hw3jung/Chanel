@@ -47,7 +47,6 @@ body {
 #login {
     display: block;
     font-size: .85em;
-    margin: 0 0 10px;
     text-align: right;
 }
 
@@ -74,6 +73,12 @@ body {
         display: inline;
         list-style: none;
     }
+
+#loginHome {
+    text-align: right;
+    padding: 13px 0 0 0;
+}
+
 
 /* login page */
 #loginForm {
@@ -310,7 +315,7 @@ footer{
 	color: #666;
 	overflow: hidden;
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 footer ul li{
