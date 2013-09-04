@@ -238,6 +238,10 @@ namespace BookSpade.Revamped.Controllers
             {
                 // User is new, ask for their desired membership name
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                
+                string name = result.ExtraData["name"];
+                string fbId = result.ExtraData["id"]; 
+              
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
