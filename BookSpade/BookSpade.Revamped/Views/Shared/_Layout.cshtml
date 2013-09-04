@@ -6,10 +6,10 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         
-        @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/effects/stroll/stroll.min.css")
         @Styles.Render("~/Content/bootstrap/css/bootstrap.min.css")
         @Styles.Render("~/Content/bootstrap/css/bootstrap-responsive.min.css")
+        @Styles.Render("~/Content/css")
     </head>
     <body>
         <div class="body container-fluid">
@@ -33,15 +33,15 @@
             <footer class="row-fluid">
                 <!--Links and legal disclaimer goes here-->
                 <ul>
-                    <li>BookSpade &copy; @DateTime.Now.Year</li>
+                    <li class="span2">BookSpade &copy; @DateTime.Now.Year</li>
 
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="span2">@Html.ActionLink("Home", "Index", "Home")</li>
                 
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="span2">@Html.ActionLink("About", "About", "Home")</li>
 
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="span2">@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                    <li><a href="#" class="reportbug">Report a Bug</a></li>
+                    <li class="span2"><a href="#" class="reportbug">Report a Bug</a></li>
                 </ul>
             </footer>
         </div>

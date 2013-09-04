@@ -11,7 +11,7 @@ footer {
     height: 100%;
     text-align: center;
     vertical-align: middle;
-    padding: 131px 0;
+    padding: 131px 0 150px 0;
 }
 
 #foregroundWrapper {
@@ -39,6 +39,7 @@ footer {
     display: inline-block;
     text-align: right;
     margin: 30px 30px 0 30px;
+    width: 234px;
 }
 
     #foreRight img {
