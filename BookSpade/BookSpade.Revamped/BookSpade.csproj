@@ -168,7 +168,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Handlers\CourseHandler.cs" />
+    <Compile Include="Handlers\PostHandler.cs" />
+    <Compile Include="Handlers\TextbookHandler.cs" />
+    <Compile Include="Handlers\TransactionHandler.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Textbook.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionHistory.cs" />
+    <Compile Include="Models\TransactionDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorEngineCustomized.cs" />
   </ItemGroup>
