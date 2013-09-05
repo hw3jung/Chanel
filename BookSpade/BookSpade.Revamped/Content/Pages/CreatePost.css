@@ -1,0 +1,46 @@
+﻿.new-post {
+    text-align: center;
+}
+
+.form-horizontal .control-label {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    cursor: default;
+}
+
+.form-horizontal .controls {
+    display: inline-block;
+    width: 300px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+    .form-horizontal .controls input {
+        margin-top: 0;
+    }
+
+    .form-horizontal .controls .radio {
+        width: 80px;
+        text-align: left;
+    }
+
+    .form-horizontal .controls .radio input {
+       margin: 3px 10px 0 -10px;
+        margin-left: -10px;
+        margin-top: 3px;
+
+    }
+
+    .form-horizontal .controls .radio:first-child {
+        padding-top: 7px;
+    }
+
+    .form-horizontal .controls .radio:last-child {
+        padding-top: 13px;
+    }
+
+legend {
+    margin-bottom: 0;
+    border-bottom: 1px solid #000;
+}

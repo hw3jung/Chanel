@@ -132,16 +132,6 @@ body {
     display: inline;
 }
 
-label {
-    display: block;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-label.checkbox {
-    display: inline;
-}
-
 input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
@@ -305,6 +295,15 @@ tr.pager td {
 }
 
 /******************************************************************/
+/***************************** header *****************************/
+/******************************************************************/
+header.row-fluid {
+    float: left;
+    width: 200px;
+    margin-top: 7px;
+}
+
+/******************************************************************/
 /***************************** footer *****************************/
 /******************************************************************/
 
@@ -313,6 +312,7 @@ footer{
     background: #666;
 	color: #666;
     font-size: 16px;
+    background: transparent;
 }
 
 footer ul {

@@ -30,7 +30,7 @@ namespace BookSpade.Revamped.Models
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Your Email")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -58,7 +58,7 @@ namespace BookSpade.Revamped.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Your Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -73,7 +73,7 @@ namespace BookSpade.Revamped.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Your Email")]
         public string UserName { get; set; }
 
         [Required]

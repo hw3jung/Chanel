@@ -1,25 +1,29 @@
 ﻿@Styles.Render("~/Content/Pages/Home.css")
 
-<div id ="foregroundCell">
-    <div id ="foregroundWrapper">
+<div id="foregroundCell">
+    <div id="foregroundWrapper">
         <div id="foreLeft">
-                <img src="@(Url.Content("~/Images/bookspadeText.png"))" style="width: 100%"/>
-      
-                <br />
-                <div id="description">
-                    Buy and sell the books you want at the price they should be.
-                </div>
-                
-                <div id="needToBuySell">
-                    <a href="@(Url.Action("Index", "Market", new { isBuy = false }))" title="Buy Textbooks"><div class="buttonBuySell">Buy</div></a>
-                            
-                    <a href="@(Url.Action("Index", "Market", new { isBuy = true }))" title="Sell Textbooks"><div class="buttonBuySell">Sell</div></a>
-                </div>
-		</div>
+            <img src="@(Url.Content("~/Images/bookspadeText.png"))" style="width: 100%"/>
 
-		<div id="foreRight">
+            <br />
+            <div id="description">
+                Buy and sell the books you want at the price they should be.
+            </div>
+
+            <div id="needToBuySell">
+                <a href="@(Url.Action("Index", "Market", new { isBuy = false }))" title="Buy Textbooks">
+                    <div class="buttonBuySell">Buy</div>
+                </a>
+
+                <a href="@(Url.Action("Index", "Market", new { isBuy = true }))" title="Sell Textbooks">
+                    <div class="buttonBuySell">Sell</div>
+                </a>
+            </div>
+        </div>
+
+        <div id="foreRight">
             <img src="@(Url.Content("~/Images/homeImage_bookStand.png"))" />
-		</div>
+        </div>
     </div>
 </div>
 

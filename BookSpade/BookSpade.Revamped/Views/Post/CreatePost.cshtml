@@ -1,0 +1,159 @@
+﻿@Styles.Render("~/Content/Pages/CreatePost.css")
+
+<div class="new-post">
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+  <legend>Match My Book</legend>
+
+  <!-- Select Basic -->
+  <div class="control-group">
+    <label class="control-label">I want to</label>
+    <div class="controls">
+      <select id="postType" name="postType" class="input-xlarge">
+        <option>Buy a book</option>
+        <option>Sell a book</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Multiple Radios -->
+  <div class="control-group">
+    <label class="control-label">Book Condition</label>
+    <div class="controls">
+      <label class="radio">
+        <input type="radio" name="condition" value="Excellent" checked="checked">
+        Excellent
+      </label>
+      <label class="radio">
+        <input type="radio" name="condition" value="Good">
+        Good
+      </label>
+      <label class="radio">
+        <input type="radio" name="condition" value="Decent">
+        Decent
+      </label>
+      <label class="radio">
+        <input type="radio" name="condition" value="Poor">
+        Poor
+      </label>
+      <label class="radio">
+        <input type="radio" name="condition" value="Terrible">
+        Terrible
+      </label>
+    </div>
+  </div>
+
+  <!-- Multiple Checkboxes -->
+  <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox" name="negotiatePrice" value="I want to negotiate the price.">
+        I want to negotiate the price.
+      </label>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="control-group">
+    <label class="control-label">Price</label>
+    <div class="controls">
+      <input id="bookPrice" name="bookPrice" type="text" placeholder="100" class="input-xlarge" required="">
+    
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+      <button id="matchButton" name="matchButton" class="btn btn-primary">Match Me!</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+
+</div>
+
+
+@Scripts.Render("~/Static/CreatePost.js")
+
+@*@model IEnumerable<BRApplication.Models.Textbook>*@
+
+@*<div id="SubmitDialog" title="Contact Preference">
+    <div id="ContactPref">
+        <div class="PrefDetail">
+            <ul>
+                <li class="lblContactRef">Email</li>
+                <li class="valContactRef">This will be kept private. BookSpade will send you an email with the contact of those interested.</li>
+            </ul>
+        </div>
+        <div class="PrefDetail">
+            <ul>
+                <li class="lblContactRef">Facebook</li>
+                <li class="valContactRef">A profile link will be displayed to everyone interested in responding to your post.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        @Html.RadioButton("Pref", false)Facebook
+        @Html.RadioButton("Pref", true)Email
+    </div>
+    <div id="divContactEmail" style="display:none;">
+        Please enter a valid email: 
+        @Html.TextBox("txtContactEmail")
+    </div>
+</div>
+
+<div id="ErrorDialog" title="Oops!"> Please select a book or add you own book</div>
+
+
+<div class="PostContainer">
+    <div class="NewPost">
+        <div class="PostHeader">
+            <img src="@Url.Content("~/Content/Images/BookStack.png")" alt="BookStack"/>&nbsp
+            Add Your Posting
+        </div>
+        <div class="SearchBook">
+            <input id="BookSearch" type="text" placeholder="Search by Title, Course, or ISBN"/>
+        </div>
+        <div class="ChooseBook">
+            <div id="BookListWrapper">
+                <ul id="BookList" class="SearchResults wave">
+                    @Html.Partial("BookList_Partial", Model)
+                </ul>
+            </div>
+            <a href="javscript:void(0)" class="link">Cannot find your book? Click Here</a>
+        </div>
+    </div>
+    <form id="NewBookForm" autocomplete="off">
+        <div class="hidden">
+            @Html.Partial("AddBook_Partial");
+        </div>
+    </form>
+</div>
+
+<form id="CommonFields" autocomplete="off">
+    <div class="AddPost">
+        Make the price negotiable <input type="checkbox" id="cbNegotiationPrice"/>
+        <input id="Price" class="InputGradient Info" type="text" placeholder="Price ($)" onkeydown="return FilterInputByDigits(event)" />
+        <input id="SubmitButton" type="button" value="Add Post" />
+    </div>
+    <div class="PostType">
+            <select id="PostType">
+                <option value="Buy" selected>Buy</option>
+                <option value="Sell">Sell</option>
+            </select>
+            <select id="Condition" class="InputGradient Info" >
+                <option value="" disabled selected>Condition</option>
+                <option value="Like New">Like New</option>
+                <option value="Good">Good</option>
+                <option value="Not Bad">Not Bad</option>
+                <option value="Salvageable">Salvageable</option>
+            </select>    
+    </div>
+</form>*@
