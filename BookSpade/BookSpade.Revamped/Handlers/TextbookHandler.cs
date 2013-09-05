@@ -24,7 +24,7 @@ namespace BookSpade.Revamped.Handlers
                 if (dt == null || dt.Rows.Count == 0)
                 {
 
-                    int courseId = !string.IsNullOrEmpty(book.NewCourseName) ? CourseHandler.CreateCourse(book.NewCourseName) : book.CourseId.Value;
+                    int courseId = !string.IsNullOrEmpty(book.NewCourseName) ? CourseHandler.CreateCourse(book.NewCourseName) : book.CourseId;
 
                     Dictionary<string, string> textbook = new Dictionary<string, string>();
                     textbook.Add("ISBN", book.ISBN);
@@ -61,17 +61,17 @@ namespace BookSpade.Revamped.Handlers
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int BookId = (int)row["TextBookId"];
-                    string BookTitle = (string)row["BookTitle"];
-                    string ISBN = (string)row["ISBN"];
-                    string Author = (string)row["Author"];
-                    int CourseId = (int)row["CourseId"];
+                    int BookId = Convert.ToInt32(row["TextBookId"]);
+                    string BookTitle = Convert.ToString(row["BookTitle"]);
+                    string ISBN = Convert.ToString(row["ISBN"]);
+                    string Author = Convert.ToString(row["Author"]);
+                    int CourseId = Convert.ToInt32(row["CourseId"]);
                     string BookImageUrl = Convert.ToString(row["BookImageURL"]);
-                    decimal StorePrice = (decimal)row["StorePrice"];
-                    int IsActive = (int)row["IsActive"];
-                    int IsDeleted = (int)row["IsDeleted"];
-                    DateTime CreatedDate = (DateTime)row["CreatedDate"];
-                    DateTime ModifiedDate = (DateTime)row["ModifiedDate"];
+                    decimal StorePrice = Convert.ToDecimal(row["StorePrice"]);
+                    int IsActive = Convert.ToInt32(row["IsActive"]);
+                    int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
+                    DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
+                    DateTime ModifiedDate = Convert.ToDateTime(row["ModifiedDate"]);
 
                     book = new Textbook(BookId,
                         BookTitle,
@@ -88,7 +88,7 @@ namespace BookSpade.Revamped.Handlers
                 }
 
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { Console.Write(ex.Message + "          " + ex.StackTrace); }
 
             return book; 
         }

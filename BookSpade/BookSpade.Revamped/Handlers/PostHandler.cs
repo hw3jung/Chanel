@@ -57,13 +57,13 @@ namespace BookSpade.Revamped.Handlers
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int ProfileId = (int)row["ProfileId"];
-                    int TextBookId = (int)row["TextBookId"];
-                    int ActionBy = (int)row["ActionBy"];
-                    decimal Price = (decimal)row["Price"];
-                    string BookCondition = (string)row["BookCondition"];
-                    int IsActive = (int)row["IsActive"];
-                    int IsDeleted = (int)row["IsDeleted"];
+                    int ProfileId = Convert.ToInt32(row["ProfileId"]);
+                    int TextBookId = Convert.ToInt32(row["TextBookId"]);
+                    int ActionBy = Convert.ToInt32(row["ActionBy"]);
+                    decimal Price = Convert.ToDecimal(row["Price"]);
+                    string BookCondition = Convert.ToString(row["BookCondition"]);
+                    int IsActive = Convert.ToInt32(row["IsActive"]);
+                    int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
                     DateTime CreatedDate = (DateTime)row["CreatedDate"];
                     DateTime ModifiedDate = (DateTime)row["ModifiedDate"];
 

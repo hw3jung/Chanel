@@ -58,12 +58,12 @@ namespace BookSpade.Revamped.Handlers
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    string CourseName = (string)row["CourseName"];
-                    string Description = (string)row["Description"];
-                    int IsActive = (int)row["IsActive"];
-                    int IsDeleted = (int)row["IsDeleted"];
-                    DateTime CreatedDate = (DateTime)row["CreatedDate"];
-                    DateTime ModifiedDate = (DateTime)row["ModifiedDate"];
+                    string CourseName = Convert.ToString(row["CourseName"]);
+                    string Description = Convert.ToString(row["Description"]);
+                    int IsActive = Convert.ToInt32(row["IsActive"]);
+                    int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
+                    DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
+                    DateTime ModifiedDate = Convert.ToDateTime(row["ModifiedDate"]);
 
                     course = new Course(
                         CourseId,

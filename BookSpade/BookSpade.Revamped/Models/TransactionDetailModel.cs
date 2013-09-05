@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BookSpade.Revamped.Handlers; 
 
 namespace BookSpade.Revamped.Models
 {
@@ -14,21 +15,20 @@ namespace BookSpade.Revamped.Models
         public string Condition { get; set; }
         public string CourseName { get; set; }
         public decimal StorePrice { get; set; }
-    
-        public TransactionDetailModel(
-            Transaction transaction, 
-            Textbook book, 
-            Post SellerPost,
-            Course course)
+
+        public TransactionDetailModel(Transaction transaction)
         {
-            BookTitle = book.BookTitle;
-            ISBN = book.ISBN;
+            Textbook textbook = TextbookHandler.getTextbook(transaction.TextbookId);
+            Course course = CourseHandler.getCourse(textbook.BookId);
+            Post SellerPost = PostHandler.getPost(transaction.SellerPostId); 
+
+            BookTitle = textbook.BookTitle;
+            ISBN = textbook.ISBN;
             Price = SellerPost.Price;
             FinalPrice = transaction.FinalPrice;
             Condition = SellerPost.BookCondition;
             CourseName = course.CourseName;
-            StorePrice = book.StorePrice;
-
+            StorePrice = textbook.StorePrice;
         }
     }
 }

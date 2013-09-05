@@ -22,16 +22,12 @@ namespace BookSpade.Revamped.Controllers
         {
             string username = User.Identity.Name;
             Profile profile = ProfileHandler.GetProfile(username);
-            IEnumerable<Transaction> transactions = TransactionHandler.getUserTransactionHistory(profile.ProfileId); 
+            IEnumerable<Transaction> transactions = TransactionHandler.getUserTransactionHistory(profile.ProfileId);
 
-            //IEnumerable<TransactionDetailModel> detailedHistory = transactions.Select(
-            //    x => new TransactionDetailModel(
-            //        x, 
-            //        TextbookHandler.getTextbook(x.TextbookId), 
-            //        PostHandler.getPost(x.SellerPostId),
-            //        CourseHandler.getCourse(x.co
+            IEnumerable<TransactionDetailModel> detailedHistory = transactions.Select(
+                x => new TransactionDetailModel(x));
 
-            return View(); 
+            return View(detailedHistory); 
         }
 
     }

@@ -44,7 +44,7 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
-        #region getTransactionDe
+        #region getTransaction
 
         public static Transaction getTransaction(int transactionId)
         {
@@ -57,17 +57,17 @@ namespace BookSpade.Revamped.Handlers
             {
                 DataRow row = dt.Rows[0];
 
-                int TransactionId = (int)row["TransactionId"];
-                int TextbookId = (int)row["TextbookId"];
-                int SellerPostId = (int)row["SellerPostId"];
-                int BuyerPostId = (int)row["BuyerPostId"];
-                int CommentId = (int)(row["CommentId"]);
-                decimal FinalPrice = (decimal)(row["FinalPrice"]);
-                decimal SellerPrice = (decimal)(row["SellerPrice"]);
-                int IsActive = (int)(row["IsActive"]);
-                int IsDeleted = (int)(row["IsDeleted"]);
-                DateTime CreatedDate = (DateTime)(row["CreatedDate"]);
-                DateTime ModifiedDate = (DateTime)(row["ModifiedDate"]); 
+                int TransactionId = Convert.ToInt32(row["TransactionId"]);
+                int TextbookId = Convert.ToInt32(row["TextbookId"]);
+                int SellerPostId = Convert.ToInt32(row["SellerPostId"]);
+                int BuyerPostId = Convert.ToInt32(row["BuyerPostId"]);
+                int CommentId = Convert.ToInt32(row["CommentId"]);
+                decimal FinalPrice = Convert.ToDecimal(row["FinalPrice"]);
+                decimal SellerPrice = Convert.ToDecimal(row["SellerPrice"]);
+                int IsActive = Convert.ToInt32(row["IsActive"]);
+                int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
+                DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
+                DateTime ModifiedDate = Convert.ToDateTime(row["ModifiedDate"]); 
  
                 transaction = new Transaction(
                     TransactionId,
@@ -99,17 +99,17 @@ namespace BookSpade.Revamped.Handlers
             DataTable dt = da.select(String.Format("TransactionId IN '({0})'", Ids), "Transaction"); 
             IEnumerable<Transaction>  transactions = dt.AsEnumerable().Select(
                                                         x => new Transaction(
-                                                            (int)x["TransactionId"],
-                                                            (int)x["TextbookId"],
-                                                            (int)x["SellerPostId"],
-                                                            (int)x["BuyerPostId"],
-                                                            (int)x["CommentId"],
-                                                            (decimal)x["FinalPrice"],
-                                                            (decimal)x["SellerPrice"],
-                                                            (int)x["IsActive"],
-                                                            (int)x["IsDeleted"],
-                                                            (DateTime)x["CreatedDate"],
-                                                            (DateTime)x["ModifiedDate"]));
+                                                            Convert.ToInt32(x["TransactionId"]),
+                                                            Convert.ToInt32(x["TextbookId"]),
+                                                            Convert.ToInt32(x["SellerPostId"]),
+                                                            Convert.ToInt32(x["BuyerPostId"]),
+                                                            Convert.ToInt32(x["CommentId"]),
+                                                            Convert.ToDecimal(x["FinalPrice"]),
+                                                            Convert.ToDecimal(x["SellerPrice"]),
+                                                            Convert.ToInt32(x["IsActive"]),
+                                                            Convert.ToInt32(x["IsDeleted"]),
+                                                            Convert.ToDateTime(x["CreatedDate"]),
+                                                            Convert.ToDateTime(x["ModifiedDate"])));
  
             return transactions; 
         }
