@@ -10,7 +10,7 @@ namespace BookSpade.Revamped.Models
         public int CourseId { get; set; } 
         public string CourseName { get; set; }
         public string CourseDescription { get; set; } 
-        public int IsValid { get; set; }
+        public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
@@ -18,7 +18,7 @@ namespace BookSpade.Revamped.Models
         public Course(int courseId,
                       string courseName,
                       string courseDescription,
-                      int isValid,
+                      int isActive,
                       int isDeleted,
                       DateTime createdDate,
                       DateTime modifiedDate)
@@ -26,7 +26,7 @@ namespace BookSpade.Revamped.Models
             CourseId = courseId;
             CourseName = courseName;
             CourseDescription = courseDescription;
-            IsValid = isValid;
+            IsActive = isActive;
             IsDeleted = isDeleted;
             CreatedDate = createdDate;
             ModifiedDate = modifiedDate; 

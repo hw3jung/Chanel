@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BookSpade.Revamped.DAL;
 using System.Data; 
+using BookSpade.Revamped.Models;
 
 namespace BookSpade.Revamped.Handlers
 {
@@ -42,5 +43,49 @@ namespace BookSpade.Revamped.Handlers
         }
 
         #endregion
+
+        #region GetCourse
+
+        public static Course getCourse(int CourseId)
+        {
+            Course course = null;
+
+            try
+            {
+                DataAccess da = new DataAccess();
+                DataTable dt = da.select(String.Format("CourseId = '{0}'", CourseId), "CourseInfo");
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    string CourseName = (string)row["CourseName"];
+                    string Description = (string)row["Description"];
+                    int IsActive = (int)row["IsActive"];
+                    int IsDeleted = (int)row["IsDeleted"];
+                    DateTime CreatedDate = (DateTime)row["CreatedDate"];
+                    DateTime ModifiedDate = (DateTime)row["ModifiedDate"];
+
+                    course = new Course(
+                        CourseId,
+                        CourseName,
+                        Description,
+                        IsActive,
+                        IsDeleted,
+                        CreatedDate,
+                        ModifiedDate);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message + "   " + ex.StackTrace);
+            }
+
+            return course;
+        }
+
+        #endregion
+
     }
 }

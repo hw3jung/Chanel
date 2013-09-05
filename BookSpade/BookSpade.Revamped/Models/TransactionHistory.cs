@@ -9,6 +9,7 @@ namespace BookSpade.Revamped.Models
     {
         public int TransactionHistoryId { get; set; }
         public int ProfileId { get; set; }
+        public Profile Profile { get; set; } 
         public IEnumerable<TransactionDetailModel> TransactionModels { get; set; }
 
         public TransactionHistory(int thId, int pId, IEnumerable<TransactionDetailModel> transactionModels)
