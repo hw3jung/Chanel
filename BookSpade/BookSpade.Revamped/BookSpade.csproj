@@ -170,11 +170,13 @@
     </Compile>
     <Compile Include="Handlers\CourseHandler.cs" />
     <Compile Include="Handlers\PostHandler.cs" />
+    <Compile Include="Handlers\ProfileHandler.cs" />
     <Compile Include="Handlers\TextbookHandler.cs" />
     <Compile Include="Handlers\TransactionHandler.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Textbook.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionHistory.cs" />

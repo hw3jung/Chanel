@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using BookSpade.Revamped.Filters;
 using BookSpade.Revamped.Models;
+using BookSpade.Revamped.Handlers; 
 
 namespace BookSpade.Revamped.Controllers
 {
@@ -239,9 +240,12 @@ namespace BookSpade.Revamped.Controllers
                 // User is new, ask for their desired membership name
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 
+                //Custom ---------------------------------
                 string name = result.ExtraData["name"];
-                string fbId = result.ExtraData["id"]; 
-              
+                string email = result.UserName;
+                ProfileHandler.CreateProfile(name, email);
+                //----------------------------------------
+
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
