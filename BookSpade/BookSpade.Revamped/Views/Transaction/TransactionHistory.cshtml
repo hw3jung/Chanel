@@ -1,2 +1,11 @@
 ﻿@model IEnumerable<TransactionDetailModel>
 
+<div class="containter">
+
+  @{
+      foreach(TransactionDetailModel TransactionDetail in Model){
+        Html.Partial("", TransactionDetail); 
+      }
+  }
+
+</div>

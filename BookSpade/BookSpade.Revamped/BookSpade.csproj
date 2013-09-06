@@ -343,6 +343,7 @@
     <Content Include="Views\Transaction\TransactionHistory.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\Partial Views\_AddBookPartial.cshtml" />
+    <Content Include="Views\Transaction\Partial Views\_TransactionHistoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

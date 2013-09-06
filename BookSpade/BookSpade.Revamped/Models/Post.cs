@@ -44,7 +44,12 @@ namespace BookSpade.Revamped.Models
             IsActive = isActive;
             IsDeleted = isDeleted;
             CreatedDate = createdDate;
-            ModifiedDate = modifiedDate; 
+            ModifiedDate = modifiedDate;
         }
+
+        public Profile PosterProfile() {
+            return BookSpade.Revamped.Handlers.ProfileHandler.GetProfile(this.ProfileId); 
+        }
+
     }
 }

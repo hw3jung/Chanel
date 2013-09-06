@@ -19,7 +19,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("Email = '{0}'", Email), "UserProfile");
+                DataTable dt = DAL.select(String.Format("Email = '{0}'", Email), "Profile");
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
@@ -53,7 +53,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("ProfileId = '{0}'", ProfileId), "UserProfile");
+                DataTable dt = DAL.select(String.Format("ProfileId = '{0}'", ProfileId), "Profile");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -84,7 +84,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("Email = '{0}'", Email), "UserProfile");
+                DataTable dt = DAL.select(String.Format("Email = '{0}'", Email), "Profile");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {

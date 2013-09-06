@@ -15,7 +15,7 @@ namespace BookSpade.Revamped.DAL
 
         public int insert(Dictionary<string, string> ColumnValuePairs, string TableName)
         {
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["BookRack"].ToString();
+            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
             int newId = -1;
             using (SqlCommand command = conn.CreateCommand())

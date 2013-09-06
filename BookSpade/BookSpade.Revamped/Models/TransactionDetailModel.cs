@@ -16,11 +16,15 @@ namespace BookSpade.Revamped.Models
         public string CourseName { get; set; }
         public decimal StorePrice { get; set; }
 
+        public Post SellerPost { get; set; }
+        public Post BuyerPost { get; set; }
+
         public TransactionDetailModel(Transaction transaction)
         {
             Textbook textbook = TextbookHandler.getTextbook(transaction.TextbookId);
             Course course = CourseHandler.getCourse(textbook.BookId);
-            Post SellerPost = PostHandler.getPost(transaction.SellerPostId); 
+            SellerPost = PostHandler.getPost(transaction.SellerPostId);
+            BuyerPost = PostHandler.getPost(transaction.BuyerPostId); 
 
             BookTitle = textbook.BookTitle;
             ISBN = textbook.ISBN;
