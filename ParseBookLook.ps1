@@ -139,6 +139,7 @@ while($ie.busy) {Start-Sleep 1}
 $processedBooks = @()
 
 $index = 0
+$retry = 3
 
 while(1) {
     $URI = "https://fortuna.uwaterloo.ca/cgi-bin/cgiwrap/rsic/book/scan/MM=da86eb2d0180239bac50b59859ed098c:${index}:" + ($index + 9) + ":10.html?mv_more_ip=1&mv_nextpage=results_books%2ehtml&mv_arg="
@@ -156,8 +157,21 @@ while(1) {
     # Total number of books for a specific page
     $books.length
 
-    # If there are no more books, exit
-    if(!$books.length) {break}
+    # If there are no more books for 3 pages in a row,
+    # we prob reached the end; so exit
+    if(!$books.length) {
+        if($retry -eq 0) {
+            break
+        } else {
+            $button.click()
+
+            # The easiest way to accomodate for slowness of IE
+            while($ie.busy) {Start-Sleep 1} 
+
+            $retry -= 1
+            continue
+        }
+    }
 
     # Iterate through the collection
     for ($i=0; $i -lt $books.length; $i++) {

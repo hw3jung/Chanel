@@ -12,7 +12,7 @@
         @Styles.Render("~/Content/css")
     </head>
     <body>
-        <div class="body container-fluid">
+        <div class="container-fluid">
             <header class="row-fluid">
                 <div class="headerWrapper">
                     <div class="logoWrapper">
@@ -27,8 +27,8 @@
                     <div>@Html.Partial("_LoginPartial")</div>
                 </section>
             </div>
-            <div class="row-fluid">
-                @RenderBody()
+            <div class="body row-fluid">
+              @RenderBody()
             </div>
             <footer class="row-fluid">
                 <!--Links and legal disclaimer goes here-->
@@ -48,9 +48,7 @@
 
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
-        @Scripts.Render("~/Scripts/stroll.js")
         @Scripts.Render("~/Scripts/bootstrap/bootstrap.min.js")
-
         @RenderSection("scripts", required: false)
 
         <script type="text/javascript">

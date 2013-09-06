@@ -1,46 +1,172 @@
 ﻿.new-post {
     text-align: center;
+    margin-bottom: 15px;
+    padding-top: 10px;
 }
 
-.form-horizontal .control-label {
+.page-header {
+    border-bottom: none;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+fieldset {
+    border: none;
+}
+
+.common-fields .control-label {
+    width: 100px;
     display: inline-block;
     float: none;
     vertical-align: top;
     cursor: default;
 }
 
-.form-horizontal .controls {
+.common-fields .controls {
     display: inline-block;
     width: 300px;
     margin-left: 15px;
     text-align: left;
 }
 
-    .form-horizontal .controls input {
+    .common-fields .control-group {
+        margin-bottom: 10px;
+    }
+
+    .common-fields .controls input {
         margin-top: 0;
     }
 
-    .form-horizontal .controls .radio {
-        width: 80px;
-        text-align: left;
-    }
-
-    .form-horizontal .controls .radio input {
-       margin: 3px 10px 0 -10px;
-        margin-left: -10px;
+    .common-fields .controls .checkbox input {
         margin-top: 3px;
-
     }
 
-    .form-horizontal .controls .radio:first-child {
-        padding-top: 7px;
+.row-fluid .span5 {
+    width: 500px;
+}
+
+.submit-form {
+    display: inline-block;
+    text-align: left;
+    width: 450px;
+    margin-bottom: 222px;
+}
+
+.common-fields {
+    margin-top: 35px;
+}
+
+#postType {
+    width: 248px;
+}
+
+#bookCondition {
+    width: 248px;
+}
+
+#bookPrice {
+    width: 234px;
+}
+
+.new-post legend {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.PostHeader {
+    font-size: 24px;
+    font-weight: bold; 
+    font-family: Calibri;
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 57px;
+    vertical-align: bottom;
+}
+
+    .PostHeader img {
+        margin-right: 5px;
     }
 
-    .form-horizontal .controls .radio:last-child {
-        padding-top: 13px;
+#BookSearch {
+    width: 400px;
+}
+
+.ChooseBook {
+    margin-top: 10px;
+}
+
+.book-list.span5 {
+    float: none;
+    display: inline-block;
+}
+
+/*
+    Book Search List Styles
+*/
+
+#BookListWrapper {
+        display: inline-block;
+        height: 390px;
+        width: 410px;
+    }
+    
+    .SearchResults {
+        position: relative;
+        width: 100%;
+        height: 82%;
+        margin-bottom: 0;
+        margin-left: 0;
+	    overflow-y: scroll;
+
+        -webkit-perspective: 400px;
+	       -moz-perspective: 400px;
+	        -ms-perspective: 400px;
+	         -o-perspective: 400px;
+	            perspective: 400px;
+    }
+    
+        .SearchResults li {
+            position: relative;
+            text-align: left;
+            padding: 11px 0 11px 12px;
+            color: #252525;
+            font-size: 16px;
+            border: 1px solid transparent;
+            z-index: 0;
+                
+            -webkit-transform: translateZ(0px);
+		       -moz-transform: translateZ(0px);
+		        -ms-transform: translateZ(0px);
+		         -o-transform: translateZ(0px);
+		            transform: translateZ(0px);
+        }
+        
+        .SearchResults li:nth-child(odd) {
+            background: url('../Images/bg_pattern_blue.jpg') repeat;
+        }
+
+        .selected {
+            border: 1px solid black !important;
+        }
+
+#newBookButton {
+    width: 180px;
+    margin-top: -70px;
+}
+
+@media only screen and (max-width: 993px) {
+    .submit-form {
+        margin-bottom: 15px;
     }
 
-legend {
-    margin-bottom: 0;
-    border-bottom: 1px solid #000;
+    .common-fields {
+        margin-top: 0;
+    }
+
+    #newBookButton {
+        margin-top: -85px;
+    }
 }

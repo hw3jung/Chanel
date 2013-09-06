@@ -1,85 +1,108 @@
-﻿@Styles.Render("~/Content/Pages/CreatePost.css")
+﻿@model IEnumerable<BookSpade.Revamped.Models.Textbook>
+
+@Styles.Render("~/Content/Pages/CreatePost.css")
 
 <div class="new-post">
-  <form class="form-horizontal">
-  <fieldset>
+  <div class="page-header">Match My Book</div>
 
-  <!-- Form Name -->
-  <legend>Match My Book</legend>
+  <div style="text-align: center;">
+  <div class="book-list span5">
+    <div class="PostHeader">
+      <img src="@Url.Content("~/Content/Images/BookStack.png")" alt="BookStack"/>
+      Find Your Book
+    </div>
+    <div class="SearchBook">
+        <input id="BookSearch" type="text" placeholder="Search by Title, Course, or ISBN"/>
+    </div>
+    <div class="ChooseBook">
+      <div id="BookListWrapper">
+          <ul id="BookList" class="SearchResults wave">
+            @Html.Partial("_BookListPartial", Model)
+          </ul>
+      </div>
 
-  <!-- Select Basic -->
-  <div class="control-group">
-    <label class="control-label">I want to</label>
-    <div class="controls">
-      <select id="postType" name="postType" class="input-xlarge">
-        <option>Buy a book</option>
-        <option>Sell a book</option>
-      </select>
+      <!-- Button -->
+      <div class="control-group">
+        <div class="controls">
+          <label class="control-label"></label>
+          <button id="newBookButton" name="newBookButton" class="btn btn-info">Can't find your book? Click Here</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Multiple Radios -->
-  <div class="control-group">
-    <label class="control-label">Book Condition</label>
-    <div class="controls">
-      <label class="radio">
-        <input type="radio" name="condition" value="Excellent" checked="checked">
-        Excellent
-      </label>
-      <label class="radio">
-        <input type="radio" name="condition" value="Good">
-        Good
-      </label>
-      <label class="radio">
-        <input type="radio" name="condition" value="Decent">
-        Decent
-      </label>
-      <label class="radio">
-        <input type="radio" name="condition" value="Poor">
-        Poor
-      </label>
-      <label class="radio">
-        <input type="radio" name="condition" value="Terrible">
-        Terrible
-      </label>
-    </div>
-  </div>
+  <div class="submit-form">
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="common-fields span5">
+          <!-- Select Basic -->
+          <div class="control-group">
+            <label class="control-label">I want to</label>
+            <div class="controls">
+              <select id="postType" name="postType" class="input-xlarge">
+                <option>Buy this book</option>
+                <option>Sell this book</option>
+              </select>
 
-  <!-- Multiple Checkboxes -->
-  <div class="control-group">
-    <label class="control-label"></label>
-    <div class="controls">
-      <label class="checkbox">
-        <input type="checkbox" name="negotiatePrice" value="I want to negotiate the price.">
-        I want to negotiate the price.
-      </label>
-    </div>
-  </div>
+            </div>
+          </div>
 
-  <!-- Text input-->
-  <div class="control-group">
-    <label class="control-label">Price</label>
-    <div class="controls">
-      <input id="bookPrice" name="bookPrice" type="text" placeholder="100" class="input-xlarge" required="">
+          <!-- Select Basic -->
+          <div class="control-group">
+            <label class="control-label">Book Condition</label>
+            <div class="controls">
+              <select id="bookCondition" name="bookCondition" class="input-xlarge">
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Decent</option>
+                <option>Poor</option>
+                <option>Salvageable</option>
+              </select>
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="control-group">
+            <label class="control-label">Price</label>
+            <div class="controls">
+              <input id="bookPrice" name="bookPrice" type="text" placeholder="100" class="input-xlarge" required="">
     
-    </div>
+            </div>
+          </div>
+
+          <!-- Multiple Checkboxes -->
+          <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" name="negotiatePrice" value="negotiate">
+                I want to negotiate the price instead.
+              </label>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+              <button id="matchButton" name="matchButton" class="btn btn-large btn-success">Match Me!</button>
+            </div>
+          </div>
+        </div>
+  
+      </fieldset>
+    </form>
   </div>
 
-  <!-- Button -->
-  <div class="control-group">
-    <label class="control-label"></label>
-    <div class="controls">
-      <button id="matchButton" name="matchButton" class="btn btn-primary">Match Me!</button>
-    </div>
   </div>
-
-  </fieldset>
-  </form>
-
 </div>
 
 
-@Scripts.Render("~/Static/CreatePost.js")
+@section Scripts {
+    @Scripts.Render("~/Scripts/stroll.min.js")
+    @Scripts.Render("~/Static/CreatePost.js")
+}
 
 @*@model IEnumerable<BRApplication.Models.Textbook>*@
 

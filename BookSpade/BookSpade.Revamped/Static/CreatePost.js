@@ -1,4 +1,12 @@
-﻿
+﻿// Jquery styling
+
+//Must come after definition of the 'ul' element that we are binding to
+stroll.bind('.ChooseBook ul');
+
+$("#BookList li").click(function () {
+    $(this).siblings(".selected").removeClass("selected");
+    $(this).addClass("selected");
+});
 
 //<script type="text/javascript">
 //    //Must come after definition of the 'ul' element that we are binding to

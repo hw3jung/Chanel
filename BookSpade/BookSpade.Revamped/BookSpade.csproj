@@ -198,6 +198,9 @@
     <Content Include="Content\effects\stroll\stroll.css" />
     <Content Include="Content\effects\stroll\stroll.min.css" />
     <Content Include="Content\Images\bg_pattern.jpg" />
+    <Content Include="Content\Images\bg_pattern_blue.jpg" />
+    <Content Include="Content\Images\bg_pattern_dark.jpg" />
+    <Content Include="Content\Images\bg_pattern_grey.jpg" />
     <Content Include="Content\Images\BookStack.png" />
     <Content Include="Content\Images\bs_btn_login.png" />
     <Content Include="Content\Images\login-with-facebook.png" />
@@ -343,7 +346,7 @@
     <Content Include="Views\Transaction\TransactionHistory.cshtml" />
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\Partial Views\_AddBookPartial.cshtml" />
-    <Content Include="Views\Transaction\Partial Views\_TransactionHistoryDetail.cshtml" />
+    <Content Include="Views\Post\Partial Views\_BookListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

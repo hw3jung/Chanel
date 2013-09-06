@@ -178,6 +178,10 @@ textarea {
         margin-right: 4px;
     }
 
+    input[type="radio"] {                         
+        border: 0px !important;
+    }
+
 /* info and errors */
 .message-info {
     border: 1px solid;
@@ -308,16 +312,21 @@ header.row-fluid {
 /******************************************************************/
 
 footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
 	width: 100%;
-    background: #666;
+    padding: 12px 0;
 	color: #666;
     font-size: 16px;
-    background: transparent;
+    background: url('Images/bg_pattern.jpg') repeat;
+    z-index: 10003;
 }
 
 footer ul {
     text-align: center;
     margin: 0;
+    height: 20px;
 }
 
 footer ul li{
@@ -345,4 +354,21 @@ footer a:hover {
     font: 16px calibri;
     color: #36a9e1;
     text-decoration: none;
+}
+
+/*-------------------------------------------------------------*/
+/* String-related
+ -------------------------------------------------------------*/
+
+.Truncate {
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+.One-line {
+    overflow: hidden;
+}
+
+.Block {
+    display: block;
 }
