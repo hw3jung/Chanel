@@ -19,7 +19,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("Email = '{0}'", Email), "Profile");
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
 
                 if (dt == null || dt.Rows.Count == 0)
                 {

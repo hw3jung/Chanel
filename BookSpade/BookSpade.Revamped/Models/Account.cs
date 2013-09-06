@@ -10,8 +10,7 @@ namespace BookSpade.Revamped.Models
 {
     public class UsersContext : DbContext
     {
-        public UsersContext()
-            : base("DefaultConnection")
+        public UsersContext() : base("DefaultConnection")
         {
         }
 
@@ -25,6 +24,7 @@ namespace BookSpade.Revamped.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public string DisplayName { get; set; } 
     }
 
     public class RegisterExternalLoginModel
@@ -32,7 +32,7 @@ namespace BookSpade.Revamped.Models
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
-
+        public string DisplayName { get; set; } 
         public string ExternalLoginData { get; set; }
     }
 

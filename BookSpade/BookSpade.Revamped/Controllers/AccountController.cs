@@ -242,13 +242,10 @@ namespace BookSpade.Revamped.Controllers
                 
                 //Custom ---------------------------------
                 string name = result.ExtraData["name"];
-                string email = result.UserName;
-                ProfileHandler.CreateProfile(name, email);
-                //----------------------------------------
-
+                
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData, DisplayName = name });
             }
         }
 
@@ -277,8 +274,8 @@ namespace BookSpade.Revamped.Controllers
                     // Check if user already exists
                     if (user == null)
                     {
-                        // Insert name into the profile table
-                        db.UserProfiles.Add(new ProfileModel { UserName = model.UserName });
+                        // Insert name into the profile
+                        db.UserProfiles.Add(new ProfileModel { UserName = model.UserName, DisplayName = model.DisplayName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
