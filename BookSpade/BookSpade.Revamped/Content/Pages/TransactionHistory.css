@@ -1,0 +1,36 @@
+﻿ .BookDetail {
+      
+    }
+
+  .Details {
+    display:block;
+  }
+
+    .lbl {
+      font-weight:bold;
+      padding:2px;
+    }
+
+  .item-container {
+    text-align:left;
+  }
+
+  .item-title {
+    border-bottom:2px double grey; 
+    padding-bottom:2px;
+  }
+
+  .isbn-course > .BookDetail {
+    float:none;
+    display:inline-block;
+  }
+
+  .prices > .BookDetail {
+    float:none;
+    display:inline-block;
+    font-size:smaller; 
+  }
+
+  @media only screen and (max-width: 993px) {
+    
+  }

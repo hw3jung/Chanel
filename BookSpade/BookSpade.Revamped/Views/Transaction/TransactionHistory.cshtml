@@ -1,11 +1,20 @@
 ﻿@model IEnumerable<TransactionDetailModel>
 
-<div class="containter">
-
-  @{
-      foreach(TransactionDetailModel TransactionDetail in Model){
-        Html.Partial("", TransactionDetail); 
-      }
+<style type="text/css">
+  .user-history {
+    list-style:none;
   }
 
+
+
+</style>
+
+<div class="containter text-center" >
+  <ul class="user-history">
+  @{
+      foreach(TransactionDetailModel TransactionDetail in Model){
+          Html.RenderPartial("_TransactionHistoryDetail", TransactionDetail);
+      }
+  }
+  </ul>
 </div>

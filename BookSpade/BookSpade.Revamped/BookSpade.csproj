@@ -212,6 +212,7 @@
     <Content Include="Content\Pages\Home.css" />
     <Content Include="Content\Mobile.css" />
     <Content Include="Content\Pages\CreatePost.css" />
+    <Content Include="Content\Pages\TransactionHistory.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -347,6 +348,7 @@
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\Partial Views\_AddBookPartial.cshtml" />
     <Content Include="Views\Post\Partial Views\_BookListPartial.cshtml" />
+    <Content Include="Views\Transaction\Partial Views\_TransactionHistoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

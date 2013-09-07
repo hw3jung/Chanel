@@ -22,7 +22,7 @@ namespace BookSpade.Revamped.Models
         public TransactionDetailModel(Transaction transaction)
         {
             Textbook textbook = TextbookHandler.getTextbook(transaction.TextbookId);
-            Course course = CourseHandler.getCourse(textbook.BookId);
+            Course course = CourseHandler.getCourse(textbook.CourseId);
             SellerPost = PostHandler.getPost(transaction.SellerPostId);
             BuyerPost = PostHandler.getPost(transaction.BuyerPostId); 
 

@@ -18,6 +18,7 @@ namespace BookSpade.Revamped.Handlers
 
             try
             {
+              
                 DataAccess DAL = new DataAccess();
                 DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
 
@@ -84,15 +85,15 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("Email = '{0}'", Email), "Profile");
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int ProfileId = Convert.ToInt32(row["ProfileId"]); 
-                    string name = Convert.ToString(row["Name"]);
+                    int ProfileId = Convert.ToInt32(row["UserId"]); 
+                    string DisplayName = Convert.ToString(row["DisplayName"]);
 
-                    profile = new Profile(ProfileId, name, Email);
+                    profile = new Profile(ProfileId, DisplayName, Email);
                 }
             }
             catch (Exception ex)

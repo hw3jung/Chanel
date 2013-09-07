@@ -57,7 +57,7 @@ namespace BookSpade.Revamped.Handlers
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int ProfileId = Convert.ToInt32(row["ProfileId"]);
+                    int ProfileId = Convert.ToInt32(row["UserId"]);
                     int TextBookId = Convert.ToInt32(row["TextBookId"]);
                     int ActionBy = Convert.ToInt32(row["ActionBy"]);
                     decimal Price = Convert.ToDecimal(row["Price"]);

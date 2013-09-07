@@ -11,7 +11,7 @@ namespace BookSpade.Revamped.Models
         public int TextbookId { get; set; } 
         public int SellerPostId { get; set; }
         public int BuyerPostId { get; set; }
-        public int CommentId { get; set; }
+        public int? CommentId { get; set; }
         public decimal? FinalPrice { get; set; }
         public decimal SellerPrice { get; set; }
         public int IsActive { get; set; }
@@ -24,7 +24,7 @@ namespace BookSpade.Revamped.Models
             int textbookId,
             int sellerPostId,
             int buyerPostId,
-            int commentId,
+            int? commentId,
             decimal? finalPrice,
             decimal sellerPrice,
             int isActive,

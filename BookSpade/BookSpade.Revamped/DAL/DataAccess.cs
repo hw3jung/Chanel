@@ -9,7 +9,7 @@ namespace BookSpade.Revamped.DAL
 {
     public class DataAccess
     {
-        String[] WhiteListOfTableNames = new String[] { "Posts", "CourseInfo", "TextBooks", "Transactions", "TransactionStatus", "UserProfile", "Bids" };
+        String[] WhiteListOfTableNames = new String[] { "Posts", "CourseInfo", "TextBooks", "Transactions", "TransactionHistory", "UserProfile", "TransactionComments" };
 
         #region insert
 
@@ -84,7 +84,7 @@ namespace BookSpade.Revamped.DAL
         {
             ColumnNames = ColumnNames ?? new string[] { "*" };
 
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["BookRack"].ToString();
+            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
             DataTable dt = new DataTable();
             SqlCommand cmd = conn.CreateCommand();
@@ -139,7 +139,7 @@ namespace BookSpade.Revamped.DAL
         // WhereClause is either empty or of the form column=value etc
         public void delete(string WhereClause, string TableName)
         {
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["BookRack"].ToString();
+            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
             SqlCommand command = new SqlCommand();
             command = conn.CreateCommand();
@@ -175,7 +175,7 @@ namespace BookSpade.Revamped.DAL
         // WhereClause is either empty or of the form column=value etc
         public void update(string TableName, string WhereClause, Dictionary<string, string> newColumnValues)
         {
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["BookRack"].ToString();
+            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
             SqlCommand command = new SqlCommand();
             command = conn.CreateCommand();

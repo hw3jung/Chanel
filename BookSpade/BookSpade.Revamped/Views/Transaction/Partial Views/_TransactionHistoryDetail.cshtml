@@ -1,3 +1,41 @@
 ﻿@model TransactionDetailModel
 
-<h6>@Model.BookTitle</h6>
+
+@Styles.Render("~/Content/Pages/TransactionHistory.css")
+
+
+<li class="item"> 
+  <div class="item-container">
+    <h4 class="item-title">
+      @Model.BookTitle
+    </h4>
+    <div>
+      <div class="isbn-course">
+        <div class="BookDetail lbl">ISBN : </div><div class="BookDetail">@Model.ISBN</div>
+        <div class="BookDetail lbl">Course : </div><div class="BookDetail">@Model.CourseName</div>
+      </div>
+      <div class="prices">
+        <div class="BookDetail lbl">Initial Price : </div><div class="BookDetail">@Model.Price</div>
+      @{
+        if (Model.FinalPrice != null){
+          <div class="BookDetail lbl">
+            Final Price : 
+          </div>
+          <div class="BookDetail">
+            Model.FinalPrice
+          </div>
+        } else {
+          <div class="BookDetail lbl">
+            Final Price : 
+          </div>
+          <div class="BookDetail">
+            To be determined
+          </div>
+        
+        }
+      }
+      </div>
+    </div>
+  </div>
+</li>
+

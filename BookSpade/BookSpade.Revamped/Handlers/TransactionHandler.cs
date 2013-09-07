@@ -31,7 +31,7 @@ namespace BookSpade.Revamped.Handlers
                 Transaction.Add("CreatedDate", transaction.CreatedDate.ToString());
                 Transaction.Add("ModifiedDate", transaction.ModifiedDate.ToString());
 
-                transactionId = da.insert(Transaction, "Transaction");
+                transactionId = da.insert(Transaction, "Transactions");
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace BookSpade.Revamped.Handlers
             Transaction transaction = null;
 
             DataAccess da = new DataAccess();
-            DataTable dt = da.select(String.Format("TransactionId = '{0}'", transactionId), "Transaction");
+            DataTable dt = da.select(String.Format("TransactionId = '{0}'", transactionId), "Transactions");
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -91,25 +91,25 @@ namespace BookSpade.Revamped.Handlers
 
         #region getUserTransactionHistory
 
-        public static IEnumerable<Transaction> getUserTransactionHistory(int ProfileId)
+        public static IEnumerable<Transaction> getUserTransactionHistory(int UserId)
         {
             DataAccess da = new DataAccess();
-            List<int> transactionIds = da.select(String.Format("ProfileId = '{0}'", ProfileId), "TransactionHistory").AsEnumerable().Select(x => (int)x["TransactionId"]).ToList();
-            string Ids = string.Join(",", transactionIds); 
-            DataTable dt = da.select(String.Format("TransactionId IN '({0})'", Ids), "Transaction"); 
+            List<int> transactionIds = da.select(String.Format("UserId = '{0}'", UserId), "TransactionHistory").AsEnumerable().Select(x => (int)x["TransactionId"]).ToList();
+            string Ids = string.Join(",", transactionIds);
+            DataTable dt = da.select(String.Format("TransactionId IN ('{0}')", Ids), "Transactions"); 
             IEnumerable<Transaction>  transactions = dt.AsEnumerable().Select(
                                                         x => new Transaction(
                                                             Convert.ToInt32(x["TransactionId"]),
                                                             Convert.ToInt32(x["TextbookId"]),
                                                             Convert.ToInt32(x["SellerPostId"]),
                                                             Convert.ToInt32(x["BuyerPostId"]),
-                                                            Convert.ToInt32(x["CommentId"]),
-                                                            Convert.ToDecimal(x["FinalPrice"]),
+                                                            x["CommentId"] is DBNull ? (int?)null : Convert.ToInt32(x["CommentId"]),
+                                                            x["FinalPrice"] is DBNull ? (decimal?)null : Convert.ToDecimal(x["FinalPrice"]),
                                                             Convert.ToDecimal(x["SellerPrice"]),
                                                             Convert.ToInt32(x["IsActive"]),
                                                             Convert.ToInt32(x["IsDeleted"]),
                                                             Convert.ToDateTime(x["CreatedDate"]),
-                                                            Convert.ToDateTime(x["ModifiedDate"])));
+                                                            Convert.ToDateTime(x["ModifiedDate"]))).ToList();
  
             return transactions; 
         }
