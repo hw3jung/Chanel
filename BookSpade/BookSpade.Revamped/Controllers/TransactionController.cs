@@ -30,5 +30,11 @@ namespace BookSpade.Revamped.Controllers
             return View(detailedHistory); 
         }
 
+        public ActionResult TransactionDetails(Transaction transaction)
+        {
+            TransactionCommentModel model = new TransactionCommentModel(transaction);
+
+            return View(model); 
+        }
     }
 }

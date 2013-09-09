@@ -1,0 +1,18 @@
+﻿@model TransactionCommentModel
+
+@{
+    ViewBag.Title = "Transaction";
+}
+
+
+<div>
+
+</div>
+<div>
+  @{
+     foreach(Comment comment in Model.Comments) {
+       Html.RenderPartial("_TransactionHistoryDetail", comment);    
+     }
+  }
+</div>
+

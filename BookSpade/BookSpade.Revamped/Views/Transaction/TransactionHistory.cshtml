@@ -1,16 +1,10 @@
 ﻿@model IEnumerable<TransactionDetailModel>
 
-<style type="text/css">
-  .user-history {
-    list-style:none;
-  }
+@Styles.Render("~/Content/Pages/TransactionHistory.css")
 
-
-
-</style>
-
-<div class="containter text-center" >
-  <ul class="user-history">
+<div class="history-containter container text-center" >
+  <h1>Transaction History</h1>
+  <ul class="user-history SearchResults wave">
   @{
       foreach(TransactionDetailModel TransactionDetail in Model){
           Html.RenderPartial("_TransactionHistoryDetail", TransactionDetail);
@@ -18,3 +12,8 @@
   }
   </ul>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/stroll.min.js")
+}

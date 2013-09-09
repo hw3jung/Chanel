@@ -59,7 +59,7 @@ namespace BookSpade.Revamped.Handlers
                     DataRow row = dt.Rows[0];
                     int ProfileId = Convert.ToInt32(row["UserId"]);
                     int TextBookId = Convert.ToInt32(row["TextBookId"]);
-                    int ActionBy = Convert.ToInt32(row["ActionBy"]);
+                    ActionBy ActionBy = (ActionBy)Convert.ToInt32(row["ActionBy"]);
                     decimal Price = Convert.ToDecimal(row["Price"]);
                     string BookCondition = Convert.ToString(row["BookCondition"]);
                     int IsActive = Convert.ToInt32(row["IsActive"]);

@@ -96,7 +96,7 @@ namespace BookSpade.Revamped.Handlers
             DataAccess da = new DataAccess();
             List<int> transactionIds = da.select(String.Format("UserId = '{0}'", UserId), "TransactionHistory").AsEnumerable().Select(x => (int)x["TransactionId"]).ToList();
             string Ids = string.Join(",", transactionIds);
-            DataTable dt = da.select(String.Format("TransactionId IN ('{0}')", Ids), "Transactions"); 
+            DataTable dt = da.select(String.Format("TransactionId IN ({0})", Ids), "Transactions"); 
             IEnumerable<Transaction>  transactions = dt.AsEnumerable().Select(
                                                         x => new Transaction(
                                                             Convert.ToInt32(x["TransactionId"]),

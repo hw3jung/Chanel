@@ -45,16 +45,17 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        //by Id
         #region GetProfile
 
-        public static Profile GetProfile(int ProfileId){
+        public static Profile GetProfile(int userId){
 
             Profile profile = null;
 
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("ProfileId = '{0}'", ProfileId), "Profile");
+                DataTable dt = DAL.select(String.Format("UserId = '{0}'", userId), "UserProfile");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -62,7 +63,7 @@ namespace BookSpade.Revamped.Handlers
                     string name = Convert.ToString(row["Name"]);
                     string email = Convert.ToString(row["Email"]);
                     
-                    profile = new Profile(ProfileId, name, email);
+                    profile = new Profile(userId, name, email);
                 }
             }
             catch (Exception ex)
@@ -76,6 +77,7 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        //by Email
         #region GetProfile
 
         public static Profile GetProfile(string Email) //in B.S. UserName == Email 

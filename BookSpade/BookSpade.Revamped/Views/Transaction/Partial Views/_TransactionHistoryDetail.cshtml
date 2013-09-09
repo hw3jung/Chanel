@@ -1,10 +1,6 @@
 ﻿@model TransactionDetailModel
 
-
-@Styles.Render("~/Content/Pages/TransactionHistory.css")
-
-
-<li class="item"> 
+<li> 
   <div class="item-container">
     <h4 class="item-title">
       @Model.BookTitle
@@ -16,24 +12,23 @@
       </div>
       <div class="prices">
         <div class="BookDetail lbl">Initial Price : </div><div class="BookDetail">@Model.Price</div>
-      @{
-        if (Model.FinalPrice != null){
-          <div class="BookDetail lbl">
-            Final Price : 
-          </div>
-          <div class="BookDetail">
-            Model.FinalPrice
-          </div>
-        } else {
-          <div class="BookDetail lbl">
-            Final Price : 
-          </div>
-          <div class="BookDetail">
-            To be determined
-          </div>
-        
+        @{
+          if (Model.FinalPrice != null){
+            <div class="BookDetail lbl">
+              Final Price : 
+            </div>
+            <div class="BookDetail">
+              Model.FinalPrice
+            </div>
+          } else {
+            <div class="BookDetail lbl">
+              Final Price : 
+            </div>
+            <div class="BookDetail">
+              To be determined
+            </div>
+          }
         }
-      }
       </div>
     </div>
   </div>
