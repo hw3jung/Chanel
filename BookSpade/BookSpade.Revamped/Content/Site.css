@@ -25,6 +25,10 @@ body {
     float: right;
 }
 
+fieldset {
+    border: none;
+}
+
 /* site title
 ----------------------------------------------------------*/
 .site-title {

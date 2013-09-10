@@ -1,47 +1,114 @@
-﻿// Jquery styling
+﻿var addBook = false;
 
 //Must come after definition of the 'ul' element that we are binding to
 stroll.bind('.ChooseBook ul');
 
-$("#BookList li").click(function () {
+function clickBookListItem() {
     $(this).siblings(".selected").removeClass("selected");
     $(this).addClass("selected");
-});
 
-//<script type="text/javascript">
-//    //Must come after definition of the 'ul' element that we are binding to
-//    stroll.bind('.NewPost ul');
+    $("#bookTitle").removeAttr('required');
+    $("#course").removeAttr('required');
+    $("#isbn").removeAttr('required');
+
+    $(".new-book").css('display', 'none');
+    $(".submit-form").css('margin-bottom', '222px');
+    $(".common-fields").css('margin-top', '30px');
+    $("#newBookButton").css('display', 'inline-block');
+}
+
+function clickNewBookButton() {
+    addBook = true;
+    $("#BookList li.selected").removeClass("selected");
+
+    $("#bookTitle").prop("required", "true");
+    $("#course").prop("required", "true");
+    $("#isbn").prop("required", "true");
+
+    $(".submit-form").css('margin-bottom', '0');
+    $(".common-fields").css('margin-top', '0');
+    $(".new-book").css('display', 'block');
+    $(this).css('display', 'none');
+}
+
+function changePostType() {
+    var value = $(this).val();
+
+    if (value == "Buy this book") {
+        $("#matchButton").text("Match Me With a Seller!");
+    } else if (value == "Sell this book") {
+        $("#matchButton").text("Match Me With a Buyer!");
+    }
+}
+
+function clickNegotiatePrice() {
+    var checked = $(this).is(':checked');
+
+    if (checked) {
+        $("#bookPrice").val("");
+        $("#bookPrice").prop('disabled', true);
+    } else {
+        $("#bookPrice").prop('disabled', false);
+    }
+}
+
+function getCommonFields() {
+    var postType = $("#PostType").val() == "Sell this book";
+    var price = $("#bookPrice").val().trim();
+    var condition = $("#bookCondition").val().trim();
+    var isNegotiable = $('#negotiatePrice').is(':checked');
+
+    var fields = {
+        "postType": postType,
+        "price": price,
+        "condition": condition,
+        "isNegotiable": isNegotiable
+    }
+    return fields;
+}
+
+function getBookFields() {
+    var fields = null;
+
+    if (addBook) {
+        var title = $("#bookTitle").val().trim();
+        var course = $("#course").val().trim();
+        var isbn = $("#isbn").val().trim();
+        var author = $("#author").val().trim();
+        var bookImageUrl = $("#bookImageUrl").val().trim();
+
+        fields = {
+            "title": title,
+            "course": course,
+            "isbn": isbn,
+            "author": author,
+            "bookImageUrl": bookImageUrl
+        }
+    } else {
+        var title = $("#BookList li.selected #Title").text().trim();
+        var course = $("#BookList li.selected #Course").text().trim();
+
+        fields = {
+            "title": title,
+            "course": course
+        }
+    }
     
-//    $("li").click(function () {
-//        $(this).siblings(".selected").removeClass("selected");
-//        $(this).addClass("selected");
-//    });
+    return fields;
+}
 
-//    // get the width of the book list minus scrollbar
-//    var bookList = document.getElementById("BookList");
-//    var origWidth = bookList.offsetWidth;
-//    var scrollWidth = bookList.scrollWidth;
-
-//    // width of our wrapper equals width of the scrollable part of the book list
-//    document.getElementById("BookListWrapper").style.width = scrollWidth + "px";
-//    bookList.style.width = origWidth + "px";
-
-//    var addBook = false;
-
-//    $(".link").click(function () {
-//        addBook = !addBook;
-
-//        var origHeight = $(".NewPost").css("height");
-
-//        if (addBook) {
-//            $(".hidden").show();
-//            $(".NewPost").css("height", origHeight);
-//        } else {
-//            $(".hidden").hide();
-//            $(".NewPost").css("height", "92%");
-//        }
-//    });
+// Save into db and "match make"
+function createPost() {
     
+}
+
+// Attach event handlers
+$("#BookList li").click(clickBookListItem);
+$("#newBookButton").click(clickNewBookButton);
+$("#postType").change(changePostType);
+$("#negotiatePrice").click(clickNegotiatePrice);
+
+
 //    var xhr = null;
 //    $("#BookSearch").keyup(function () {
 //        var searchVal = $("#BookSearch").val().trim();
@@ -193,28 +260,6 @@ $("#BookList li").click(function () {
 //                }
 //            }
 //        }); 
-//    }
-
-//    function ContactPrefDialog() {
-//        $("#SubmitDialog").dialog({
-//            height: 500,
-//            width: 500,
-//            modal: true,
-//            buttons: {
-//                "Post" : function () {
-//                    if (addBook) {
-//                        NewBook();
-//                        $(this).dialog("close");
-//                    } else {
-//                        AddPost();
-//                        $(this).dialog("close");
-//                    }
-//                },
-//                "Cancel": function () {
-//                    $(this).dialog("close"); 
-//                }
-//            }
-//        });
 //    }
 
 //    function AddPost() {

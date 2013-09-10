@@ -16,8 +16,12 @@
         <legend>Registration Form</legend>
         <ol>
             <li>
+                @Html.LabelFor(m => m.DisplayName)
+                @Html.TextBoxFor(m => m.DisplayName)
+            </li>
+            <li>
                 @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.EditorFor(m => m.UserName)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -33,5 +37,5 @@
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Static/Register.js")
 }

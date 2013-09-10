@@ -9,40 +9,51 @@
     font-size: 26px;
     font-weight: bold;
     margin-top: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     padding: 0;
 }
 
-fieldset {
-    border: none;
+.common-fields.span5 {
+    margin-left: 0;
+    margin-top: 30px;
 }
 
-.common-fields .control-label {
-    width: 100px;
+.common-fields .control-label,
+.new-book .control-label {
+    width: 105px;
     display: inline-block;
     float: none;
     vertical-align: top;
     cursor: default;
 }
 
-.common-fields .controls {
+.common-fields .controls,
+.new-book .controls {
     display: inline-block;
     width: 300px;
     margin-left: 15px;
     text-align: left;
 }
 
-    .common-fields .control-group {
-        margin-bottom: 10px;
+    .common-fields .control-group,
+    .new-book .control-group {
+        margin-bottom: 12.5px;
     }
 
-    .common-fields .controls input {
+    .common-fields .controls input,
+    .new-book .controls input {
+        width: 234px;
         margin-top: 0;
     }
 
     .common-fields .controls .checkbox input {
         margin-top: 3px;
     }
+
+.new-book.span5 {
+    display: none;
+    padding-top: 30px;
+}
 
 .row-fluid .span5 {
     width: 500px;
@@ -55,10 +66,6 @@ fieldset {
     margin-bottom: 222px;
 }
 
-.common-fields {
-    margin-top: 35px;
-}
-
 #postType {
     width: 248px;
 }
@@ -67,8 +74,8 @@ fieldset {
     width: 248px;
 }
 
-#bookPrice {
-    width: 234px;
+#negotiatePrice {
+    width: inherit;
 }
 
 .new-post legend {
@@ -82,7 +89,7 @@ fieldset {
     font-family: Calibri;
     margin-bottom: 10px;
     text-align: left;
-    padding-left: 57px;
+    padding-left: 45px;
     vertical-align: bottom;
 }
 
@@ -101,6 +108,7 @@ fieldset {
 .book-list.span5 {
     float: none;
     display: inline-block;
+    vertical-align: top;
 }
 
 /*
@@ -154,19 +162,28 @@ fieldset {
 
 #newBookButton {
     width: 180px;
-    margin-top: -70px;
+    margin-top: -80px;
+}
+
+#matchButton {
+    width: 252px;
 }
 
 @media only screen and (max-width: 993px) {
     .submit-form {
-        margin-bottom: 15px;
+        margin-bottom: 15px !important;
     }
 
-    .common-fields {
-        margin-top: 0;
+    .common-fields.span5 {
+        margin-top: 0  !important;
+    }
+
+    .new-book.span5 {
+        padding-top: 0 !important;
+        margin-top: -35px;
     }
 
     #newBookButton {
-        margin-top: -85px;
+        margin-top: -85px !important;
     }
 }

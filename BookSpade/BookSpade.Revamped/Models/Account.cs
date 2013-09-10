@@ -29,9 +29,11 @@ namespace BookSpade.Revamped.Models
 
     public class RegisterExternalLoginModel
     {
-        [Required]
-        [Display(Name = "User name")]
+        [Required(ErrorMessage = "Please enter your email address.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please enter a valid email address.")]
+        [Display(Name = "Your email")]
         public string UserName { get; set; }
+        
         public string DisplayName { get; set; } 
         public string ExternalLoginData { get; set; }
     }
@@ -72,12 +74,17 @@ namespace BookSpade.Revamped.Models
 
     public class RegisterModel
     {
-        [Required]
-        [Display(Name = "User name")]
+        [Required(ErrorMessage = "Please enter your name.")]
+        [Display(Name = "Your name")]
+        public string DisplayName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your email address.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please enter a valid email address.")]
+        [Display(Name = "Your email")]
         public string UserName { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Please enter a password of your choice.")]
+        [StringLength(100, ErrorMessage = "Your password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
