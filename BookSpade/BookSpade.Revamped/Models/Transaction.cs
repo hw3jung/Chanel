@@ -13,7 +13,7 @@ namespace BookSpade.Revamped.Models
         public int BuyerPostId { get; set; }
         public int? CommentId { get; set; }
         public decimal? FinalPrice { get; set; }
-        public decimal SellerPrice { get; set; }
+        public decimal InitialPrice { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -26,7 +26,7 @@ namespace BookSpade.Revamped.Models
             int buyerPostId,
             int? commentId,
             decimal? finalPrice,
-            decimal sellerPrice,
+            decimal initialPrice,
             int isActive,
             int isDeleted,
             DateTime createdDate,
@@ -39,7 +39,7 @@ namespace BookSpade.Revamped.Models
             BuyerPostId = buyerPostId;
             CommentId = commentId;
             FinalPrice = FinalPrice;
-            SellerPrice = sellerPrice;
+            InitialPrice = initialPrice;
             IsActive = isActive;
             IsDeleted = isDeleted; 
             CreatedDate = createdDate;

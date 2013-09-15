@@ -12,10 +12,10 @@ namespace BookSpade.Revamped.Models
         public Profile Profile { get; set; } 
         public IEnumerable<TransactionDetailModel> TransactionModels { get; set; }
 
-        public TransactionHistory(int thId, int pId, IEnumerable<TransactionDetailModel> transactionModels)
+        public TransactionHistory(int transactionHistoryId, int profileId, IEnumerable<TransactionDetailModel> transactionModels)
         {
-            TransactionHistoryId = thId;
-            ProfileId = pId;
+            TransactionHistoryId = transactionHistoryId;
+            ProfileId = profileId;
             TransactionModels = transactionModels; 
         }
     }

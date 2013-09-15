@@ -20,7 +20,7 @@
 
 .common-fields .control-label,
 .new-book .control-label {
-    width: 105px;
+    width: 110px;
     display: inline-block;
     float: none;
     vertical-align: top;
@@ -39,6 +39,10 @@
     .new-book .control-group {
         margin-bottom: 12.5px;
     }
+
+        .common-fields .control-group:nth-last-of-type(3) {
+            margin-bottom: -5px;
+        }
 
     .common-fields .controls input,
     .new-book .controls input {
@@ -66,15 +70,15 @@
     margin-bottom: 222px;
 }
 
-#postType {
+#ActionBy {
     width: 248px;
 }
 
-#bookCondition {
+#BookCondition {
     width: 248px;
 }
 
-#negotiatePrice {
+#IsNegotiable {
     width: inherit;
 }
 

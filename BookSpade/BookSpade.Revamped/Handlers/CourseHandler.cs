@@ -23,13 +23,13 @@ namespace BookSpade.Revamped.Handlers
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
-                    Dictionary<string, string> courseInfo = new Dictionary<string, string>();
+                    Dictionary<string, object> courseInfo = new Dictionary<string, object>();
                     courseInfo.Add("CourseName", CourseName);
                     courseInfo.Add("Description", CourseName);
-                    courseInfo.Add("IsActive", "1");
-                    courseInfo.Add("IsDeleted", "0");
-                    courseInfo.Add("CreatedDate", Convert.ToString(DateTime.Now));
-                    courseInfo.Add("ModifiedDate", Convert.ToString(DateTime.Now));
+                    courseInfo.Add("IsActive", 1);
+                    courseInfo.Add("IsDeleted", 0);
+                    courseInfo.Add("CreatedDate", DateTime.Now);
+                    courseInfo.Add("ModifiedDate", DateTime.Now);
                    
                     id = DAL.insert(courseInfo, "CourseInfo");
                 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BookSpade.Revamped.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -23,7 +25,12 @@ namespace BookSpade.Revamped
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            ViewEngines.Engines.Add(new RazorEngineCustomized()); 
+            ViewEngines.Engines.Add(new RazorEngineCustomized());
+
+            // Queue the Processor thread for BookQueue. Put this call 
+            // before Parallel.Invoke to begin processing as soon as 
+            // new posts are added to BookQueue.
+            Task.Factory.StartNew(() => QueueWorker.ProcessPosts());
         }
     }
 }

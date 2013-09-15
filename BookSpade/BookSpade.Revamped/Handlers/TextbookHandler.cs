@@ -26,18 +26,19 @@ namespace BookSpade.Revamped.Handlers
 
                     int courseId = !string.IsNullOrEmpty(book.NewCourseName) ? CourseHandler.CreateCourse(book.NewCourseName) : book.CourseId;
 
-                    Dictionary<string, string> textbook = new Dictionary<string, string>();
+                    Dictionary<string, object> textbook = new Dictionary<string, object>();
                     textbook.Add("ISBN", book.ISBN);
                     textbook.Add("BookTitle", book.BookTitle);
                     textbook.Add("Author", book.Author);
-                    textbook.Add("CourseId", courseId.ToString());
+                    textbook.Add("CourseId", courseId);
                     textbook.Add("BookImageURL", book.BookImageUrl);
-                    textbook.Add("StorePrice", book.StorePrice.ToString());
-                    textbook.Add("IsActive", "1");
-                    textbook.Add("IsDeleted", "0");
-                    textbook.Add("CreatedDate", DateTime.Now.ToString());
-                    textbook.Add("ModifiedDate", DateTime.Now.ToString());
+                    textbook.Add("StorePrice", book.StorePrice);
+                    textbook.Add("IsActive", 1);
+                    textbook.Add("IsDeleted", 0);
+                    textbook.Add("CreatedDate", DateTime.Now);
+                    textbook.Add("ModifiedDate", DateTime.Now);
 
+                    BookId = da.insert(textbook, "TextBooks");
                 }
             }
             catch (Exception ex) { Console.Write(ex.Message + "    " + ex.StackTrace); }
@@ -56,35 +57,35 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("TextBookId = '{0}'", textbookId), "TextBooks");
+                DataTable dt = da.select(String.Format("TextBookId = {0}", textbookId), "TextBooks");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int BookId = Convert.ToInt32(row["TextBookId"]);
-                    string BookTitle = Convert.ToString(row["BookTitle"]);
-                    string ISBN = Convert.ToString(row["ISBN"]);
-                    string Author = Convert.ToString(row["Author"]);
-                    int CourseId = Convert.ToInt32(row["CourseId"]);
-                    string BookImageUrl = Convert.ToString(row["BookImageURL"]);
-                    decimal StorePrice = Convert.ToDecimal(row["StorePrice"]);
-                    int IsActive = Convert.ToInt32(row["IsActive"]);
-                    int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
-                    DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
-                    DateTime ModifiedDate = Convert.ToDateTime(row["ModifiedDate"]);
+                    string bookTitle = Convert.ToString(row["BookTitle"]);
+                    string isbn = Convert.ToString(row["ISBN"]);
+                    string author = Convert.ToString(row["Author"]);
+                    int courseId = Convert.ToInt32(row["CourseId"]);
+                    string bookImageUrl = row["BookImageURL"] is DBNull ? null : Convert.ToString(row["BookImageURL"]);
+                    decimal? storePrice = row["StorePrice"] is DBNull ? (decimal?)null : Convert.ToDecimal(row["StorePrice"]);
+                    int isActive = Convert.ToInt32(row["IsActive"]);
+                    int isDeleted = Convert.ToInt32(row["IsDeleted"]);
+                    DateTime createdDate = Convert.ToDateTime(row["CreatedDate"]);
+                    DateTime modifiedDate = Convert.ToDateTime(row["ModifiedDate"]);
 
-                    book = new Textbook(BookId,
-                        BookTitle,
-                        ISBN,
-                        Author,
-                        CourseId,
+                    book = new Textbook(
+                        textbookId,
+                        bookTitle,
+                        isbn,
+                        author,
+                        courseId,
                         null,
-                        BookImageUrl,
-                        StorePrice,
-                        IsActive,
-                        IsDeleted,
-                        CreatedDate,
-                        ModifiedDate); 
+                        bookImageUrl,
+                        storePrice,
+                        isActive,
+                        isDeleted,
+                        createdDate,
+                        modifiedDate);
                 }
 
             }

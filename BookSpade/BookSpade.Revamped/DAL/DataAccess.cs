@@ -7,13 +7,29 @@ using System.Text;
 
 namespace BookSpade.Revamped.DAL
 {
+    public sealed class SortColumn
+    {
+        private readonly string ColumnName;
+        private readonly string Direction;
+
+        public SortColumn(string columnName, string direction)
+        {
+            this.ColumnName = columnName;
+            this.Direction = direction;
+        }
+
+        public override string ToString() {
+            return ColumnName + " " + Direction;
+        }
+    }
+
     public class DataAccess
     {
         String[] WhiteListOfTableNames = new String[] { "Posts", "CourseInfo", "TextBooks", "Transactions", "TransactionHistory", "UserProfile", "TransactionComments" };
 
         #region insert
 
-        public int insert(Dictionary<string, string> ColumnValuePairs, string TableName)
+        public int insert(Dictionary<string, object> ColumnValuePairs, string TableName)
         {
             string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
@@ -57,7 +73,7 @@ namespace BookSpade.Revamped.DAL
                     command.CommandText = insertCommand.Append(" SELECT SCOPE_IDENTITY()").ToString();
                     foreach (var pair in ColumnValuePairs)
                     {
-                        command.Parameters.AddWithValue("@" + pair.Key, pair.Value);
+                        command.Parameters.AddWithValue("@" + pair.Key, Convert.ToString(pair.Value));
                     }
                     conn.Open();
                     newId = Convert.ToInt32(command.ExecuteScalar());
@@ -80,7 +96,7 @@ namespace BookSpade.Revamped.DAL
 
         // WhereClause is either "" or of the form "Col = value AND/OR Col2 = value2..."
 
-        public DataTable select(string WhereClause, string TableName, string[] ColumnNames = null)
+        public DataTable select(string WhereClause, string TableName, string[] ColumnNames = null, List<SortColumn> SortColumns = null)
         {
             ColumnNames = ColumnNames ?? new string[] { "*" };
 
@@ -109,6 +125,15 @@ namespace BookSpade.Revamped.DAL
                 {
                     selectCommand.Append(" WHERE ").Append(WhereClause);
                 }
+
+                if (SortColumns != null)
+                {
+                    string sortClause = " ORDER BY ";
+                    sortClause += string.Join(", ", SortColumns.Select(c => c.ToString()).ToArray());
+
+                    selectCommand.Append(sortClause);
+                }
+
                 int temp = Array.IndexOf(WhiteListOfTableNames, TableName);
                 if (temp < 0)
                 {
@@ -173,7 +198,7 @@ namespace BookSpade.Revamped.DAL
 
         #region update
         // WhereClause is either empty or of the form column=value etc
-        public void update(string TableName, string WhereClause, Dictionary<string, string> newColumnValues)
+        public void update(string TableName, string WhereClause, Dictionary<string, object> newColumnValues)
         {
             string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
@@ -186,14 +211,16 @@ namespace BookSpade.Revamped.DAL
                 bool first = true;
                 foreach (var column in newColumnValues)
                 {
+                    string value = Convert.ToString(column.Value);
+
                     if (first)
                     {
-                        updateCommand.Append(column.Key).Append("=").Append(column.Value);
+                        updateCommand.Append(column.Key).Append("=").Append(value);
                         first = false;
                     }
                     else
                     {
-                        updateCommand.Append(", ").Append(column.Key).Append("=").Append(column.Value);
+                        updateCommand.Append(", ").Append(column.Key).Append("=").Append(value);
                     }
                 }
 

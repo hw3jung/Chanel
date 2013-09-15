@@ -8,21 +8,19 @@ namespace BookSpade.Revamped.Utilities
 {
     public class QueueWorker
     {
-        public static void RunProducer(Post newPost)
+        public static void AddPost(Post newPost)
         {
             BookQueueSingleton.Instance.Add(newPost);
         }
 
-        public static void RunConsumer()
+        public static void ProcessPosts()
         {
             // GetConsumingEnumerable returns the enumerator for the  
             // underlying collection.
-            foreach (var post in BookQueueSingleton.Instance.GetConsumingEnumerable())
+            foreach (Post post in BookQueueSingleton.Instance.GetConsumingEnumerable())
             {
-                
+                Matchmaker.Match(post);
             }
-            
-            //Console.WriteLine("Press any key to exit");
         }
     }
 }

@@ -1,0 +1,93 @@
+﻿@model BookSpade.Revamped.Models.CreatePostModel
+
+@{
+    if (Model.IsNewBook)
+    {
+        ViewBag.CommonFieldsStyle = "margin-top: 0;";
+    }
+    else
+    {
+        ViewBag.CommonFieldsStyle = "";
+    }
+}
+
+@using (Html.BeginForm()) {
+  @Html.AntiForgeryToken()
+      
+  <fieldset class="form-horizontal">
+    @Html.Partial("_AddBookPartial")
+    <div class="common-fields span5" style="@ViewBag.CommonFieldsStyle">
+      <!-- Select Basic -->
+      <div class="control-group">
+        <label class="control-label">I want to</label>
+        <div class="controls">
+          @Html.DropDownListFor(m => m.ActionBy, Model.PostTypes, new { @class = "input-xlarge" })
+
+        </div>
+      </div>
+
+      <!-- Select Basic -->
+      <div class="control-group">
+        <label class="control-label">Book Condition</label>
+        <div class="controls">
+          @Html.DropDownListFor(m => m.BookCondition, Model.BookConditions, new { @class = "input-xlarge" })
+
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label">
+          @{
+              if (Model.ActionBy == BookSpade.Revamped.Utilities.ActionBy.Buyer)
+              {
+                <span>I'm willing to pay (at most)</span>
+              }
+              else 
+              {
+                <span>I'd like to receive (at least)</span>
+              }
+          }
+        </label>
+        <div class="controls">
+          @Html.TextBoxFor(m => m.Price, new { @class = "input-xlarge", @placeholder = "e.g. 100", @Value = "", @required = "true"})
+          
+        </div>
+      </div>
+
+      <!-- Multiple Checkboxes -->
+      <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+          <label class="checkbox">
+            @Html.CheckBoxFor(m => m.IsNegotiable)
+            I want to negotiate the price instead.
+          </label>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+          <button id="matchButton" name="matchButton" class="btn btn-large btn-success">
+            @{
+                if (Model.ActionBy == BookSpade.Revamped.Utilities.ActionBy.Buyer)
+                {
+                  <span>Match Me With a Seller!</span>
+                } 
+                else 
+                {
+                  <span>Match Me With a Buyer!</span>
+                }
+            }
+          </button>
+        </div>
+      </div>
+
+      @Html.HiddenFor(m => m.TextBookId)
+      @Html.HiddenFor(m => m.IsNewBook)
+    </div>
+
+  </fieldset>
+}

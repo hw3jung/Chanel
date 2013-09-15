@@ -7,35 +7,35 @@ namespace BookSpade.Revamped.Models
 {
     public class Textbook
     {
-        public int BookId { get; set; }
+        public int TextBookId { get; set; }
         public string BookTitle { get; set; } 
         public string ISBN { get; set; }
         public string Author { get; set; }
         public int CourseId { get; set; }
-        public string NewCourseName { get; set; } 
+        public string NewCourseName { get; set; }
         public string BookImageUrl { get; set; }
-        public decimal StorePrice { get; set; }
+        public decimal? StorePrice { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; } 
 
         public Textbook(
-                int bookId,
+                int textbookId,
                 string bookTitle,
                 string isbn,
                 string author,
                 int courseId,
                 string newCourseName,
                 string bookImageUrl,
-                decimal storePrice,
+                decimal? storePrice,
                 int isActive,
                 int isDeleted,
                 DateTime createdDate,
                 DateTime modifiedDate
             )
         {
-            BookId = bookId;
+            TextBookId = textbookId;
             BookTitle = bookTitle; 
             ISBN = isbn;
             Author = author;

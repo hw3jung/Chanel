@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using BookSpade.Revamped.Models;
 using BookSpade.Revamped.DAL;
-using System.Data; 
+using System.Data;
+using BookSpade.Revamped.Utilities; 
 
 namespace BookSpade.Revamped.Handlers
 {
@@ -20,15 +21,15 @@ namespace BookSpade.Revamped.Handlers
             {
                 DataAccess da = new DataAccess();
 
-                Dictionary<string, string> TransactionComment = new Dictionary<string, string>();
-                TransactionComment.Add("UserId", Convert.ToString(comment.UserId));
-                TransactionComment.Add("ActionBy", Convert.ToString(comment.ActionBy));
-                TransactionComment.Add("TransactionId ", Convert.ToString(comment.TransactionId));
-                TransactionComment.Add("Comment", Convert.ToString(comment.comment));
-                TransactionComment.Add("IsActive", "1");
-                TransactionComment.Add("IsDeleted", "0");
-                TransactionComment.Add("CreatedDate", Convert.ToString(DateTime.Now));
-                TransactionComment.Add("ModifiedDate", Convert.ToString(DateTime.Now));
+                Dictionary<string, object> TransactionComment = new Dictionary<string, object>();
+                TransactionComment.Add("UserId", comment.UserId);
+                TransactionComment.Add("ActionBy", comment.ActionBy);
+                TransactionComment.Add("TransactionId ", comment.TransactionId);
+                TransactionComment.Add("Comment", comment.comment);
+                TransactionComment.Add("IsActive", 1);
+                TransactionComment.Add("IsDeleted", 0);
+                TransactionComment.Add("CreatedDate", DateTime.Now);
+                TransactionComment.Add("ModifiedDate", DateTime.Now);
 
                 id = da.insert(TransactionComment, "TransactionComments");
             }

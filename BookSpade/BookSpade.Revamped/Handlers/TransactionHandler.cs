@@ -19,17 +19,17 @@ namespace BookSpade.Revamped.Handlers
             {
                 DataAccess da = new DataAccess();
 
-                Dictionary<string, string> Transaction = new Dictionary<string, string>();
-                Transaction.Add("TextbookId", transaction.TextbookId.ToString());
-                Transaction.Add("SellerPostId", transaction.SellerPostId.ToString());
-                Transaction.Add("BuyerPostId", transaction.BuyerPostId.ToString());
-                Transaction.Add("CommentId", transaction.CommentId.ToString());
-                Transaction.Add("FinalPrice", transaction.FinalPrice.ToString());
-                Transaction.Add("SellerPrice", transaction.SellerPrice.ToString());
-                Transaction.Add("IsActive", transaction.IsActive.ToString());
-                Transaction.Add("IsDeleted", transaction.IsDeleted.ToString());
-                Transaction.Add("CreatedDate", transaction.CreatedDate.ToString());
-                Transaction.Add("ModifiedDate", transaction.ModifiedDate.ToString());
+                Dictionary<string, object> Transaction = new Dictionary<string, object>();
+                Transaction.Add("TextbookId", transaction.TextbookId);
+                Transaction.Add("SellerPostId", transaction.SellerPostId);
+                Transaction.Add("BuyerPostId", transaction.BuyerPostId);
+                Transaction.Add("CommentId", transaction.CommentId);
+                Transaction.Add("FinalPrice", transaction.FinalPrice);
+                Transaction.Add("SellerPrice", transaction.InitialPrice);
+                Transaction.Add("IsActive", transaction.IsActive);
+                Transaction.Add("IsDeleted", transaction.IsDeleted);
+                Transaction.Add("CreatedDate", transaction.CreatedDate);
+                Transaction.Add("ModifiedDate", transaction.ModifiedDate);
 
                 transactionId = da.insert(Transaction, "Transactions");
             }
@@ -40,7 +40,6 @@ namespace BookSpade.Revamped.Handlers
 
             return transactionId; 
         }
-
 
         #endregion
 
@@ -63,7 +62,7 @@ namespace BookSpade.Revamped.Handlers
                 int BuyerPostId = Convert.ToInt32(row["BuyerPostId"]);
                 int CommentId = Convert.ToInt32(row["CommentId"]);
                 decimal FinalPrice = Convert.ToDecimal(row["FinalPrice"]);
-                decimal SellerPrice = Convert.ToDecimal(row["SellerPrice"]);
+                decimal InitialPrice = Convert.ToDecimal(row["InitialPrice"]);
                 int IsActive = Convert.ToInt32(row["IsActive"]);
                 int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
                 DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
@@ -76,15 +75,41 @@ namespace BookSpade.Revamped.Handlers
                     BuyerPostId,
                     CommentId,
                     FinalPrice,
-                    SellerPrice,
+                    InitialPrice,
                     IsActive,
                     IsDeleted,
                     CreatedDate,
                     ModifiedDate
-                    ); 
+                ); 
             }
 
             return transaction; 
+        }
+
+        #endregion
+
+        #region CreateTransactionHistory
+
+        public static int CreateTransactionHistory(int transactionId, int userId)
+        {
+            int transactionHistoryId = -1;
+
+            try
+            {
+                DataAccess da = new DataAccess();
+
+                Dictionary<string, object> transactionHistory = new Dictionary<string, object>();
+                transactionHistory.Add("TransactionId", transactionId);
+                transactionHistory.Add("UserId", userId);
+
+                transactionHistoryId = da.insert(transactionHistory, "TransactionHistory");
+            }
+            catch (Exception ex)
+            {
+                Console.Write("ERROR: An error occured in adding a new transaction --- " + ex.Message + "          " + ex.StackTrace);
+            }
+
+            return transactionHistoryId;
         }
 
         #endregion
@@ -105,7 +130,7 @@ namespace BookSpade.Revamped.Handlers
                                                             Convert.ToInt32(x["BuyerPostId"]),
                                                             x["CommentId"] is DBNull ? (int?)null : Convert.ToInt32(x["CommentId"]),
                                                             x["FinalPrice"] is DBNull ? (decimal?)null : Convert.ToDecimal(x["FinalPrice"]),
-                                                            Convert.ToDecimal(x["SellerPrice"]),
+                                                            Convert.ToDecimal(x["InitialPrice"]),
                                                             Convert.ToInt32(x["IsActive"]),
                                                             Convert.ToInt32(x["IsDeleted"]),
                                                             Convert.ToDateTime(x["CreatedDate"]),

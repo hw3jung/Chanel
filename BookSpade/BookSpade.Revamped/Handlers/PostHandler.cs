@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using BookSpade.Revamped.DAL;
 using BookSpade.Revamped.Models;
-using System.Data; 
+using System.Data;
+using BookSpade.Revamped.Utilities; 
 
 namespace BookSpade.Revamped.Handlers
 {
@@ -20,18 +21,19 @@ namespace BookSpade.Revamped.Handlers
             {
                 DataAccess da = new DataAccess();
 
-                Dictionary<string, string> post = new Dictionary<string, string>();
-                post.Add("ProfileId", Convert.ToString(newPost.ProfileId));
-                post.Add("TextBookId", Convert.ToString(newPost.TextBookId));
-                post.Add("ActionBy ", Convert.ToString(newPost.ActionBy));
-                post.Add("Price", Convert.ToString(newPost.Price));
-                post.Add("BookCondition", newPost.BookCondition);
-                post.Add("IsActive", "1");
-                post.Add("IsDeleted", "0");
-                post.Add("CreatedDate", Convert.ToString(DateTime.Now));
-                post.Add("ModifiedDate", Convert.ToString(DateTime.Now));
+                Dictionary<string, object> post = new Dictionary<string, object>();
+                post.Add("UserId", newPost.UserId);
+                post.Add("TextBookId", newPost.TextBookId);
+                post.Add("ActionBy ", (int) newPost.ActionBy); // enum must be casted to int before we can store it in db
+                post.Add("Price", newPost.Price);
+                post.Add("BookCondition", (int) newPost.BookCondition); // enum must be casted to int before we can store it in db
+                post.Add("IsTransacting", newPost.IsTransacting);
+                post.Add("IsActive", 1);
+                post.Add("IsDeleted", 0);
+                post.Add("CreatedDate", DateTime.Now);
+                post.Add("ModifiedDate", DateTime.Now);
 
-                id = da.insert(post, "Posts"); 
+                id = da.insert(post, "Posts");
             }
             catch (Exception ex)
             {
@@ -45,42 +47,43 @@ namespace BookSpade.Revamped.Handlers
 
         #region getPost
 
-        public static Post getPost(int PostId)
+        public static Post getPost(int postId)
         {
             Post post = null;
 
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("PostId = '{0}'", PostId), "Posts");
+                DataTable dt = da.select(String.Format("PostId = '{0}'", postId), "Posts");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int ProfileId = Convert.ToInt32(row["UserId"]);
-                    int TextBookId = Convert.ToInt32(row["TextBookId"]);
-                    ActionBy ActionBy = (ActionBy)Convert.ToInt32(row["ActionBy"]);
-                    decimal Price = Convert.ToDecimal(row["Price"]);
-                    string BookCondition = Convert.ToString(row["BookCondition"]);
-                    int IsActive = Convert.ToInt32(row["IsActive"]);
-                    int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
-                    DateTime CreatedDate = (DateTime)row["CreatedDate"];
-                    DateTime ModifiedDate = (DateTime)row["ModifiedDate"];
+                    int profileId = Convert.ToInt32(row["UserId"]);
+                    int textbookId = Convert.ToInt32(row["TextBookId"]);
+                    ActionBy actionBy = (ActionBy)Convert.ToInt32(row["ActionBy"]);
+                    decimal price = Convert.ToDecimal(row["Price"]);
+                    BookCondition bookCondition = (BookCondition)Convert.ToInt32(row["BookCondition"]);
+                    int isTransacting = Convert.ToInt32(row["IsTransacting"]);
+                    int isActive = Convert.ToInt32(row["IsActive"]);
+                    int isDeleted = Convert.ToInt32(row["IsDeleted"]);
+                    DateTime createdDate = (DateTime)row["CreatedDate"];
+                    DateTime modifiedDate = (DateTime)row["ModifiedDate"];
 
                     post = new Post(
-                        PostId,
-                        ProfileId,
-                        TextBookId,
-                        ActionBy,
-                        Price,
-                        BookCondition,
-                        IsActive,
-                        IsDeleted,
-                        CreatedDate,
-                        ModifiedDate); 
-
+                        postId,
+                        profileId,
+                        textbookId,
+                        actionBy,
+                        price,
+                        bookCondition,
+                        isTransacting,
+                        isActive,
+                        isDeleted,
+                        createdDate,
+                        modifiedDate
+                    );
                 }
-                
             }
             catch (Exception ex)
             {
@@ -91,5 +94,113 @@ namespace BookSpade.Revamped.Handlers
         }
         #endregion
 
+        #region updatePostState
+
+        public static bool updatePostState(int postId, int isTransacting, int? isActive = null)
+        {
+            bool success = true;
+
+            try
+            {
+                Dictionary<string, object> updateDict = new Dictionary<string, object>();
+                updateDict.Add("IsTransacting", isTransacting);
+
+                if (isActive != null)
+                {
+                    updateDict.Add("IsActive", isActive);
+                }
+
+                DataAccess da = new DataAccess();
+                da.update("Posts", String.Format("PostId = {0}", postId), updateDict);
+            }
+            catch (Exception e)
+            {
+                Console.Write("ERROR: Could not update post state with the given post id --- " + e.Message);
+                success = false;
+            }
+
+            return success;
+        }
+
+        #endregion
+        
+        #region findMatchingPosts
+
+        public static Post findMatchingPost(Post post)
+        {
+            Post matchingPost = null;
+
+            try
+            {
+                var counterparty = post.ActionBy == ActionBy.Buyer ? ActionBy.Seller : ActionBy.Buyer;
+
+                string query = String.Format("UserId <> {0} AND TextBookId = {1} AND ActionBy = {2} " +
+                    "AND IsTransacting = 0 AND IsActive = 1 AND IsDeleted = 0",
+                    post.UserId,
+                    post.TextBookId,
+                    counterparty
+                );
+
+                List<SortColumn> sortColumns = new List<SortColumn>();
+                if (post.ActionBy == ActionBy.Buyer) //buyer
+                {
+                    query += String.Format("Price <= {0} AND BookCondition >= {1}",
+                        post.Price,
+                        post.BookCondition
+                    );
+
+                    sortColumns.Add(new SortColumn("Price", "ASC"));
+                }
+                else //seller
+                {
+                    query += String.Format("Price >= {0} AND BookCondition <= {1}",
+                        post.Price,
+                        post.BookCondition
+                    );
+
+                    sortColumns.Add(new SortColumn("Price", "DESC"));
+                }
+                
+                DataAccess da = new DataAccess();
+                DataTable dt = da.select(query, "Posts", SortColumns : sortColumns);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    int postId = Convert.ToInt32(row["PostId"]);
+                    int profileId = Convert.ToInt32(row["UserId"]);
+                    int textBookId = Convert.ToInt32(row["TextBookId"]);
+                    ActionBy actionBy = (ActionBy)Convert.ToInt32(row["ActionBy"]);
+                    decimal price = Convert.ToDecimal(row["Price"]);
+                    BookCondition bookCondition = (BookCondition)Convert.ToInt32(row["BookCondition"]);
+                    int isTransacting = Convert.ToInt32(row["IsTransacting"]);
+                    int isActive = Convert.ToInt32(row["IsActive"]);
+                    int isDeleted = Convert.ToInt32(row["IsDeleted"]);
+                    DateTime createdDate = (DateTime)row["CreatedDate"];
+                    DateTime modifiedDate = (DateTime)row["ModifiedDate"];
+
+                    matchingPost = new Post(
+                        postId,
+                        profileId,
+                        textBookId,
+                        actionBy,
+                        price,
+                        bookCondition,
+                        isTransacting,
+                        isActive,
+                        isDeleted,
+                        createdDate,
+                        modifiedDate
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message + "   " + ex.StackTrace); 
+            }
+
+            return matchingPost;
+        }
+        #endregion
     }
 }

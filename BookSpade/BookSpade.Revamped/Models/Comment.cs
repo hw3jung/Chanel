@@ -1,16 +1,11 @@
-﻿using System;
+﻿using BookSpade.Revamped.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BookSpade.Revamped.Models
 {
-    public enum ActionBy
-    {
-        Seller = 0,
-        Buyer = 1
-    }
-
     public class Comment
     {
         public int CommentId { get; set; }

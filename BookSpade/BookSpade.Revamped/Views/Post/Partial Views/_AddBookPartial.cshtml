@@ -1,9 +1,22 @@
-﻿<div class="new-book span5">
+﻿@model BookSpade.Revamped.Models.CreatePostModel
+
+@{
+    if (Model.IsNewBook)
+    {
+        ViewBag.NewBookFormStyle = "display: block;";
+    }
+    else
+    {
+      ViewBag.NewBookFormStyle = "";
+    }
+}
+
+<div class="new-book span5" style="@ViewBag.NewBookFormStyle">
   <!-- Text input-->
   <div class="control-group">
     <label class="control-label">Book Title</label>
     <div class="controls">
-      <input id="bookTitle" name="bookTitle" type="text" placeholder="Financial Accounting with Connect &amp; Lyryx 4th Cdn" class="input-xlarge">
+      @Html.TextBoxFor(m => m.BookTitle, new { @class = "input-xlarge", @placeholder = "Financial Accounting with Connect & Lyryx 4th Cdn", @Value = ""})
 
     </div>
   </div>
@@ -12,7 +25,7 @@
   <div class="control-group">
     <label class="control-label">Course</label>
     <div class="controls">
-      <input id="course" name="course" type="text" placeholder="AFM 101" class="input-xlarge">
+      @Html.TextBoxFor(m => m.NewCourseName, new { @class = "input-xlarge", @placeholder = "AFM 101", @Value = ""})
     
     </div>
   </div>
@@ -21,7 +34,7 @@
   <div class="control-group">
     <label class="control-label">ISBN</label>
     <div class="controls">
-      <input id="isbn" name="isbn" type="text" placeholder="9780070898714" class="input-xlarge">
+      @Html.TextBoxFor(m => m.ISBN, new { @class = "input-xlarge", @placeholder = "9780070898714", @Value = ""})
     
     </div>
   </div>
@@ -32,7 +45,7 @@
   <div class="control-group">
     <label class="control-label">Author (optional)</label>
     <div class="controls">
-      <input id="author" name="author" type="text" placeholder="Robert Libby, Patricia Libby, Daniel Short, George Kanaan, Maureen Gowing" class="input-xlarge">
+      @Html.TextBoxFor(m => m.Author, new { @class = "input-xlarge", @placeholder = "Robert Libby, Patricia Libby, Daniel Short, George Kanaan, Maureen Gowing", @Value = ""})
     
     </div>
   </div>
@@ -41,7 +54,7 @@
   <div class="control-group">
     <label class="control-label">Book Image URL (optional)</label>
     <div class="controls">
-      <input id="bookImageUrl" name="bookImageUrl" type="text" placeholder="http://ecx.images-amazon.com/images/I/41zG8Om9YaL._SL500_AA300_.jpg" class="input-xlarge">
+      @Html.TextBoxFor(m => m.BookImageUrl, new { @class = "input-xlarge", @placeholder = "http://ecx.images-amazon.com/images/I/41zG8Om9YaL._SL500_AA300_.jpg", @Value = ""})
     
     </div>
   </div>

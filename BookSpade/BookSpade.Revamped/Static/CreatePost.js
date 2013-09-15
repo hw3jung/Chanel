@@ -15,6 +15,10 @@ function clickBookListItem() {
     $(".submit-form").css('margin-bottom', '222px');
     $(".common-fields").css('margin-top', '30px');
     $("#newBookButton").css('display', 'inline-block');
+
+    var textbookId = $(this).find("#Title")[0].getAttribute('data-value');
+    $("#TextBookId").val(textbookId);
+    $("#IsNewBook").val("false");
 }
 
 function clickNewBookButton() {
@@ -29,15 +33,20 @@ function clickNewBookButton() {
     $(".common-fields").css('margin-top', '0');
     $(".new-book").css('display', 'block');
     $(this).css('display', 'none');
+
+    $("#TextBookId").val("");
+    $("#IsNewBook").val("true");
 }
 
 function changePostType() {
     var value = $(this).val();
 
-    if (value == "Buy this book") {
+    if (value == "Buyer") {
         $("#matchButton").text("Match Me With a Seller!");
-    } else if (value == "Sell this book") {
+        $("#Price").parent().siblings('.control-label').text("I'm willing to pay (at most)");
+    } else if (value == "Seller") {
         $("#matchButton").text("Match Me With a Buyer!");
+        $("#Price").parent().siblings('.control-label').text("I'd like to receive (at least)");
     }
 }
 
@@ -45,68 +54,18 @@ function clickNegotiatePrice() {
     var checked = $(this).is(':checked');
 
     if (checked) {
-        $("#bookPrice").val("");
-        $("#bookPrice").prop('disabled', true);
+        $("#Price").val("");
+        $("#Price").prop('disabled', true);
     } else {
-        $("#bookPrice").prop('disabled', false);
+        $("#Price").prop('disabled', false);
     }
-}
-
-function getCommonFields() {
-    var postType = $("#PostType").val() == "Sell this book";
-    var price = $("#bookPrice").val().trim();
-    var condition = $("#bookCondition").val().trim();
-    var isNegotiable = $('#negotiatePrice').is(':checked');
-
-    var fields = {
-        "postType": postType,
-        "price": price,
-        "condition": condition,
-        "isNegotiable": isNegotiable
-    }
-    return fields;
-}
-
-function getBookFields() {
-    var fields = null;
-
-    if (addBook) {
-        var title = $("#bookTitle").val().trim();
-        var course = $("#course").val().trim();
-        var isbn = $("#isbn").val().trim();
-        var author = $("#author").val().trim();
-        var bookImageUrl = $("#bookImageUrl").val().trim();
-
-        fields = {
-            "title": title,
-            "course": course,
-            "isbn": isbn,
-            "author": author,
-            "bookImageUrl": bookImageUrl
-        }
-    } else {
-        var title = $("#BookList li.selected #Title").text().trim();
-        var course = $("#BookList li.selected #Course").text().trim();
-
-        fields = {
-            "title": title,
-            "course": course
-        }
-    }
-    
-    return fields;
-}
-
-// Save into db and "match make"
-function createPost() {
-    
 }
 
 // Attach event handlers
 $("#BookList li").click(clickBookListItem);
 $("#newBookButton").click(clickNewBookButton);
-$("#postType").change(changePostType);
-$("#negotiatePrice").click(clickNegotiatePrice);
+$("#ActionBy").change(changePostType);
+$("#IsNegotiable").click(clickNegotiatePrice);
 
 
 //    var xhr = null;

@@ -1,6 +1,17 @@
-﻿@model IEnumerable<BookSpade.Revamped.Models.Textbook>
+﻿@model BookSpade.Revamped.Models.CreatePostModel
 
 @Styles.Render("~/Content/Pages/CreatePost.css")
+
+@{
+    if (Model.IsNewBook)
+    {
+        ViewBag.SubmitFormStyle = "margin-bottom: 0;";
+    }
+    else
+    {
+        ViewBag.SubmitFormStyle = "";
+    }
+}
 
 <div class="new-post">
   <div class="page-header">Match My Book</div>
@@ -15,7 +26,7 @@
     <div class="ChooseBook">
       <div id="BookListWrapper">
           <ul id="BookList" class="SearchResults wave">
-            @Html.Partial("_BookListPartial", Model)
+            @Html.Partial("_BookListPartial", Model.Textbooks)
           </ul>
       </div>
 
@@ -23,75 +34,18 @@
       <div class="control-group">
         <div class="controls">
           <label class="control-label"></label>
-          <button id="newBookButton" name="newBookButton" class="btn btn-info">Can't find your book? Click Here</button>
+          @{
+              if (!Model.IsNewBook) {
+                <button id="newBookButton" name="newBookButton" class="btn btn-info">Can't find your book? Click Here</button>
+              }
+          }
         </div>
       </div>
     </div>
   </div>
 
-  <div class="submit-form">
-    <form class="form-horizontal">
-      <fieldset>
-        @Html.Partial("_AddBookPartial")
-        <div class="common-fields span5">
-          <!-- Select Basic -->
-          <div class="control-group">
-            <label class="control-label">I want to</label>
-            <div class="controls">
-              <select id="postType" name="postType" class="input-xlarge">
-                <option>Buy this book</option>
-                <option>Sell this book</option>
-              </select>
-
-            </div>
-          </div>
-
-          <!-- Select Basic -->
-          <div class="control-group">
-            <label class="control-label">Book Condition</label>
-            <div class="controls">
-              <select id="bookCondition" name="bookCondition" class="input-xlarge">
-                <option>Excellent</option>
-                <option>Good</option>
-                <option>Decent</option>
-                <option>Poor</option>
-                <option>Salvageable</option>
-              </select>
-
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="control-group">
-            <label class="control-label">Price</label>
-            <div class="controls">
-              <input id="bookPrice" name="bookPrice" type="text" placeholder="e.g. 100" class="input-xlarge" required="">
-    
-            </div>
-          </div>
-
-          <!-- Multiple Checkboxes -->
-          <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox" id="negotiatePrice" name="negotiatePrice" value="negotiate">
-                I want to negotiate the price instead.
-              </label>
-            </div>
-          </div>
-
-          <!-- Button -->
-          <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <button id="matchButton" name="matchButton" class="btn btn-large btn-success">Match Me With a Seller!</button>
-            </div>
-          </div>
-        </div>
-  
-      </fieldset>
-    </form>
+  <div class="submit-form" style="@ViewBag.SubmitFormStyle">
+    @Html.Partial("_NewPostForm")
   </div>
 </div>
 

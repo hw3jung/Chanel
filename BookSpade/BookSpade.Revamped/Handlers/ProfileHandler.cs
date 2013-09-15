@@ -24,13 +24,13 @@ namespace BookSpade.Revamped.Handlers
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
-                    Dictionary<string, string> profile = new Dictionary<string, string>();
+                    Dictionary<string, object> profile = new Dictionary<string, object>();
                     profile.Add("Name", Name);
                     profile.Add("Email", Email);
-                    profile.Add("IsActive", "1");
-                    profile.Add("IsDeleted", "0");
-                    profile.Add("CreatedDate", Convert.ToString(DateTime.Now));
-                    profile.Add("ModifiedDate", Convert.ToString(DateTime.Now));
+                    profile.Add("IsActive", 1);
+                    profile.Add("IsDeleted", 0);
+                    profile.Add("CreatedDate", DateTime.Now);
+                    profile.Add("ModifiedDate", DateTime.Now);
 
                     id = DAL.insert(profile, "UserProfile");
                 }
@@ -108,5 +108,31 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        #region GetProfileId
+
+        public static int GetProfileId(string Email) //in B.S. UserName == Email 
+        {
+            int profileId = -1;
+
+            try
+            {
+                DataAccess DAL = new DataAccess();
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    profileId = Convert.ToInt32(row["UserId"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write("ERROR: An error occured in retrieving the user profile --- " + ex.Message);
+            }
+
+            return profileId;
+        }
+
+        #endregion
     }
 }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BookSpade.Revamped.Handlers; 
+using BookSpade.Revamped.Handlers;
+using BookSpade.Revamped.Utilities; 
 
 namespace BookSpade.Revamped.Models
 {
@@ -12,9 +13,9 @@ namespace BookSpade.Revamped.Models
         public string ISBN { get; set; }
         public decimal Price { get; set; }
         public decimal? FinalPrice { get; set; }
-        public string Condition { get; set; }
+        public BookCondition Condition { get; set; }
         public string CourseName { get; set; }
-        public decimal StorePrice { get; set; }
+        public decimal? StorePrice { get; set; }
 
         public Post SellerPost { get; set; }
         public Post BuyerPost { get; set; }
