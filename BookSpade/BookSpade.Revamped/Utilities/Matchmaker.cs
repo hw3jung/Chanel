@@ -41,6 +41,7 @@ namespace BookSpade.Revamped.Utilities
                 int buyerUserId = -1;
                 int sellerUserId = -1;
 
+             
                 decimal initialPrice;
 
                 if (newPost.ActionBy == ActionBy.Buyer)
@@ -68,9 +69,10 @@ namespace BookSpade.Revamped.Utilities
                 Transaction newTransaction = new Transaction(
                     -1, // id doesnt matter here
                     newPost.TextBookId,
+                    sellerUserId,
+                    buyerUserId,
                     sellerPostId,
                     buyerPostId,
-                    null,
                     null,
                     initialPrice,
                     1,

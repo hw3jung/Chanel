@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BookSpade.Revamped.Handlers;
-using BookSpade.Revamped.Models; 
+using BookSpade.Revamped.Models;
+using BookSpade.Revamped.Utilities;
 
 namespace BookSpade.Revamped.Controllers
 {
