@@ -8,10 +8,11 @@ namespace BookSpade.Revamped.Models
     public class Transaction
     {
         public int TransactionId { get; set; }
-        public int TextbookId { get; set; } 
+        public int TextbookId { get; set; }
+        public int SellerId { get; set; }
+        public int BuyerId { get; set; } 
         public int SellerPostId { get; set; }
         public int BuyerPostId { get; set; }
-        public int? CommentId { get; set; }
         public decimal? FinalPrice { get; set; }
         public decimal InitialPrice { get; set; }
         public int IsActive { get; set; }
@@ -22,9 +23,10 @@ namespace BookSpade.Revamped.Models
         public Transaction(
             int transactionId,
             int textbookId,
+            int sellerId,
+            int buyerId,
             int sellerPostId,
             int buyerPostId,
-            int? commentId,
             decimal? finalPrice,
             decimal initialPrice,
             int isActive,
@@ -34,10 +36,11 @@ namespace BookSpade.Revamped.Models
             )
         {
             TransactionId = transactionId;
-            TextbookId = textbookId; 
+            TextbookId = textbookId;
+            SellerId = sellerId;
+            BuyerId = buyerId; 
             SellerPostId = sellerPostId;
             BuyerPostId = buyerPostId;
-            CommentId = commentId;
             FinalPrice = FinalPrice;
             InitialPrice = initialPrice;
             IsActive = isActive;

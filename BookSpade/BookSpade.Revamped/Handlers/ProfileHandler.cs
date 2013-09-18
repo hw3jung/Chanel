@@ -60,8 +60,8 @@ namespace BookSpade.Revamped.Handlers
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    string name = Convert.ToString(row["Name"]);
-                    string email = Convert.ToString(row["Email"]);
+                    string name = Convert.ToString(row["DisplayName"]);
+                    string email = Convert.ToString(row["UserName"]);
                     
                     profile = new Profile(userId, name, email);
                 }

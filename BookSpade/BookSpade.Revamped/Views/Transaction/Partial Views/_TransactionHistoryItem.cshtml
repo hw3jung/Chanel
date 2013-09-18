@@ -3,7 +3,7 @@
 <li> 
   <div class="item-container">
     <h4 class="item-title">
-      @Model.BookTitle
+      @Html.ActionLink(Model.BookTitle, "TransactionDetails", new {transactionId = Model.transaction.TransactionId})
     </h4>
     <div>
       <div class="isbn-course">
@@ -23,7 +23,7 @@
           } else {
             <div class="BookDetail lbl">
               Final Price : 
-            </div>
+            </div>  
             <div class="BookDetail">
               To be determined
             </div>
@@ -33,4 +33,5 @@
     </div>
   </div>
 </li>
+
 

@@ -19,6 +19,7 @@ namespace BookSpade.Revamped.Models
 
         public Post SellerPost { get; set; }
         public Post BuyerPost { get; set; }
+        public Transaction transaction { get; set; } 
 
         public TransactionDetailModel(Transaction transaction)
         {
@@ -34,6 +35,7 @@ namespace BookSpade.Revamped.Models
             Condition = SellerPost.BookCondition;
             CourseName = course.CourseName;
             StorePrice = textbook.StorePrice;
+            this.transaction = transaction; 
         }
     }
 }

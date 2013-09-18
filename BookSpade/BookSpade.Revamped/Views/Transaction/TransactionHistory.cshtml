@@ -7,7 +7,7 @@
   <ul class="user-history SearchResults wave">
   @{
       foreach(TransactionDetailModel TransactionDetail in Model){
-          Html.Partial("_TransactionHistoryDetail", TransactionDetail);
+          Html.Partial("_TransactionHistoryItem", TransactionDetail);
       }
   }
   </ul>

@@ -166,6 +166,7 @@
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="DAL\DataAccess.cs" />
+    <Compile Include="EmailUtil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -357,7 +358,7 @@
     <Content Include="Views\Post\CreatePost.cshtml" />
     <Content Include="Views\Post\Partial Views\_AddBookPartial.cshtml" />
     <Content Include="Views\Post\Partial Views\_BookListPartial.cshtml" />
-    <Content Include="Views\Transaction\Partial Views\_TransactionHistoryDetail.cshtml" />
+    <Content Include="Views\Transaction\Partial Views\_TransactionHistoryItem.cshtml" />
     <Content Include="Views\Transaction\TransactionDetails.cshtml" />
     <Content Include="Views\Transaction\Partial Views\_TransactionComment.cshtml" />
     <Content Include="Views\Post\Partial Views\_NewPostForm.cshtml" />

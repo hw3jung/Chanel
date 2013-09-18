@@ -4,15 +4,50 @@
     ViewBag.Title = "Transaction";
 }
 
-
 <div>
-
+  @Model.Details.BookTitle
+  @Model.Details.Condition
+  @Model.Details.CourseName
+  @Model.Details.ISBN
+  @Model.Details.StorePrice
+  @Model.Details.Price
 </div>
-<div>
+<div id="dvComments">
   @{
      foreach(Comment comment in Model.Comments) {
-       Html.RenderPartial("_TransactionHistoryDetail", comment);    
+      <div>
+        @Html.Partial("_TransactionComment", comment)
+      </div>    
      }
   }
 </div>
+<div>
+  @Html.TextArea("NewComment", "", 3, 50, new { Id = "txtNewComment"})
+ <input id="submit" type="submit" onclick="newComment()" value="Submit" />
+</div>
+
+<script type="text/javascript">
+  function newComment() {
+
+    var Comment = $("#txtNewComment").val();
+   
+    $.ajax({
+
+      url: '@Url.Action("newComment", "Transaction")',
+      data: {
+        comment: Comment,
+        userId: "@(Model.UserId)",
+        OtherUserId: "@(Model.OtherPartyId)",
+        transactionId: "@(Model.Details.transaction.TransactionId)"
+      },
+      type: 'POST',
+      success: function (result) {
+
+        $("#dvComments").append("<div>" + result + " " + Comment + "</div>");
+        $("#txtNewComment").val(""); 
+       
+      }
+    });
+  }
+</script>
 

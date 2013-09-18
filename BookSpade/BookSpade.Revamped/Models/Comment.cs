@@ -18,6 +18,8 @@ namespace BookSpade.Revamped.Models
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
+        public Profile CommentatorProfile { get; set; }
+
         public Comment(
             int commentId,
             string comment,
@@ -38,12 +40,8 @@ namespace BookSpade.Revamped.Models
             IsActive = isActive;
             IsDeleted = isDeleted;
             CreatedDate = createdDate;
-            ModifiedDate = modifiedDate; 
-        }
-
-        public Profile getCommentatorProfile()
-        {
-            return BookSpade.Revamped.Handlers.ProfileHandler.GetProfile(UserId); 
+            ModifiedDate = modifiedDate;
+            CommentatorProfile = BookSpade.Revamped.Handlers.ProfileHandler.GetProfile(UserId);
         }
     }
 }

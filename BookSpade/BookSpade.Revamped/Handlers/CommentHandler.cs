@@ -46,12 +46,10 @@ namespace BookSpade.Revamped.Handlers
         #region getComments
 
         public static IEnumerable<Comment> getComments(int TransactionId)
-        {
-            IEnumerable<Comment> comments = new List<Comment>();
-
+        { 
             DataAccess da = new DataAccess();
             DataTable dt = da.select(String.Format("TransactionId = '{0}'", TransactionId), "TransactionComments");
-            IEnumerable<Comment> transactions = dt.AsEnumerable().Select(
+            IEnumerable<Comment> comments = dt.AsEnumerable().Select(
                                                         x => new Comment(
                                                             Convert.ToInt32(x["CommentId"]),
                                                             Convert.ToString(x["Comment"]),
