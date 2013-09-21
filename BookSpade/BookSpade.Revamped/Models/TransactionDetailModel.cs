@@ -37,5 +37,10 @@ namespace BookSpade.Revamped.Models
             StorePrice = textbook.StorePrice;
             this.transaction = transaction; 
         }
+
+        public TransactionDetailModel()
+        {
+        }
+
     }
 }

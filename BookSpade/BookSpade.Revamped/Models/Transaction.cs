@@ -41,12 +41,14 @@ namespace BookSpade.Revamped.Models
             BuyerId = buyerId; 
             SellerPostId = sellerPostId;
             BuyerPostId = buyerPostId;
-            FinalPrice = FinalPrice;
+            FinalPrice = finalPrice;
             InitialPrice = initialPrice;
             IsActive = isActive;
             IsDeleted = isDeleted; 
             CreatedDate = createdDate;
             ModifiedDate = modifiedDate; 
         }
+
+        public Transaction() { }
     }
 }

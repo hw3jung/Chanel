@@ -1,0 +1,21 @@
+﻿@model Transaction
+
+ @using (Html.BeginForm("CancelTransaction", "Transaction"))
+    {
+      <div>
+        <p>
+          <b>WARNING!! </b> 
+          Clicking on the following "Cancel" button will cancel the transaction altogether. You and the other party to this transaction will not be matched by BookSpade again.
+        </p>
+      </div>
+      <div> 
+        <button id="cancel" type="submit" style="margin:0 auto;" class="btn btn-danger" onclick="cancelTransaction()">Cancel Transaction</button> 
+      </div>
+   
+   @Html.HiddenFor(x => x.TransactionId);
+   @Html.HiddenFor(x => x.SellerId);
+   @Html.HiddenFor(x => x.SellerPostId);
+   @Html.HiddenFor(x => x.BuyerId);
+   @Html.HiddenFor(x => x.BuyerPostId);
+      
+    }

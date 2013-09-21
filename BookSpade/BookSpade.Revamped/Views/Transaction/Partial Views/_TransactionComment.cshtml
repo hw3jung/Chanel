@@ -1,7 +1,9 @@
 ﻿@model Comment
 
-<div>
-  @Model.CommentatorProfile.Name
-  @Model.comment
-</div>
-
+<li>
+    <div>
+      <img class="comment-spade" src="@Url.Content("~/Content/Images/Spade.png")" alt="spade" />
+      <span><b>@Model.CommentatorProfile.Name</b></span>
+      @Model.comment
+    </div>
+</li>

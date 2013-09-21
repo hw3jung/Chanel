@@ -63,7 +63,7 @@ namespace BookSpade.Revamped.Handlers
             Transaction transaction = null;
 
             DataAccess da = new DataAccess();
-            DataTable dt = da.select(String.Format("TransactionId = '{0}'", transactionId), "Transactions");
+            DataTable dt = da.select(String.Format("TransactionId = '{0}' AND IsActive = 1 AND IsDeleted = 0 ", transactionId), "Transactions");
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -136,7 +136,7 @@ namespace BookSpade.Revamped.Handlers
             DataAccess da = new DataAccess();
             List<int> transactionIds = da.select(String.Format("UserId = '{0}'", UserId), "TransactionHistory").AsEnumerable().Select(x => (int)x["TransactionId"]).ToList();
             string Ids = string.Join(",", transactionIds);
-            DataTable dt = da.select(String.Format("TransactionId IN ({0})", Ids), "Transactions"); 
+            DataTable dt = da.select(String.Format("TransactionId IN ({0}) AND IsDeleted = 0 AND IsActive = 1", Ids), "Transactions"); 
             IEnumerable<Transaction>  transactions = dt.AsEnumerable().Select(
                                                         x => new Transaction(
                                                             Convert.ToInt32(x["TransactionId"]),
@@ -153,6 +153,51 @@ namespace BookSpade.Revamped.Handlers
                                                             Convert.ToDateTime(x["ModifiedDate"]))).ToList();
  
             return transactions; 
+        }
+
+        #endregion
+
+        #region UpdateTransaction
+
+        public static void UpdateTransaction(int transactionId, object value, string column)
+        {
+            DataAccess da = new DataAccess();
+            Dictionary<string, object> updateDictionary = new Dictionary<string,object>();
+            updateDictionary.Add(column, value);
+            da.update("Transactions", String.Format("TransactionId = {0}", transactionId), updateDictionary);
+        }
+
+        #endregion
+
+        #region CancelTransaction
+
+        public static bool CancelTransaction(Transaction transaction)
+        {
+            PostHandler.updatePostState(transaction.SellerPostId, 0, null);
+            PostHandler.updatePostState(transaction.BuyerPostId, 0, null);
+            UpdateTransaction(transaction.TransactionId, 1, "IsDeleted");
+
+            if (CreateForbiddenMatch(transaction.BuyerPostId, transaction.SellerPostId) > 0
+                && CreateForbiddenMatch(transaction.SellerPostId, transaction.BuyerPostId) > 0)
+                return true;
+            else
+                return false;
+        }
+
+        #endregion
+
+        #region CreateForbiddenMatch
+
+        private static int CreateForbiddenMatch(int PostId, int MatchedPostId)
+        {
+            DataAccess da = new DataAccess();
+
+            Dictionary<string, object> CancelledTransaction = new Dictionary<string, object>();
+            CancelledTransaction.Add("PostId", PostId);
+            CancelledTransaction.Add("MatchedPostId", MatchedPostId);
+
+            return da.insert(CancelledTransaction, "CancelledTransactions"); 
+
         }
 
         #endregion

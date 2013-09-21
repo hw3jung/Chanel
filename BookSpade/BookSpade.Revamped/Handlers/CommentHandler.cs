@@ -23,7 +23,7 @@ namespace BookSpade.Revamped.Handlers
 
                 Dictionary<string, object> TransactionComment = new Dictionary<string, object>();
                 TransactionComment.Add("UserId", comment.UserId);
-                TransactionComment.Add("ActionBy", comment.ActionBy);
+                TransactionComment.Add("ActionBy", (int)comment.ActionBy);
                 TransactionComment.Add("TransactionId ", comment.TransactionId);
                 TransactionComment.Add("Comment", comment.comment);
                 TransactionComment.Add("IsActive", 1);
@@ -48,7 +48,7 @@ namespace BookSpade.Revamped.Handlers
         public static IEnumerable<Comment> getComments(int TransactionId)
         { 
             DataAccess da = new DataAccess();
-            DataTable dt = da.select(String.Format("TransactionId = '{0}'", TransactionId), "TransactionComments");
+            DataTable dt = da.select(String.Format("TransactionId = '{0}' AND IsActive = 1 AND IsDeleted = 0", TransactionId), "TransactionComments");
             IEnumerable<Comment> comments = dt.AsEnumerable().Select(
                                                         x => new Comment(
                                                             Convert.ToInt32(x["CommentId"]),

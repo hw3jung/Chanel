@@ -53,7 +53,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("CourseId = '{0}'", CourseId), "CourseInfo");
+                DataTable dt = da.select(String.Format("CourseId = '{0}' AND IsActive = 1 AND IsDeleted = 0", CourseId), "CourseInfo");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {

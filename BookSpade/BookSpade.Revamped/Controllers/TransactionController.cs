@@ -59,7 +59,28 @@ namespace BookSpade.Revamped.Controllers
 
             EmailUtil.Mail(NotifyUser.Email, newComment.CommentatorProfile.Name + " : Responded to your comment", "'" + comment + "'");  
 
-            return Json(newComment.CommentatorProfile.Name);
+            return Json("");
+        }
+
+        #endregion
+
+        #region setFinalPrice
+
+        public JsonResult setFinalPrice(int transactionId, decimal finalprice)
+        {
+            TransactionHandler.UpdateTransaction(transactionId, finalprice, "FinalPrice"); 
+            return Json(""); 
+        }
+
+        #endregion
+
+        #region CancelTransaction
+
+        [HttpPost]
+        public ActionResult CancelTransaction(Transaction transaction)
+        {
+            TransactionHandler.CancelTransaction(transaction);
+            return RedirectToAction("Index", "Home"); 
         }
 
         #endregion

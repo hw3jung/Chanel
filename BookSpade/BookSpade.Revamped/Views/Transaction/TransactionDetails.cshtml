@@ -4,50 +4,201 @@
     ViewBag.Title = "Transaction";
 }
 
-<div>
-  @Model.Details.BookTitle
-  @Model.Details.Condition
-  @Model.Details.CourseName
-  @Model.Details.ISBN
-  @Model.Details.StorePrice
-  @Model.Details.Price
-</div>
-<div id="dvComments">
-  @{
-     foreach(Comment comment in Model.Comments) {
-      <div>
-        @Html.Partial("_TransactionComment", comment)
-      </div>    
-     }
-  }
-</div>
-<div>
-  @Html.TextArea("NewComment", "", 3, 50, new { Id = "txtNewComment"})
- <input id="submit" type="submit" onclick="newComment()" value="Submit" />
-</div>
+@Styles.Render("~/Content/Pages/TransactionDetail.css")
 
-<script type="text/javascript">
-  function newComment() {
 
-    var Comment = $("#txtNewComment").val();
-   
-    $.ajax({
+@Model.Details.FinalPrice
 
-      url: '@Url.Action("newComment", "Transaction")',
-      data: {
-        comment: Comment,
-        userId: "@(Model.UserId)",
-        OtherUserId: "@(Model.OtherPartyId)",
-        transactionId: "@(Model.Details.transaction.TransactionId)"
-      },
-      type: 'POST',
-      success: function (result) {
+<div class="details container">
+  <div class="d-iblock transaction-info">
+    <h4>Details</h4>
+    <div>
+      <div class="d-iblock lbl">
+        Book Title
+      </div>
+      <div class="d-iblock val">
+        @Model.Details.BookTitle
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock lbl">
+        Condition
+      </div>
+      <div class="d-iblock val">
+        @Model.Details.Condition
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock lbl">
+        Course Name
+      </div>
+      <div class="d-iblock val">
+        @Model.Details.CourseName
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock lbl">
+        ISBN
+      </div>
+      <div class="d-iblock val">
+        @Model.Details.ISBN
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock lbl">
+        Store Price
+      </div>
+      <div class="d-iblock val">
+        @Model.Details.StorePrice
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock lbl">
+        Price
+      </div>
+      <div class="d-iblock val">
+        @Model.Details.Price
+      </div>
+    </div>
+  </div>
 
-        $("#dvComments").append("<div>" + result + " " + Comment + "</div>");
-        $("#txtNewComment").val(""); 
-       
+  <div class="d-iblock fprice-cancel" style="float:right;">
+    <h4>Your Price</h4>
+    <div>
+      <div class="d-iblock lbl">Final Price</div>
+      <div class="d-iblock price-val">
+        @{
+          if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1) {
+           @Html.TextBox("FinalPrice", Model.Details.FinalPrice, new {id = "txtFinalPrice", @class="input-small", disabled="disabled"}) 
+          }
+          else
+          {
+            @Html.TextBox("FinalPrice", "", new {id = "txtFinalPrice", @class="input-small"}) 
+          }
+        }
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock lbl">&nbsp;</div>
+
+      @{
+        if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1){} 
+        else {
+          <div class="d-iblock prive-val">
+              <button id="confirmPrice" type="button"  class="btn btn-primary" onclick="confirmFinalPrice()">Confirm</button> 
+          </div> 
+        }
       }
+    </div>
+    <h4>Withdraw</h4>
+    @Html.Partial("_CancelTransaction", Model.Details.transaction)
+  </div>   
+</div>  
+
+
+  <div id="dvComments" class="text-center commentcontainer container">
+    <h4>Your thoughts on the deal</h4>
+    @{
+      if (Model.Comments.Count() > 0){
+      <ul id="commentlst" class="SearchResults wave">
+    
+        @foreach (Comment comment in Model.Comments)
+        {
+          @Html.Partial("_TransactionComment", comment); 
+        }
+
+      </ul>
+      } else {
+       <h4>There are no comments to display</h4> 
+       <ul id="commentlst"  class="SearchResults wave height-auto"></ul>
+      }
+    }
+    
+    <div class="d-iblock">
+      <div class="f-left">
+        <span class="countdown"></span>
+      </div>
+      <div class="d-iblock">
+        <textarea id="txtNewComment" class="message comment-new" name="NewComment" rows="3" cols="15" maxlength="225"></textarea>
+      </div>
+    </div>
+    <div>
+      <div class="d-iblock">&nbsp;&nbsp;&nbsp;</div>
+      <div class="d-iblock">
+       <button id="submit" type="submit" class="btn btn-small btn-primary" onclick="newComment()">Submit</button> 
+      </div>
+    </div>
+  </div>
+  
+@section scripts {
+   @Scripts.Render("~/Scripts/stroll.min.js")
+  <script type="text/javascript">
+
+    function newComment() {
+      var Comment = $("#txtNewComment").val();
+
+      $('#dvComments ul').append(
+        $('<li>').append(
+            "<div>" +
+              "<img style=\"width:55px; height:auto;\" src=\"@Url.Content("~/Content/Images/Spade.png")\" alt=\"spade\" />" +
+              "<span style=\"font-weight:bold;\">" + "@(Model.profile.Name)" + "</span>" + 
+               Comment +
+            "</div>"
+        )
+      );
+
+      $('#commentlst').scrollTop(10000000);
+      $("#txtNewComment").val("");
+      updateCountdown();
+
+      $.ajax({
+        url: '@Url.Action("newComment", "Transaction")',
+        data: {
+          comment: Comment,
+          userId: "@(Model.UserId)",
+          OtherUserId: "@(Model.OtherPartyId)",
+          transactionId: "@(Model.Details.transaction.TransactionId)"
+        },
+        type: 'POST',
+        success: function (result) {
+          
+        }
+      });
+    }
+
+    function updateCountdown() {
+      var remainig = 225 - $('.message').val().length;
+      $('.countdown').text(remainig); 
+
+    }
+
+    function confirmFinalPrice() {
+      var finalprice = $("#txtFinalPrice").val();
+
+      alert(finalprice);
+      $.ajax({
+        url: '@Url.Action("setFinalPrice", "Transaction")',
+        data: {
+          transactionId: "@(Model.Details.transaction.TransactionId)",
+          finalprice: parseFloat(finalprice).toFixed(2)
+        },
+        type: 'POST',
+        success: function (result) {
+          $("#txtFinalPrice").attr("disabled", "disabled");
+          $("#confirmPrice").hide();
+        }
+      });
+    }
+
+    $(function () {
+      updateCountdown();
+      $('.message').change(updateCountdown);
+      $('.message').keyup(updateCountdown);
+
+      $('#commentlst').scrollTop(10000000);
+
     });
-  }
-</script>
+
+   </script>
+}
 

@@ -54,7 +54,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("PostId = '{0}'", postId), "Posts");
+                DataTable dt = da.select(String.Format("PostId = '{0}' AND IsActive = 1 AND IsDeleted = 0", postId), "Posts");
 
                 if (dt != null && dt.Rows.Count > 0)
                 {

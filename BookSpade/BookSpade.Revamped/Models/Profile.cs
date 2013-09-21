@@ -17,5 +17,11 @@ namespace BookSpade.Revamped.Models
             this.Name = Name;
             this.Email = Email; 
         }
+
+        public Profile()
+        {
+
+        }
+
     }
 }
