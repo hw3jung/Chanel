@@ -1,4 +1,8 @@
-﻿.countdown {
+﻿textarea {
+    width:400px;
+}
+
+.countdown {
     font-weight:bold; 
     font-size:10px;
 }
@@ -13,19 +17,27 @@
 }
 
 .commentcontainer {
-    width:1000px;
-    height:200px;
+    width:490px;
+    height:475px;
     bottom:0;
     font-size:14px;
     text-align:left;
+    float:right;
+    background-color:rgba(255, 255, 255, 0.3);
+    padding:5px;
 }
 
 .comment-new {
     font-size:14px;
 }
 
+.text-center {
+    text-align:center;
+}
+
 .container {
     text-align:left;
+    width:1030px;
 }
 
 .d-iblock {
@@ -46,21 +58,21 @@
 }
 
 .details {
-     width:1000px;
+     width:500px;
      text-align:left;
      vertical-align:top;
 }
 
 .transaction-info {
     width:490px;
-    background-color:rgba(255, 255, 255, 0.3);
+    background-color:rgba(255, 255, 255, 0.4);
     padding:10px;
     vertical-align:top;
 }
 
 .fprice-cancel {
-    width:450px;
-    background-color:rgba(255, 255, 255, 0.3);
+    width:490px;
+    background-color:rgba(255, 255, 255, 0.4);
     padding:10px;
     vertical-align:top;
 }

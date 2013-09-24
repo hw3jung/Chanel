@@ -9,94 +9,97 @@
 
 @Model.Details.FinalPrice
 
-<div class="details container">
-  <div class="d-iblock transaction-info">
-    <h4>Details</h4>
-    <div>
-      <div class="d-iblock lbl">
-        Book Title
-      </div>
-      <div class="d-iblock val">
-        @Model.Details.BookTitle
-      </div>
-    </div>
-    <div>
-      <div class="d-iblock lbl">
-        Condition
-      </div>
-      <div class="d-iblock val">
-        @Model.Details.Condition
-      </div>
-    </div>
-    <div>
-      <div class="d-iblock lbl">
-        Course Name
-      </div>
-      <div class="d-iblock val">
-        @Model.Details.CourseName
-      </div>
-    </div>
-    <div>
-      <div class="d-iblock lbl">
-        ISBN
-      </div>
-      <div class="d-iblock val">
-        @Model.Details.ISBN
-      </div>
-    </div>
-    <div>
-      <div class="d-iblock lbl">
-        Store Price
-      </div>
-      <div class="d-iblock val">
-        @Model.Details.StorePrice
-      </div>
-    </div>
-    <div>
-      <div class="d-iblock lbl">
-        Price
-      </div>
-      <div class="d-iblock val">
-        @Model.Details.Price
-      </div>
-    </div>
-  </div>
+<h1 class="text-center">Your Transaction</h1>
 
-  <div class="d-iblock fprice-cancel" style="float:right;">
-    <h4>Your Price</h4>
-    <div>
-      <div class="d-iblock lbl">Final Price</div>
-      <div class="d-iblock price-val">
+<div class="container">
+  <div class="text-center d-iblock details">
+    <div class="transaction-info">
+      <h4>Details</h4>
+      <div>
+        <div class="d-iblock lbl">
+          Book Title
+        </div>
+        <div class="d-iblock val">
+          @Model.Details.BookTitle
+        </div>
+      </div>
+      <div>
+        <div class="d-iblock lbl">
+          Condition
+        </div>
+        <div class="d-iblock val">
+          @Model.Details.Condition
+        </div>
+      </div>
+      <div>
+        <div class="d-iblock lbl">
+          Course Name
+        </div>
+        <div class="d-iblock val">
+          @Model.Details.CourseName
+        </div>
+      </div>
+      <div>
+        <div class="d-iblock lbl">
+          ISBN
+        </div>
+        <div class="d-iblock val">
+          @Model.Details.ISBN
+        </div>
+      </div>
+      <div>
+        <div class="d-iblock lbl">
+          Store Price
+        </div>
+        <div class="d-iblock val">
+          @Model.Details.StorePrice
+        </div>
+      </div>
+      <div>
+        <div class="d-iblock lbl">
+          Price
+        </div>
+        <div class="d-iblock val">
+          @Model.Details.Price
+        </div>
+      </div>
+    </div>
+    <div>&nbsp;</div>
+    <div class="fprice-cancel">
+      <h4>Your Price</h4>
+      <div>
+        <div class="d-iblock lbl">Final Price</div>
+        <div class="d-iblock price-val">
+          @{
+            if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1) {
+             @Html.TextBox("FinalPrice", Model.Details.FinalPrice, new {id = "txtFinalPrice", @class="input-small", disabled="disabled"}) 
+            }
+            else
+            {
+              @Html.TextBox("FinalPrice", "", new {id = "txtFinalPrice", @class="input-small"}) 
+            }
+          }
+        </div>
+      </div>
+      <div>
+        <div class="d-iblock lbl">&nbsp;</div>
+
         @{
-          if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1) {
-           @Html.TextBox("FinalPrice", Model.Details.FinalPrice, new {id = "txtFinalPrice", @class="input-small", disabled="disabled"}) 
-          }
-          else
-          {
-            @Html.TextBox("FinalPrice", "", new {id = "txtFinalPrice", @class="input-small"}) 
+          if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1){} 
+          else {
+            <div class="d-iblock prive-val">
+                <button id="confirmPrice" type="button"  class="btn btn-primary" onclick="confirmFinalPrice()">Confirm</button> 
+            </div> 
           }
         }
       </div>
-    </div>
-    <div>
-      <div class="d-iblock lbl">&nbsp;</div>
-
-      @{
-        if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1){} 
-        else {
-          <div class="d-iblock prive-val">
-              <button id="confirmPrice" type="button"  class="btn btn-primary" onclick="confirmFinalPrice()">Confirm</button> 
-          </div> 
-        }
-      }
-    </div>
-    <h4>Withdraw</h4>
-    @Html.Partial("_CancelTransaction", Model.Details.transaction)
-  </div>   
-</div>  
+      <h4>Withdraw</h4>
+      @Html.Partial("_CancelTransaction", Model.Details.transaction)
+    </div>   
+  </div>  
 
 
-  <div id="dvComments" class="text-center commentcontainer container">
+  <div id="dvComments" class="d-iblock commentcontainer">
     <h4>Your thoughts on the deal</h4>
     @{
       if (Model.Comments.Count() > 0){
@@ -115,21 +118,21 @@
     }
     
     <div class="d-iblock">
-      <div class="f-left">
+      <div class="d-iblock">
         <span class="countdown"></span>
       </div>
       <div class="d-iblock">
-        <textarea id="txtNewComment" class="message comment-new" name="NewComment" rows="3" cols="15" maxlength="225"></textarea>
+        <textarea id="txtNewComment" class="message comment-new" name="NewComment" rows="4" cols="10" maxlength="225"></textarea>
       </div>
     </div>
     <div>
-      <div class="d-iblock">&nbsp;&nbsp;&nbsp;</div>
+      <div class="d-iblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
       <div class="d-iblock">
-       <button id="submit" type="submit" class="btn btn-small btn-primary" onclick="newComment()">Submit</button> 
+       <button id="submit" type="submit" class="btn btn-primary" onclick="newComment()">Submit</button> 
       </div>
     </div>
   </div>
-  
+</div>
 @section scripts {
    @Scripts.Render("~/Scripts/stroll.min.js")
   <script type="text/javascript">
