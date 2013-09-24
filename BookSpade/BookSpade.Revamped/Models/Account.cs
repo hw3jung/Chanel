@@ -60,7 +60,7 @@ namespace BookSpade.Revamped.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Email address")]
         public string UserName { get; set; }
 
         [Required]
@@ -80,7 +80,7 @@ namespace BookSpade.Revamped.Models
 
         [Required(ErrorMessage = "Please enter your email address.")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Please enter a valid email address.")]
-        [Display(Name = "Your email")]
+        [Display(Name = "Email address")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Please enter a password of your choice.")]

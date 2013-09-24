@@ -23,7 +23,8 @@ namespace BookSpade.Revamped.Controllers
         //
         // GET: /Post/Create
 
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult Create(bool isBuy)
         {
             List<Textbook> textBookCollection = new List<Textbook>();
 
@@ -49,7 +50,7 @@ namespace BookSpade.Revamped.Controllers
 
             var viewModel = new CreatePostModel()
             {
-                ActionBy = ActionBy.Buyer,
+                ActionBy = isBuy ? ActionBy.Buyer : ActionBy.Seller,
                 BookCondition = BookCondition.Excellent,
                 PostTypes = SelectListUtility.getPostTypes(),
                 BookConditions = SelectListUtility.getBookConditions(),

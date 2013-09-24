@@ -11,11 +11,11 @@
             </div>
 
             <div id="needToBuySell">
-                <a href="@(Url.Action("Index", "Market", new { isBuy = false }))" title="Buy Textbooks">
+                <a href="@(Url.Action("Create", "Post", new { isBuy = true }))" title="Buy Textbooks">
                     <div class="buttonBuySell">Buy</div>
                 </a>
 
-                <a href="@(Url.Action("Index", "Market", new { isBuy = true }))" title="Sell Textbooks">
+                <a href="@(Url.Action("Create", "Post", new { isBuy = false }))" title="Sell Textbooks">
                     <div class="buttonBuySell">Sell</div>
                 </a>
             </div>
