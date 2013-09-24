@@ -96,7 +96,12 @@ namespace BookSpade.Revamped.DAL
 
         // WhereClause is either "" or of the form "Col = value AND/OR Col2 = value2..."
 
-        public DataTable select(string WhereClause, string TableName, string[] ColumnNames = null, List<SortColumn> SortColumns = null)
+        public DataTable select(
+            string WhereClause,
+            string TableName,
+            int NumRows = 0,
+            string[] ColumnNames = null,
+            List<SortColumn> SortColumns = null)
         {
             ColumnNames = ColumnNames ?? new string[] { "*" };
 
@@ -108,6 +113,11 @@ namespace BookSpade.Revamped.DAL
             {
                 StringBuilder selectCommand = new StringBuilder();
                 selectCommand.Append("SELECT ");
+
+                if (NumRows > 0)
+                {
+                    selectCommand.Append(string.Format("TOP {0} ", NumRows));
+                }
 
                 int i = 0;
                 int numColumns = ColumnNames.Count();

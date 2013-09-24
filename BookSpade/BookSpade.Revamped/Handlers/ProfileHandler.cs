@@ -20,7 +20,7 @@ namespace BookSpade.Revamped.Handlers
             {
               
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile", NumRows : 1);
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
@@ -55,7 +55,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("UserId = '{0}'", userId), "UserProfile");
+                DataTable dt = DAL.select(String.Format("UserId = '{0}'", userId), "UserProfile", NumRows : 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -87,7 +87,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile", NumRows : 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -117,7 +117,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile");
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile", NumRows : 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {

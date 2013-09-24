@@ -19,12 +19,11 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("ISBN = '{0}'", book.ISBN), "TextBooks");
+                DataTable dt = da.select(String.Format("ISBN = '{0}'", book.ISBN), "TextBooks", NumRows : 1);
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
-
-                    int courseId = !string.IsNullOrEmpty(book.NewCourseName) ? CourseHandler.CreateCourse(book.NewCourseName) : book.CourseId;
+                    int courseId = !string.IsNullOrEmpty(book.CourseName) ? CourseHandler.CreateCourse(book.CourseName) : book.CourseId;
 
                     Dictionary<string, object> textbook = new Dictionary<string, object>();
                     textbook.Add("ISBN", book.ISBN);
@@ -57,7 +56,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("TextBookId = {0} AND IsActive = 1 AND IsDeleted = 0", textbookId), "TextBooks");
+                DataTable dt = da.select(String.Format("TextBookId = '{0}' AND IsActive = 1 AND IsDeleted = 0", textbookId), "TextBooks", NumRows : 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -89,7 +88,7 @@ namespace BookSpade.Revamped.Handlers
                 }
 
             }
-            catch (Exception ex) { Console.Write(ex.Message + "          " + ex.StackTrace); }
+            catch (Exception ex) { Console.Write(ex.Message + " " + ex.StackTrace); }
 
             return book; 
         }

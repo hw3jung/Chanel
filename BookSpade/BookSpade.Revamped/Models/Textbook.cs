@@ -12,7 +12,7 @@ namespace BookSpade.Revamped.Models
         public string ISBN { get; set; }
         public string Author { get; set; }
         public int CourseId { get; set; }
-        public string NewCourseName { get; set; }
+        public string CourseName { get; set; }
         public string BookImageUrl { get; set; }
         public decimal? StorePrice { get; set; }
         public int IsActive { get; set; }
@@ -26,7 +26,7 @@ namespace BookSpade.Revamped.Models
                 string isbn,
                 string author,
                 int courseId,
-                string newCourseName,
+                string courseName,
                 string bookImageUrl,
                 decimal? storePrice,
                 int isActive,
@@ -40,7 +40,7 @@ namespace BookSpade.Revamped.Models
             ISBN = isbn;
             Author = author;
             CourseId = courseId;
-            NewCourseName = newCourseName; 
+            CourseName = courseName;
             BookImageUrl = bookImageUrl;
             StorePrice = storePrice;
             IsActive = isActive;
