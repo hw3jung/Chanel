@@ -207,6 +207,8 @@
     <Content Include="Content\effects\qtip2\jquery.qtip.min.css" />
     <Content Include="Content\effects\stroll\stroll.css" />
     <Content Include="Content\effects\stroll\stroll.min.css" />
+    <Content Include="Content\effects\tooltip\closeBtn.gif" />
+    <Content Include="Content\effects\tooltip\tooltip.css" />
     <Content Include="Content\Images\bg_pattern.jpg" />
     <Content Include="Content\Images\bg_pattern_blue.jpg" />
     <Content Include="Content\Images\bg_pattern_dark.jpg" />
@@ -311,6 +313,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\stroll.js" />
     <Content Include="Scripts\stroll.min.js" />
+    <Content Include="Scripts\tooltip.js" />
     <Content Include="Static\CreatePost.js" />
     <Content Include="Static\ExternalLoginConfirmation.js" />
     <Content Include="Static\Register.js" />

@@ -19,7 +19,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("CourseName = '{0}'", CourseName), "CourseInfo");
+                DataTable dt = DAL.select(String.Format("CourseName = '{0}'", CourseName), "CourseInfo", NumRows : 1);
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
@@ -53,7 +53,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("CourseId = '{0}' AND IsActive = 1 AND IsDeleted = 0", CourseId), "CourseInfo");
+                DataTable dt = da.select(String.Format("CourseId = '{0}' AND IsActive = 1 AND IsDeleted = 0", CourseId), "CourseInfo", NumRows : 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {

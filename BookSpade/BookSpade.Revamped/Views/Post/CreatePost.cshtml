@@ -1,5 +1,6 @@
 ﻿@model BookSpade.Revamped.Models.CreatePostModel
 
+@Styles.Render("~/Content/effects/tooltip/tooltip.css")
 @Styles.Render("~/Content/Pages/CreatePost.css")
 
 @{
@@ -52,5 +53,6 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/stroll.min.js")
+    @Scripts.Render("~/Scripts/tooltip.js")
     @Scripts.Render("~/Static/CreatePost.js")
 }

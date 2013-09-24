@@ -20,7 +20,7 @@ namespace BookSpade.Revamped.Models
         public string BookTitle { get; set; }
         public string ISBN { get; set; }
         public string Author { get; set; }
-        public string NewCourseName { get; set; }
+        public string CourseName { get; set; }
         public string BookImageUrl { get; set; }
 
         public ActionBy ActionBy { get; set; }

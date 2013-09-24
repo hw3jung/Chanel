@@ -63,7 +63,7 @@ namespace BookSpade.Revamped.Handlers
             Transaction transaction = null;
 
             DataAccess da = new DataAccess();
-            DataTable dt = da.select(String.Format("TransactionId = '{0}' AND IsActive = 1 AND IsDeleted = 0 ", transactionId), "Transactions");
+            DataTable dt = da.select(String.Format("TransactionId = '{0}' AND IsActive = 1 AND IsDeleted = 0", transactionId), "Transactions", NumRows : 1);
 
             if (dt != null && dt.Rows.Count > 0)
             {

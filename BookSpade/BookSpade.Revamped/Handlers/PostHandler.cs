@@ -54,7 +54,7 @@ namespace BookSpade.Revamped.Handlers
             try
             {
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(String.Format("PostId = '{0}' AND IsActive = 1 AND IsDeleted = 0", postId), "Posts");
+                DataTable dt = da.select(String.Format("PostId = '{0}' AND IsActive = 1 AND IsDeleted = 0", postId), "Posts", NumRows : 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -162,7 +162,7 @@ namespace BookSpade.Revamped.Handlers
                 }
                 
                 DataAccess da = new DataAccess();
-                DataTable dt = da.select(query, "Posts", SortColumns : sortColumns);
+                DataTable dt = da.select(query, "Posts", NumRows : 1, SortColumns : sortColumns);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
