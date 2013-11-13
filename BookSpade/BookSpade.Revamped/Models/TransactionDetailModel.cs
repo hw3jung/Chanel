@@ -24,18 +24,17 @@ namespace BookSpade.Revamped.Models
         public TransactionDetailModel(Transaction transaction)
         {
             Textbook textbook = TextbookHandler.getTextbook(transaction.TextbookId);
-            Course course = CourseHandler.getCourse(textbook.CourseId);
             SellerPost = PostHandler.getPost(transaction.SellerPostId);
             BuyerPost = PostHandler.getPost(transaction.BuyerPostId); 
 
-            BookTitle = textbook.BookTitle;
-            ISBN = textbook.ISBN;
-            Price = SellerPost.Price;
-            FinalPrice = transaction.FinalPrice;
-            Condition = SellerPost.BookCondition;
-            CourseName = course.CourseName;
-            StorePrice = textbook.StorePrice;
-            this.transaction = transaction; 
+            this.BookTitle = textbook.BookTitle;
+            this.ISBN = textbook.ISBN;
+            this.Price = SellerPost.Price;
+            this.FinalPrice = transaction.FinalPrice;
+            this.Condition = SellerPost.BookCondition;
+            this.CourseName = CourseHandler.getCourseName(textbook.CourseId);
+            this.StorePrice = textbook.StorePrice;
+            this.transaction = transaction;
         }
 
         public TransactionDetailModel()

@@ -123,7 +123,7 @@ $ie.visible = $true
 $ie.Navigate("https://fortuna.uwaterloo.ca/cgi-bin/cgiwrap/rsic/book/index.html")
 
 # The easiest way to accomodate for slowness of IE
-while($ie.busy) {Start-Sleep 1} 
+while($ie.busy) {Start-Sleep 1}
 
 $doc = $ie.Document
 
@@ -133,12 +133,12 @@ $button = $search_book.getElementsByClassName("search_button").item(0)
 $button.click()
 
 # The easiest way to accomodate for slowness of IE
-while($ie.busy) {Start-Sleep 1} 
+while($ie.busy) {Start-Sleep 1}
 
 # This will be our collection of parsed objects
 $processedBooks = @()
 
-$index = 0
+$index = 7960
 $retry = 3
 
 while(1) {
@@ -161,8 +161,13 @@ while(1) {
     # we prob reached the end; so exit
     if(!$books.length) {
         if($retry -eq 0) {
+            "=================="
+            "LAST PAGE INDEX: " + $index
             break
         } else {
+            $search_book = $doc.getElementByID("search_box_book")
+            $button = $search_book.getElementsByClassName("search_button").item(0)
+
             $button.click()
 
             # The easiest way to accomodate for slowness of IE

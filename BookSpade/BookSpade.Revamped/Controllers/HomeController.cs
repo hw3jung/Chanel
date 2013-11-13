@@ -18,14 +18,16 @@ namespace BookSpade.Revamped.Controllers
         {
             ViewBag.Message = "Your app description page.";
 
-            return View();
+            return View("Home");
+            // return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View("Home");
+            // return View();
         }
     }
 }

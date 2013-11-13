@@ -3,6 +3,18 @@
 //Must come after definition of the 'ul' element that we are binding to
 stroll.bind('.ChooseBook ul');
 
+var list = $("#BookList li");
+var arr = $.makeArray(list.map(function (k, v) {
+    return $(v).text().toLowerCase();
+}));
+
+function searchBookList() {
+    var userInput = $(this).val().toLowerCase();
+    list.each(function (index, value) {
+        $(value).toggle(arr[index].indexOf(userInput) >= 0);
+    });
+}
+
 function clickBookListItem() {
     $(this).siblings(".selected").removeClass("selected");
     $(this).addClass("selected");
@@ -62,6 +74,7 @@ function clickNegotiatePrice() {
 }
 
 // Attach event handlers
+$("#BookSearch").keyup(searchBookList);
 $("#BookList li").click(clickBookListItem);
 $("#newBookButton").click(clickNewBookButton);
 $("#ActionBy").change(changePostType);

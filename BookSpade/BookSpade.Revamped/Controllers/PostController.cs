@@ -26,26 +26,26 @@ namespace BookSpade.Revamped.Controllers
         [Authorize]
         public ActionResult Create(bool isBuy)
         {
-            List<Textbook> textBookCollection = new List<Textbook>();
+            IEnumerable<Textbook> textBookCollection = TextbookHandler.getAllTextbooks();
 
             // test data
-            for(int i = 0; i < 100; i++) {
-                Textbook book = new Textbook(
-                    i,
-                    "Financial Accounting " + i,
-                    "100000000000" + i,
-                    "Author " + i,
-                    100 + i,
-                    "AFM 10" + i,
-                    null,
-                    10 + i,
-                    1,
-                    0,
-                    DateTime.Now,
-                    DateTime.Now
-                );
-                textBookCollection.Add(book);
-            }
+            //for(int i = 0; i < 100; i++) {
+            //    Textbook book = new Textbook(
+            //        i,
+            //        "Financial Accounting " + i,
+            //        "100000000000" + i,
+            //        "Author " + i,
+            //        100 + i,
+            //        "AFM 10" + i,
+            //        null,
+            //        10 + i,
+            //        1,
+            //        0,
+            //        DateTime.Now,
+            //        DateTime.Now
+            //    );
+            //    textBookCollection.Add(book);
+            //}
             //
 
             var viewModel = new CreatePostModel()

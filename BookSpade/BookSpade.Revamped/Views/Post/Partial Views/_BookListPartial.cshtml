@@ -5,10 +5,11 @@
     {
         var bookImageURL = b.BookImageUrl ?? "http://www.life-moves-fast.com/wp-content/uploads/2012/06/books-clipart.jpg";
       
-        <li onmouseover="tooltip.pop(this, '<span style=\'color:black;\'><div style=\'float:left;\'><img src=\'@bookImageURL\' width=\'100px\' /></div><div style=\'float:left;\'>ISBN: @b.ISBN<br />Book Title: @b.BookTitle<br />Author(s): @b.Author<br />Course: @b.CourseName<br />Store Price: &#36;@b.StorePrice</div></span>')">
+        <li onmouseover="tooltip.pop(this, '<span style=\'color:black;\'><div style=\'float:left;\'><img src=\'@bookImageURL.Replace("'", @"\'")\' width=\'100px\' /></div><div style=\'float:left;\'>ISBN: @b.ISBN.Replace("'", @"\'");<br />Book Title: @b.BookTitle.Replace("'", @"\'");<br />Author(s): @b.Author.Replace("'", @"\'");<br />Course: @b.CourseName.Replace("'", @"\'");<br />Store Price: $@b.StorePrice</div></span>');">
           <div class="item">
             <span id="Course" class="Block">@b.CourseName</span>
             <span id="Title" class="Block Truncate One-line" data-value="@b.TextBookId" >@b.BookTitle</span>
+            <span id="ISBN" class="Hide">@b.ISBN</span>
           </div>
         </li>
     }

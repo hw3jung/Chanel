@@ -87,5 +87,32 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        #region GetCourseName
+
+        public static string getCourseName(int CourseId)
+        {
+            string courseName = null;
+
+            try
+            {
+                DataAccess da = new DataAccess();
+                DataTable dt = da.select(String.Format("CourseId = '{0}' AND IsActive = 1 AND IsDeleted = 0", CourseId), "CourseInfo", NumRows: 1, ColumnNames: new string[] {"CourseName"});
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    courseName = Convert.ToString(row["CourseName"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message + "   " + ex.StackTrace);
+            }
+
+            return courseName;
+        }
+
+        #endregion
+
     }
 }

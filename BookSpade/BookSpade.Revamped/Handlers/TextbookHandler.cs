@@ -64,8 +64,11 @@ namespace BookSpade.Revamped.Handlers
                     string bookTitle = Convert.ToString(row["BookTitle"]);
                     string isbn = Convert.ToString(row["ISBN"]);
                     string author = Convert.ToString(row["Author"]);
-                    int courseId = Convert.ToInt32(row["CourseId"]);
                     string bookImageUrl = row["BookImageURL"] is DBNull ? null : Convert.ToString(row["BookImageURL"]);
+                    
+                    int courseId = Convert.ToInt32(row["CourseId"]);
+                    string courseName = CourseHandler.getCourseName(courseId);
+                    
                     decimal? storePrice = row["StorePrice"] is DBNull ? (decimal?)null : Convert.ToDecimal(row["StorePrice"]);
                     int isActive = Convert.ToInt32(row["IsActive"]);
                     int isDeleted = Convert.ToInt32(row["IsDeleted"]);
@@ -78,19 +81,78 @@ namespace BookSpade.Revamped.Handlers
                         isbn,
                         author,
                         courseId,
-                        null,
+                        courseName,
                         bookImageUrl,
                         storePrice,
                         isActive,
                         isDeleted,
                         createdDate,
-                        modifiedDate);
+                        modifiedDate
+                    );
                 }
 
             }
             catch (Exception ex) { Console.Write(ex.Message + " " + ex.StackTrace); }
 
             return book; 
+        }
+
+        #endregion
+
+        # region getAllTextbooks
+
+        public static IEnumerable<Textbook> getAllTextbooks()
+        {
+            List<Textbook> textbooks = new List<Textbook>();
+
+            try
+            {
+                DataAccess DAL = new DataAccess();
+                DataTable dt = DAL.select("", "TextBooks");
+
+                if (dt != null)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        int textbookId = Convert.ToInt32(row["TextBookId"]);
+                        string bookTitle = Convert.ToString(row["BookTitle"]);
+                        string isbn = Convert.ToString(row["ISBN"]);
+                        string author = Convert.ToString(row["Author"]);
+                        string bookImageUrl = row["BookImageURL"] is DBNull ? null : Convert.ToString(row["BookImageURL"]);
+
+                        int courseId = Convert.ToInt32(row["CourseId"]);
+                        string courseName = CourseHandler.getCourseName(courseId);
+
+                        decimal? storePrice = row["StorePrice"] is DBNull ? (decimal?) null : Convert.ToDecimal(row["StorePrice"]);
+                        int isActive = Convert.ToInt32(row["IsActive"]);
+                        int isDeleted = Convert.ToInt32(row["IsDeleted"]);
+                        DateTime createdDate = Convert.ToDateTime(row["CreatedDate"]);
+                        DateTime modifiedDate = Convert.ToDateTime(row["ModifiedDate"]);
+
+                        Textbook textbook = new Textbook(
+                            textbookId,
+                            bookTitle,
+                            isbn,
+                            author,
+                            courseId,
+                            courseName,
+                            bookImageUrl,
+                            storePrice,
+                            isActive,
+                            isDeleted,
+                            createdDate,
+                            modifiedDate
+                        );
+                        textbooks.Add(textbook);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write("ERROR: An error occured in retrieving all textbooks --- " + ex.Message);
+            }
+
+            return textbooks;
         }
 
         #endregion
