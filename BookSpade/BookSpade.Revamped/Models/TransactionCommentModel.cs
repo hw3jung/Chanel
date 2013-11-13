@@ -20,7 +20,6 @@ namespace BookSpade.Revamped.Models
         {
             Details = new TransactionDetailModel(transaction);
             Comments = CommentHandler.getComments(transaction.TransactionId);
-
             profile = ProfileHandler.GetProfile(UserName);
             UserId = profile.ProfileId;
 
