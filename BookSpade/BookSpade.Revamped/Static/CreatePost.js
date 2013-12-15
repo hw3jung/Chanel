@@ -3,6 +3,58 @@
 //Must come after definition of the 'ul' element that we are binding to
 stroll.bind('.ChooseBook ul');
 
+$(document).ready(function () {
+    var createPostForm = $("#createPostForm");
+    createPostForm.validate({
+        errorClass: "errormessage",
+        onkeyup: false,
+        onfocusout: false,
+        errorClass: 'error',
+        validClass: 'valid',
+        rules: {
+            Price : {
+                required  : true,
+                maxlength : 9
+            }
+        },
+        errorPlacement: function (error, element) {
+            // Set positioning based on the elements position in the form
+            var elem = $(element),
+                corners = ['left center', 'right center'],
+                flipIt = elem.parents('span.right').length > 0;
+
+            // Check we have a valid error message
+            if (!error.is(':empty')) {
+                // Apply the tooltip only if it isn't valid
+                elem.filter(':not(.valid)').qtip({
+                    overwrite: false,
+                    content: error,
+                    position: {
+                        my: corners[flipIt ? 0 : 1],
+                        at: corners[flipIt ? 1 : 0],
+                        viewport: $(window)
+                    },
+                    show: {
+                        event: false,
+                        ready: true
+                    },
+                    hide: false,
+                    style: {
+                        classes: 'qtip-red' // Make it red... the classic error colour!
+                    }
+                })
+
+                // If we have a tooltip on this element already, just update its content
+                .qtip('option', 'content.text', error);
+            }
+
+                // If the error is empty, remove the qTip
+            else { elem.qtip('destroy'); }
+        },
+        success: $.noop, // Odd workaround for errorPlacement not firing!
+    });
+});
+
 var list = $("#BookList li");
 var arr = $.makeArray(list.map(function (k, v) {
     return $(v).text().toLowerCase();
@@ -100,125 +152,11 @@ $("#IsNegotiable").click(clickNegotiatePrice);
 //    });
 //</script>
 
-//<script type="text/javascript">
-//    $(document).ready(function () {
-//        var newBookForm = $("#NewBookForm");
-//        newBookForm.validate({
-//            errorClass: "errormessage",
-//            onkeyup: false,
-//            onfocusout: false,
-//            errorClass: 'error',
-//            validClass: 'valid',
-//            rules: {
-//                Title: {
-//                    required: true,
-//                    minlength: 5,
-//                    title: true
-//                },
-//                Author: {
-//                    author: true
-//                },
-//                Course: {
-//                    required: true,
-//                    minlength: 3,
-//                    maxlength: 10,
-//                    course: true
-//                },
-//                ISBN: {
-//                    required: true,
-//                    minlength: 10,
-//                    maxlength: 13,
-//                    isbn: true
-//                },
-//                BookImageURL: {
-//                    url: true
-//                }
-//            },
-//            errorPlacement: function (error, element) {
-//                // Set positioning based on the elements position in the form
-//                var elem = $(element),
-//                    corners = ['left center', 'right center'],
-//                    flipIt = elem.parents('span.right').length > 0;
 
-//                // Check we have a valid error message
-//                if (!error.is(':empty')) {
-//                    // Apply the tooltip only if it isn't valid
-//                    elem.filter(':not(.valid)').qtip({
-//                        overwrite: false,
-//                        content: error,
-//                        position: {
-//                            my: corners[flipIt ? 0 : 1],
-//                            at: corners[flipIt ? 1 : 0],
-//                            viewport: $(window)
-//                        },
-//                        show: {
-//                            event: false,
-//                            ready: true
-//                        },
-//                        hide: false,
-//                        style: {
-//                            classes: 'qtip-red' // Make it red... the classic error colour!
-//                        }
-//                    })
-
-//                    // If we have a tooltip on this element already, just update its content
-//                    .qtip('option', 'content.text', error);
-//                }
-
-//                    // If the error is empty, remove the qTip
-//                else { elem.qtip('destroy'); }
-//            },
-//            success: $.noop, // Odd workaround for errorPlacement not firing!
-//        })
-//    });
 
 //    function ValidateFields() {
 //        var newBookForm = $("#NewBookForm");
 //        return newBookForm.validate().form();
-//    }
-//</script>
-
-
-//@section scripts {
-//    <script src="@Url.Content("~/Scripts/ToolTip.js")" type="text/javascript"></script>
-//    <script type="text/javascript">
-//        $(function () {
-//            $(":radio[name=Pref]").change(function () {
-//                if ($(this).val() == 'True') {
-//                    $("#divContactEmail").show(); 
-//                } else {
-//                    $("#divContactEmail").val("");
-//                    $("#divContactEmail").hide();
-//                }
-//            });
-
-//            $("#SubmitButton").click(function () {
-//                if (ValidateFields()) {
-//                    if (!$("li.selected").length && !addBook) {
-//                        ErrorDialog();
-//                    } else {
-//                        ContactPrefDialog();
-//                    }
-//                }
-//            });
-//        });
-
-
-//    function CommonFields() {
-//        var isBuy = $("#PostType").val() == "Buy";
-//        var price = $("#Price").val().trim();
-//        var condition = $("#Condition").val().trim();
-//        var email = $("#txtContactEmail").val();
-//        var IsNegotiable = $('#cbNegotiationPrice').is(':checked')
-
-//        var fields = {
-//            "isBuy": isBuy,
-//            "price": price,
-//            "condition": condition,
-//            "email": email,
-//            "IsNegotiable": IsNegotiable
-//        }
-//        return fields;
 //    }
 
 //    function ErrorDialog() {
@@ -289,12 +227,6 @@ $("#IsNegotiable").click(clickNegotiatePrice);
 //        });
 //    }
 //</script>
-
-//<script type="text/javascript">
-//    $(function () {
-//        $(".AddPost").tooltip();
-//        $(".PostType").tooltip();
-//    });
 
 //// Validation Checks
         

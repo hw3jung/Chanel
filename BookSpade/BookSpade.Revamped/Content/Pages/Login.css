@@ -1,0 +1,81 @@
+﻿/* login page */
+#loginForm {
+    border-right: solid 2px #c8c8c8;
+    width: 100px;
+}
+
+    #loginForm .validation-error {
+        display: block;
+        margin-left: 15px;
+    }
+
+    #loginForm .validation-summary-errors ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    #loginForm .validation-summary-errors li {
+        display: inline;
+        list-style: none;
+        margin: 0;
+    }
+
+    #loginForm input {
+        width: 250px;
+    }
+
+    #loginForm input[type="checkbox"],
+    #loginForm input[type="submit"],
+    #loginForm input[type="button"],
+    #loginForm button {
+        width: auto;
+    }
+
+        #loginForm #RememberMe {
+            vertical-align: top;
+        }
+
+        #loginForm label.checkbox {
+            display: inline-block;
+            padding-left: 5px;
+        }
+
+    #loginForm .remember {
+        margin: 2px 0;
+    }
+    
+    #loginForm .register {
+        margin: 10px 0 10px;
+    }
+
+#socialLoginForm {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+    #socialLoginForm h2 {
+        margin-bottom:  5px;
+    }
+
+#socialLoginList {
+    margin: 0;
+}
+
+    #socialLoginList button {
+        margin-bottom: 12px;
+    }
+
+#logoutForm {
+    display: inline;
+}
+
+.divider {
+    display: inline-block;
+    margin: 5px 0 15px;
+    vertical-align: middle;
+}
+
+form, fieldset {
+    margin: 0;
+    padding: 0;
+}

@@ -1,5 +1,6 @@
 ﻿@model BookSpade.Revamped.Models.CreatePostModel
 
+@Styles.Render("~/Content/effects/qtip2/jquery.qtip.min.css")
 @Styles.Render("~/Content/effects/tooltip/tooltip.css")
 @Styles.Render("~/Content/Pages/CreatePost.css")
 
@@ -15,7 +16,7 @@
 }
 
 <div class="new-post">
-  <div class="page-header">Match My Book</div>
+  <div class="page-header"></div>
 
   <div class="book-list span5">
     <div class="PostHeader">
@@ -52,6 +53,9 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery-migrate-1.1.0.min.js")
+    @Scripts.Render("~/Scripts/jquery.qtip.min.js")
     @Scripts.Render("~/Scripts/stroll.min.js")
     @Scripts.Render("~/Scripts/tooltip.js")
     @Scripts.Render("~/Static/CreatePost.js")

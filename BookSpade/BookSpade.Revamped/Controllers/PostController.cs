@@ -72,8 +72,17 @@ namespace BookSpade.Revamped.Controllers
                 int textbookId = model.TextBookId;
 
                 // if we have a new textbook info, create Textbook and store it
-                if (!String.IsNullOrEmpty(model.BookTitle))
+                if (!String.IsNullOrEmpty(model.BookTitle) &&
+                    !String.IsNullOrEmpty(model.CourseName) &&
+                    !String.IsNullOrEmpty(model.ISBN))
                 {
+                    // proceed if course id exists; otherwise create the course first
+                    Course course = CourseHandler.getCourseByName(model.CourseName);
+                    if (course == null)
+                    {
+                        model.CourseId = CourseHandler.CreateCourse(model.CourseName);
+                    }
+
                     var newTextbook = new Textbook(
                         -1, // id doesnt matter here
                         model.BookTitle,
@@ -130,27 +139,26 @@ namespace BookSpade.Revamped.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            List<Textbook> textBookCollection = new List<Textbook>();
+            IEnumerable<Textbook> textBookCollection = TextbookHandler.getAllTextbooks();
 
             // test data
-            for(int i = 0; i < 100; i++) {
-                Textbook book = new Textbook(
-                    i,
-                    "Financial Accounting " + i,
-                    "100000000000" + i,
-                    "Author " + i,
-                    100 + i,
-                    "AFM 10" + i,
-                    null,
-                    10 + i,
-                    1,
-                    0,
-                    DateTime.Now,
-                    DateTime.Now
-                );
-                textBookCollection.Add(book);
-            }
-            //
+            //for(int i = 0; i < 100; i++) {
+            //    Textbook book = new Textbook(
+            //        i,
+            //        "Financial Accounting " + i,
+            //        "100000000000" + i,
+            //        "Author " + i,
+            //        100 + i,
+            //        "AFM 10" + i,
+            //        null,
+            //        10 + i,
+            //        1,
+            //        0,
+            //        DateTime.Now,
+            //        DateTime.Now
+            //    );
+            //    textBookCollection.Add(book);
+            //}
 
             model.PostTypes = SelectListUtility.getPostTypes();
             model.BookConditions = SelectListUtility.getBookConditions();

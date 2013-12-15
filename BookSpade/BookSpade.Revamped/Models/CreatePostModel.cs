@@ -25,7 +25,6 @@ namespace BookSpade.Revamped.Models
 
         public ActionBy ActionBy { get; set; }
             
-        [Required(ErrorMessage = "Please enter the desired minimum/maximum price for the book.")]
         public decimal Price { get; set; }
 
         public BookCondition BookCondition { get; set; }

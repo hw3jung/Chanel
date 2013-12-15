@@ -225,6 +225,7 @@
     <Content Include="Content\Pages\Home.css" />
     <Content Include="Content\Mobile.css" />
     <Content Include="Content\Pages\CreatePost.css" />
+    <Content Include="Content\Pages\Login.css" />
     <Content Include="Content\Pages\TransactionDetail.css" />
     <Content Include="Content\Pages\TransactionHistory.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />

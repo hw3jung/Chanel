@@ -23,13 +23,11 @@ namespace BookSpade.Revamped.Handlers
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
-                    int courseId = !string.IsNullOrEmpty(book.CourseName) ? CourseHandler.CreateCourse(book.CourseName) : book.CourseId;
-
                     Dictionary<string, object> textbook = new Dictionary<string, object>();
                     textbook.Add("ISBN", book.ISBN);
                     textbook.Add("BookTitle", book.BookTitle);
                     textbook.Add("Author", book.Author);
-                    textbook.Add("CourseId", courseId);
+                    textbook.Add("CourseId", book.CourseId);
                     textbook.Add("BookImageURL", book.BookImageUrl);
                     textbook.Add("StorePrice", book.StorePrice);
                     textbook.Add("IsActive", 1);
