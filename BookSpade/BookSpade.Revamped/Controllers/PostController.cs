@@ -71,10 +71,8 @@ namespace BookSpade.Revamped.Controllers
             {
                 int textbookId = model.TextBookId;
 
-                // if we have a new textbook info, create Textbook and store it
-                if (!String.IsNullOrEmpty(model.BookTitle) &&
-                    !String.IsNullOrEmpty(model.CourseName) &&
-                    !String.IsNullOrEmpty(model.ISBN))
+                // if we have a new textbook, store it
+                if (model.IsNewBook)
                 {
                     // proceed if course id exists; otherwise create the course first
                     Course course = CourseHandler.getCourseByName(model.CourseName);

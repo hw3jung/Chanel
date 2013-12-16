@@ -3,27 +3,27 @@
 <div id="foregroundCell">
     <div id="foregroundWrapper">
         <div id="foreLeft">
+            <img src="@(Url.Content("~/Images/homeImage_bookStand.png"))" />
+        </div>
+        <div id="foreRight">
             <img src="@(Url.Content("~/Images/bookspadeText.png"))" style="width: 100%"/>
 
             <br />
             <div id="description">
-                Buy and sell the books you want at the price they should be.
+                <span class="slogan-top">Save time</span><br />with every book.
             </div>
 
             <div id="needToBuySell">
                 <a href="@(Url.Action("Create", "Post", new { isBuy = true }))" title="Buy Textbooks">
-                    <div class="buttonBuySell">Buy</div>
+                    <div class="buttonBuySell blue-button">Buy</div>
                 </a>
 
                 <a href="@(Url.Action("Create", "Post", new { isBuy = false }))" title="Sell Textbooks">
-                    <div class="buttonBuySell">Sell</div>
+                    <div class="buttonBuySell blue-button">Sell</div>
                 </a>
             </div>
         </div>
 
-        <div id="foreRight">
-            <img src="@(Url.Content("~/Images/homeImage_bookStand.png"))" />
-        </div>
     </div>
 </div>
 

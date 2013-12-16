@@ -38,7 +38,7 @@
           <label class="control-label"></label>
           @{
               if (!Model.IsNewBook) {
-                <button id="newBookButton" name="newBookButton" class="btn btn-info">Can't find your book? Click Here</button>
+                <button id="newBookButton" name="newBookButton" class="blue-button">Can't find your book? Click Here</button>
               }
           }
         </div>
@@ -54,7 +54,7 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
-    @Scripts.Render("~/Scripts/jquery-migrate-1.1.0.min.js")
+    @Scripts.Render("~/Scripts/jquery-migrate-1.2.1.min.js")
     @Scripts.Render("~/Scripts/jquery.qtip.min.js")
     @Scripts.Render("~/Scripts/stroll.min.js")
     @Scripts.Render("~/Scripts/tooltip.js")
