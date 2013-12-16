@@ -8,6 +8,7 @@
     text-align: center;
     vertical-align: middle;
     padding: 131px 0 150px 0;
+    background-color:#e2e2e2;
 }
 
 #foregroundWrapper {
@@ -36,13 +37,7 @@
     text-align: left;
     background: url('../images/marketpriceBG.png') repeat;
     border: 0px solid;
-    opacity: 0.8;
-
-    border-top-right-radius: 20px;
-    -moz-border-radius-topright: 20px;
-    -khtml-border-radius-topright: 20px;
-    -webkit-border-radius-topright: 20px;
-    -o-border-radius-topright: 20px;
+    opacity: 0.9;
     
     border-bottom-right-radius: 20px;
     -moz-border-radius-bottomright: 20px;
@@ -85,7 +80,7 @@ a {
 }
 
 .slogan-top {
-    color: #ED7A44;
+    color: #FD8A07;
 }
 
 
