@@ -228,6 +228,11 @@ namespace BookSpade.Revamped.Controllers
                 return RedirectToAction("ExternalLoginFailure");
             }
 
+            if (result.ExtraData.Keys.Contains("accesstoken"))
+            {
+                Session["facebooktoken"] = result.ExtraData["accesstoken"];
+            }
+
             if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
                 return RedirectToLocal(returnUrl);
@@ -244,12 +249,18 @@ namespace BookSpade.Revamped.Controllers
                 // User is new, ask for their desired membership name
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 
-                //Custom ---------------------------------
-                string name = result.ExtraData["name"];
-                
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData, DisplayName = name });
+
+                // Include extra facebook user information
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel
+                {
+                    UserName = result.UserName,
+                    ExternalLoginData = loginData,
+                    DisplayName = result.ExtraData["name"],
+                    FacebookLink = result.ExtraData["link"],
+                    FacebookEmail  = result.UserName
+                });
             }
         }
 
@@ -278,8 +289,14 @@ namespace BookSpade.Revamped.Controllers
                     // Check if user already exists
                     if (user == null)
                     {
-                        // Insert name into the profile
-                        db.UserProfiles.Add(new ProfileModel { UserName = model.UserName, DisplayName = model.DisplayName });
+                        // Save new profile
+                        db.UserProfiles.Add(new ProfileModel
+                        {
+                            UserName = model.UserName,
+                            DisplayName = model.DisplayName,
+                            FacebookLink = model.FacebookLink,
+                            FacebookEmail = model.FacebookEmail
+                        });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

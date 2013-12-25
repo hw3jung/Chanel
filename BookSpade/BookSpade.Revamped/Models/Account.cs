@@ -24,7 +24,9 @@ namespace BookSpade.Revamped.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public string DisplayName { get; set; } 
+        public string DisplayName { get; set; }
+        public string FacebookLink { get; set; }
+        public string FacebookEmail { get; set; }
     }
 
     public class RegisterExternalLoginModel
@@ -33,9 +35,11 @@ namespace BookSpade.Revamped.Models
         [DataType(DataType.EmailAddress, ErrorMessage = "Please enter a valid email address.")]
         [Display(Name = "Your email")]
         public string UserName { get; set; }
-        
-        public string DisplayName { get; set; } 
+
         public string ExternalLoginData { get; set; }
+        public string DisplayName { get; set; }
+        public string FacebookLink { get; set; }
+        public string FacebookEmail { get; set; }
     }
 
     public class LocalPasswordModel
