@@ -63,7 +63,9 @@ namespace BookSpade.Revamped.Models
 
     public class LoginModel
     {
-        [Required]
+        
+        [Required(ErrorMessage = "First name is required")]
+        [StringLength(30, ErrorMessage = "Name can be no larger than 30 characters")]
         [Display(Name = "Email address")]
         public string UserName { get; set; }
 

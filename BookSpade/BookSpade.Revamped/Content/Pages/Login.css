@@ -1,56 +1,82 @@
 ﻿/* login page */
-#loginForm {
-    border-right: solid 2px #c8c8c8;
-    width: 100px;
+
+#loginContainer:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: '';
+    height: 100%;
+    margin-right: -0.25em;
 }
 
-    #loginForm .validation-error {
+#loginContainer {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#loginContent {
+    margin: 0 auto;
+    width: 400px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#loginSection {
+    text-align: left;
+    width: 300px;
+    margin: auto;
+}
+
+    #loginSection .validation-error {
         display: block;
         margin-left: 15px;
     }
 
-    #loginForm .validation-summary-errors ul {
+    #loginSection .validation-summary-errors ul {
         margin: 0;
         padding: 0;
     }
 
-    #loginForm .validation-summary-errors li {
+    #loginSection .validation-summary-errors li {
         display: inline;
         list-style: none;
         margin: 0;
     }
 
-    #loginForm input {
+    #loginSection input {
         width: 250px;
     }
 
-    #loginForm input[type="checkbox"],
-    #loginForm input[type="submit"],
-    #loginForm input[type="button"],
-    #loginForm button {
+    #loginSection input[type="checkbox"],
+    #loginSection input[type="submit"],
+    #loginSection input[type="button"],
+    #loginSection button {
         width: auto;
     }
 
-        #loginForm #RememberMe {
+        #loginSection #RememberMe {
             vertical-align: top;
         }
 
-        #loginForm label.checkbox {
+        #loginSection label.checkbox {
             display: inline-block;
             padding-left: 5px;
         }
 
-    #loginForm .remember {
+    #loginSection .remember {
         margin: 2px 0;
     }
     
-    #loginForm .register {
+    #loginSection .register {
         margin: 10px 0 10px;
     }
 
 #socialLoginForm {
     display: inline-block;
-    margin-left: 5px;
+    margin-right: 108px;
 }
 
     #socialLoginForm h2 {

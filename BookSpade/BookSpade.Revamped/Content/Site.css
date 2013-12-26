@@ -13,6 +13,15 @@ body {
     padding: 0;
     min-width: 100%;
     min-height: 100%;
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+div.body {
+    height: 87.8%;
 }
 
 .float-left {

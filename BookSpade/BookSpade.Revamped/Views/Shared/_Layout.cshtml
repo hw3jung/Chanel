@@ -13,6 +13,18 @@
         @Styles.Render("~/Content/bootstrap/css/bootstrap.min.css")
         @Styles.Render("~/Content/bootstrap/css/bootstrap-responsive.min.css")
         @Styles.Render("~/Content/css")
+        
+        @* 
+           To deal with Facebook appending "#_=_" to return URLs
+           http://stackoverflow.com/questions/7131909/facebook-callback-appends-to-return-url
+        *@
+        <script type="text/javascript">
+          if (window.location.hash && window.location.hash == '#_=_') {
+            window.location.hash = ''; // for older browsers, leaves a # behind
+            history.pushState('', document.title, window.location.pathname); // nice and clean
+            e.preventDefault(); // no page reload
+          }
+        </script>
     </head>
     <body>
         <div class="container-fluid">
@@ -50,91 +62,8 @@
         </div>
 
         @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/Scripts/jquery-2.0.3.min.js")
-        @Scripts.Render("~/Scripts/bootstrap/bootstrap.min.js")
-        @RenderSection("scripts", required: false)
-
-        <script type="text/javascript">
-            $(function () {
-                $(document).on('click', '.reportbug', function () {
-                    var LoginStatus = $("#LoginStatus").text();
-                    if (LoginStatus == "True") {
-                        ReportBugDialog();
-                    }
-                    else {
-                        LoginRequestDialog();
-                    }
-                });
-            });
-
-            function ReportBugDialog() {
-                $("#reportBug").dialog({
-                    height: 550,
-                    width: 800,
-                    modal: true,
-                    buttons: [{
-                        text: "Cancel",
-                        "class": 'EmailCancel',
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }]
-                });
-            }
-
-            function LoginRequestDialog() {
-                $("#mdlLoginRequest").dialog({
-                    height: 200,
-                    width: 500,
-                    modal: true
-                });
-            }
-
-            $(document).on('click', '.btn-submit', function () {
-
-                var bugmsg = $(this).siblings('.bugmsg').val();
-
-                $.ajax({
-                    url: '@Url.Action("ReportABug", "Home")',
-                    data: {
-                        BugMsg: bugmsg
-                    },
-                    type: 'POST',
-                    success: function (result) {
-                        if (result) {
-                            SuccessDialog(this);
-                        } else {
-                            FailDialog(this);
-                        }
-                    }
-                });
-            });
-
-                function SuccessDialog(dialog) {
-                    $("#reportSuccess").dialog({
-                        height: 300,
-                        width: 500,
-                        modal: true,
-                        buttons: {
-                            "OK": function () {
-                                $(".ui-dialog-content").dialog("close");
-                            }
-                        }
-                    });
-                }
-
-                function FailDialog() {
-                    $("#reportFail").dialog({
-                        height: 300,
-                        width: 500,
-                        modal: true,
-                        buttons: {
-                            "OK": function () {
-                                $(".ui-dialog-content").dialog("close");
-                            }
-                        }
-                    });
-                }
-            </script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("Scripts", required: false)
     </body>
 </html>
