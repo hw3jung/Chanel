@@ -57,7 +57,7 @@ namespace BookSpade.Revamped.Controllers
             CommentHandler.createComment(newComment);
             Profile NotifyUser = ProfileHandler.GetProfile(OtherUserId);
 
-            EmailUtil.Mail(NotifyUser.Email, newComment.CommentatorProfile.Name + " : Responded to your comment", "'" + comment + "'");  
+            EmailUtil.Mail(NotifyUser.Email, NotifyUser.Name, newComment.CommentatorProfile.Name + " : Responded to your comment", newComment.CommentatorProfile.Name + " responded to your comment: <br/>" + "'" + comment + "'");  
 
             return Json("");
         }

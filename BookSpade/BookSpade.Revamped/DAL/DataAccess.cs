@@ -73,7 +73,7 @@ namespace BookSpade.Revamped.DAL
                     command.CommandText = insertCommand.Append(" SELECT SCOPE_IDENTITY()").ToString();
                     foreach (var pair in ColumnValuePairs)
                     {
-                        command.Parameters.AddWithValue("@" + pair.Key, Convert.ToString(pair.Value));
+                        command.Parameters.AddWithValue("@" + pair.Key, pair.Value);
                     }
                     conn.Open();
                     newId = Convert.ToInt32(command.ExecuteScalar());

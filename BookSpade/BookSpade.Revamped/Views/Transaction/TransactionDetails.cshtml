@@ -103,7 +103,7 @@
     <h4>Your thoughts on the deal</h4>
     @{
       if (Model.Comments.Count() > 0){
-      <ul id="commentlst" class="SearchResults wave">
+      <ul id="commentlst" class="comments">
     
         @foreach (Comment comment in Model.Comments)
         {
@@ -119,16 +119,16 @@
     
     <div class="d-iblock">
       <div class="d-iblock">
-        <span class="countdown"></span>
+        <textarea id="txtNewComment" class="message comment-new" name="NewComment" rows="4" cols="10" maxlength="225"></textarea>
       </div>
       <div class="d-iblock">
-        <textarea id="txtNewComment" class="message comment-new" name="NewComment" rows="4" cols="10" maxlength="225"></textarea>
+        <span class="countdown"></span>
       </div>
     </div>
     <div>
       <div class="d-iblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
       <div class="d-iblock">
-       <button id="submit" type="submit" class="btn btn-primary" onclick="newComment()">Submit</button> 
+       <button id="submit" type="submit" class="blue-button comment-submit" onclick="newComment()">Submit</button> 
       </div>
     </div>
   </div>
@@ -141,12 +141,9 @@
       var Comment = $("#txtNewComment").val();
 
       $('#dvComments ul').append(
-        $('<li>').append(
-            "<div>" +
-              "<img style=\"width:55px; height:auto;\" src=\"@Url.Content("~/Content/Images/Spade.png")\" alt=\"spade\" />" +
-              "<span style=\"font-weight:bold;\">" + "@(Model.profile.Name)" + "</span>" + 
-               Comment +
-            "</div>"
+        $('<li class=\"buyer-comment\">').append(
+              "<span class=\"commentor\">" + "@(Model.profile.Name)" + "</span><br />" + 
+              "<span>" + Comment + "</span>"
         )
       );
 

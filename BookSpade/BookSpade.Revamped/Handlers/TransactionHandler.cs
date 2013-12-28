@@ -25,8 +25,8 @@ namespace BookSpade.Revamped.Handlers
                 Transaction.Add("BuyerId", transaction.BuyerId);
                 Transaction.Add("SellerPostId", transaction.SellerPostId);
                 Transaction.Add("BuyerPostId", transaction.BuyerPostId);
-                Transaction.Add("FinalPrice", transaction.FinalPrice);
-                Transaction.Add("SellerPrice", transaction.InitialPrice);
+                Transaction.Add("FinalPrice", transaction.FinalPrice == null ? (object)DBNull.Value : transaction.FinalPrice);//transaction.FinalPrice);
+                Transaction.Add("InitialPrice", transaction.InitialPrice);
                 Transaction.Add("IsActive", transaction.IsActive);
                 Transaction.Add("IsDeleted", transaction.IsDeleted);
                 Transaction.Add("CreatedDate", transaction.CreatedDate);
