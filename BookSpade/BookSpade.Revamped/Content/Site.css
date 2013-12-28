@@ -87,6 +87,7 @@ fieldset {
 #loginHome {
     text-align: right;
     padding: 13px 0 0 0;
+    height: 37px;
 }
 
 #logoutForm {

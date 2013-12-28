@@ -15,39 +15,40 @@
     }
 }
 
-<div class="new-post">
-  <div class="page-header"></div>
+<div id="new-post-wrapper">
+  <div id="new-post">
 
-  <div class="book-list span5">
-    <div class="PostHeader">
-      Find Your Book
-    </div>
-    <div class="SearchBook">
-        <input id="BookSearch" type="text" placeholder="Search by Title, Course, or ISBN"/>
-    </div>
-    <div class="ChooseBook">
-      <div id="BookListWrapper">
-          <ul id="BookList" class="SearchResults wave">
-            @Html.Partial("_BookListPartial", Model.Textbooks)
-          </ul>
+    <div class="book-list span5">
+      <div class="PostHeader">
+        Find Your Book
       </div>
+      <div class="SearchBook">
+          <input id="BookSearch" type="text" placeholder="Search by Title, Course, or ISBN"/>
+      </div>
+      <div class="ChooseBook">
+        <div id="BookListWrapper">
+            <ul id="BookList" class="SearchResults wave">
+              @Html.Partial("_BookListPartial", Model.Textbooks)
+            </ul>
+        </div>
 
-      <!-- Button -->
-      <div class="control-group">
-        <div class="controls">
-          <label class="control-label"></label>
-          @{
-              if (!Model.IsNewBook) {
-                <button id="newBookButton" name="newBookButton" class="blue-button">Can't find your book? Click Here</button>
-              }
-          }
+        <!-- Button -->
+        <div class="control-group">
+          <div class="controls">
+            <label class="control-label"></label>
+            @{
+                if (!Model.IsNewBook) {
+                  <button id="newBookButton" name="newBookButton" class="blue-button">Can't find your book? Click Here</button>
+                }
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="submit-form" style="@ViewBag.SubmitFormStyle">
-    @Html.Partial("_NewPostForm")
+    <div class="submit-form" style="@ViewBag.SubmitFormStyle">
+      @Html.Partial("_NewPostForm")
+    </div>
   </div>
 </div>
 

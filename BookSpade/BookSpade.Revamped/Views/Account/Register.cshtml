@@ -1,34 +1,42 @@
 ﻿@model BookSpade.Revamped.Models.RegisterModel
 
-<hgroup class="title">
-    <h1>Sign Up</h1>
-</hgroup>
+@Styles.Render("~/Content/effects/qtip2/jquery.qtip.min.css")
+@Styles.Render("~/Content/Pages/Register.css")
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+<div id="registerContainer">
+  <div id="registerContent">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
+    {
+        @Html.AntiForgeryToken()
 
-    <fieldset>
-        <div>
-            @Html.LabelFor(m => m.DisplayName)
-            @Html.TextBoxFor(m => m.DisplayName)
-        </div>
-        <div>
-            @Html.LabelFor(m => m.UserName)
-            @Html.EditorFor(m => m.UserName)
-        </div>
-        <div>
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password)
-        </div>
-        <div>
-            @Html.LabelFor(m => m.ConfirmPassword)
-            @Html.PasswordFor(m => m.ConfirmPassword)
-        </div>
-        <input type="submit" value="Register" />
-    </fieldset>
-}
+        <hgroup id="title">
+            <h1>Sign Up</h1>
+        </hgroup>
+      
+        <fieldset>
+            <div>
+                @Html.LabelFor(m => m.DisplayName)
+                @Html.TextBoxFor(m => m.DisplayName)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.UserName)
+                @Html.EditorFor(m => m.UserName)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </div>
+            <input type="submit" value="Register" />
+        </fieldset>
+    }
+  </div>
+</div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/qtip")
     @Scripts.Render("~/Static/Register.js")
 }

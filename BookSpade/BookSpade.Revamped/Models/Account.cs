@@ -63,13 +63,9 @@ namespace BookSpade.Revamped.Models
 
     public class LoginModel
     {
-        
-        [Required(ErrorMessage = "First name is required")]
-        [StringLength(30, ErrorMessage = "Name can be no larger than 30 characters")]
         [Display(Name = "Email address")]
         public string UserName { get; set; }
 
-        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -80,24 +76,20 @@ namespace BookSpade.Revamped.Models
 
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Please enter your name.")]
         [Display(Name = "Your name")]
         public string DisplayName { get; set; }
 
-        [Required(ErrorMessage = "Please enter your email address.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Please enter a valid email address.")]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email address")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Please enter a password of your choice.")]
-        [StringLength(100, ErrorMessage = "Your password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string ConfirmPassword { get; set; }
     }
 

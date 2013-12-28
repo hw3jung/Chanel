@@ -1,37 +1,65 @@
-﻿function validateDisplayName() {
-    var name = $("#DisplayName").val();
+﻿var registerForm = $("#registerForm");
 
-    if (name.length > 0) {
-        $("#DisplayName").removeClass('input-validation-error');
-    }
-}
+$(document).ready(function () {
+    registerForm.validate({
+        onfocusout: function (element) { $(element).valid(); },
+        errorClass: 'error',
+        validClass: 'valid',
+        rules: {
+            DisplayName: {
+                required: true
+            },
+            UserName: {
+                required: true,
+                email : true
+            },
+            Password: {
+                required: true
+            },
+            ConfirmPassword: {
+                required: true,
+                equalTo: "#Password"
+            }
+        },
+        messages: {
+            ConfirmPassword: {
+                equalTo: jQuery.format("The passwords do not match.")
+            }
+        },
+        ignore: [],
+        errorPlacement: function (error, element) {
+            // Set positioning based on the elements position in the form
+            var elem = $(element),
+                corners = ['left center', 'right center'];
 
-function validateEmail() {
-    var email = $("#UserName").val();
+            // Check we have a valid error message
+            if (!error.is(':empty')) {
+                // Apply the tooltip only if it isn't valid
+                elem.filter(':not(.valid)').qtip({
+                    overwrite: false,
+                    content: error,
+                    position: {
+                        my: corners[0],
+                        at: corners[1],
+                        target: elem,
+                        viewport: $(window)
+                    },
+                    show: {
+                        event: false,
+                        ready: true
+                    },
+                    hide: false,
+                    style: {
+                        classes: 'qtip-red' // Make it red... the classic error colour!
+                    }
+                })
 
-    if (email.length > 0) {
-        $("#UserName").removeClass('input-validation-error');
-    }
-}
-
-function validatePassword() {
-    var password = $("#Password").val();
-
-    if (password.length > 0) {
-        $("#Password").removeClass('input-validation-error');
-    }
-}
-
-function validateConfirmPassword() {
-    var confirmPassword = $("#ConfirmPassword").val();
-
-    if (confirmPassword.length > 0) {
-        $("#ConfirmPassword").removeClass('input-validation-error');
-    }
-}
-
-// Attach event handlers
-$("#DisplayName").change(validateDisplayName);
-$("#UserName").change(validateEmail);
-$("#Password").change(validatePassword);
-$("#ConfirmPassword").change(validateConfirmPassword);
+                // If we have a tooltip on this element already, just update its content
+                .qtip('option', 'content.text', error);
+            }
+            // If the error is empty, remove the qTip
+            else { elem.qtip('destroy'); }
+        },
+        success: $.noop, // Odd workaround for errorPlacement not firing!
+    });
+});

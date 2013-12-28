@@ -42,7 +42,7 @@ namespace BookSpade.Revamped.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "The email or password provided is incorrect.");
             return View(model);
         }
 

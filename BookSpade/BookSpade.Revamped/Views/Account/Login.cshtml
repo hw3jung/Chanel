@@ -1,11 +1,13 @@
 ﻿@model BookSpade.Revamped.Models.LoginModel
 
+@Styles.Render("~/Content/effects/qtip2/jquery.qtip.min.css")
 @Styles.Render("~/Content/Pages/Login.css")
 
 <div id="loginContainer">
   <div id="loginContent">
     <section id="loginSection">
-    @using (Html.BeginForm(new { id = "loginForm", ReturnUrl = ViewBag.ReturnUrl })) {
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm" }))
+    {
         @Html.AntiForgeryToken()
 
         <hgroup class="title">

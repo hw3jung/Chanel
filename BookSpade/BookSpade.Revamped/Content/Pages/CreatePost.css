@@ -1,16 +1,24 @@
-﻿.new-post {
-    text-align: center;
-    margin-bottom: 15px;
-    padding-top: 10px;
+﻿#new-post-wrapper:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: '';
+    height: 100%;
+    margin-right: -0.25em;
 }
 
-.page-header {
-    border-bottom: none;
-    font-size: 26px;
-    font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: 35px;
-    padding: 0;
+#new-post-wrapper {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#new-post {
+    position: relative;
+    height: 525px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
 }
 
 .common-fields.span5 {
@@ -82,7 +90,7 @@
     width: inherit;
 }
 
-.new-post legend {
+#new-post legend {
     margin-bottom: 20px;
     font-weight: bold;
 }
