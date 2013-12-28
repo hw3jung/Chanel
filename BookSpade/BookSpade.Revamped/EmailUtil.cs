@@ -5,13 +5,25 @@ namespace BookSpade.Revamped
     public class EmailUtil
     {
 
-        public EmailUtil(string email, string subject, string body)
+        public EmailUtil(string email, string Name, string subject, string body)
         {
-            Mail(email, subject, body);
+            Mail(email, Name, subject, body);
         }
 
-        public static void Mail(string email, string subject, string body)
+        // TOEmail, TOName, EmailSubject, EmailBody
+        public static void Mail(string email, string Name, string subject, string body)
         {
+            string fBody = "Hi " + Name + ", ";
+            fBody += "<br/>";
+            fBody += "<br/>";
+            fBody += body;
+            fBody += "<br/>";
+            fBody += "<br/>";
+            fBody += "Thank You,";
+            fBody += "<br/>";
+            fBody += "BookSpade Team";
+            //Should we do a logo signature?
+
             WebMail.EnableSsl = false;
             WebMail.SmtpServer = "smtpout.secureserver.net";
             WebMail.SmtpPort = 80;
@@ -20,7 +32,7 @@ namespace BookSpade.Revamped
             WebMail.Send(
                 email,
                 subject,
-                body,
+                fBody,
                 from: "info@bookspade.com"
             );
         }

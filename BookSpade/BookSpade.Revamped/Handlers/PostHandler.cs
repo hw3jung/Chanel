@@ -138,24 +138,24 @@ namespace BookSpade.Revamped.Handlers
                     "AND IsTransacting = 0 AND IsActive = 1 AND IsDeleted = 0",
                     post.UserId,
                     post.TextBookId,
-                    counterparty
+                    (int)counterparty
                 );
 
                 List<SortColumn> sortColumns = new List<SortColumn>();
                 if (post.ActionBy == ActionBy.Buyer) //buyer
                 {
-                    query += String.Format("Price <= {0} AND BookCondition >= {1}",
+                    query += String.Format("AND Price <= {0} AND BookCondition >= {1}",
                         post.Price,
-                        post.BookCondition
+                        (int)post.BookCondition
                     );
 
                     sortColumns.Add(new SortColumn("Price", "ASC"));
                 }
                 else //seller
                 {
-                    query += String.Format("Price >= {0} AND BookCondition <= {1}",
+                    query += String.Format("AND Price >= {0} AND BookCondition <= {1}",
                         post.Price,
-                        post.BookCondition
+                        (int)post.BookCondition
                     );
 
                     sortColumns.Add(new SortColumn("Price", "DESC"));

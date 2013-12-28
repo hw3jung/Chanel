@@ -340,7 +340,8 @@ footer a:hover {
  -------------------------------------------------------------*/
 
 .blue-button,
-.green-button {
+.green-button,
+.red-button {
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -359,12 +360,20 @@ footer a:hover {
     background: #6BC257;
 }
 
+.red-button {
+    background: #D5402B;
+}
+
 .blue-button:hover {
     background: #36a9e1;
 }
 
 .green-button:hover {
     background: #36a049;
+}
+
+.red-button:hover {
+    background: #D50707;
 }
 
 /*-------------------------------------------------------------

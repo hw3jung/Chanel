@@ -1,10 +1,19 @@
 ﻿@model Comment
 
+@{
 
-<li>
-    <div>
-      <img class="comment-spade" src="@Url.Content("~/Content/Images/Spade.png")" alt="spade" />
-      <span><b>@Model.CommentatorProfile.Name</b></span>
-      @Model.comment
-    </div>
-</li>
+  if (Model.ActionBy == BookSpade.Revamped.Utilities.ActionBy.Buyer) {
+    <li class="buyer-comment">
+          <span><b>@Model.CommentatorProfile.Name</b></span>
+          <div class="buyer-bubble">
+             <span>@Model.comment</span>
+          </div>
+    </li>
+  } else {
+    <li class="seller-comment">
+          <span class="commentor" >@Model.CommentatorProfile.Name</span>
+          <br />
+          <span>@Model.comment</span>
+    </li>
+  }
+}
