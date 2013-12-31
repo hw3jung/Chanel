@@ -28,20 +28,23 @@
     </head>
     <body>
         <div class="container-fluid">
-            <header class="row-fluid">
-                <div class="headerWrapper">
-                    <div class="logoWrapper">
-                        <a href="@Url.Action("Index", "Home")">
-                            <img src="@(Url.Content("~/Images/logo-booksInSpade_Grey.png"))" />
-                        </a>
-                    </div>
-                </div>
-            </header>
-            <div id="loginHome" class="row-fluid">
-                <section id="login">
-                    <div>@Html.Partial("_LoginPartial")</div>
-                </section>
+            <div class="header-wrapper">
+              <header class="row-fluid">
+                  <div class="headerWrapper" >
+                      <div class="logoWrapper">
+                          <a href="@Url.Action("Index", "Home")">
+                              <img src="@(Url.Content("~/Images/logo-booksInSpade_Blue.png"))" />
+                          </a>
+                      </div>
+                  </div>
+              </header>
+              <div id="loginHome" class="row-fluid">
+                  <section id="login">
+                      <div>@Html.Partial("_LoginPartial")</div>
+                  </section>
+              </div>
             </div>
+            <div class="pipe"></div>
             <div class="body row-fluid">
               @RenderBody()
             </div>

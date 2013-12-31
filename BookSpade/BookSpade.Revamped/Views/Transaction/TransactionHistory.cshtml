@@ -1,19 +1,59 @@
 ﻿@model IEnumerable<TransactionDetailModel>
 
+@Styles.Render("~/Content/effects/qtip2/jquery.qtip.min.css")
 @Styles.Render("~/Content/Pages/TransactionHistory.css")
 
-<div class="history-containter container text-center" >
-  <h1>Transaction History</h1>
-  <ul class="user-history SearchResults wave">
-  @{
-      foreach(TransactionDetailModel TransactionDetail in Model){
-          Html.RenderPartial("_TransactionHistoryItem", TransactionDetail);
-      }
-  }
-  </ul>
-</div>
 
+  
+<div class="trans-history container" >
+  <div class="history-header">Transaction History</div>
+  
+  @if(Model.Count() == 0) {
+    <div class="no-trans-container">
+      <div>You do not have any pending transactions.</div>
+      <div class="no-trans-btn-desc">Need help getting that book or selling one you're done with?</div>
+      <div id="needToBuySell">
+        <div class="no-trans-btn-buysell">
+          <a href="@(Url.Action("Create", "Post", new { isBuy = true }))" title="Buy Textbooks">
+              <div class="buttonBuySell blue-button">Buy</div>
+          </a>
+        </div>
+        <div class="no-trans-btn-buysell">
+          <a href="@(Url.Action("Create", "Post", new { isBuy = false }))" title="Sell Textbooks">
+              <div class="buttonBuySell blue-button">Sell</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  } else {
+    <div class="item-container list-header">
+      <div class="item-title">Book Title</div>      
+      <div class="item-isbn">ISBN</div>
+      <div class="item-course">Course</div>
+      <div class="item-price">Initial Price</div>
+    </div>
+    <ul class="user-history SearchResults wave">
+   
+    @{
+        foreach(TransactionDetailModel TransactionDetail in Model){
+            Html.RenderPartial("_TransactionHistoryItem", TransactionDetail);
+        }
+    }
+    </ul>
+  }
+</div>
+  
+}
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/stroll.min.js")
+  
+  @Scripts.Render("~/bundles/transactionHistory")
+  <script type="text/javascript">
+     $(function() {
+          $('.SearchResults li').on("click", function () {
+              var transId = $(this).attr('id');
+              window.location = '@(Url.Content("TransactionDetails"))' + '?transactionId=' + transId;
+          }); 
+     });
+  </script>
 }

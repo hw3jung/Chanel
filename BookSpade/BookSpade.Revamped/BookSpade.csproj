@@ -289,6 +289,7 @@
     <Content Include="Images\homeImage_bookStand.png" />
     <Content Include="Images\load.gif" />
     <Content Include="Images\logo-booksInSpade.png" />
+    <Content Include="Images\logo-booksInSpade_Blue.png" />
     <Content Include="Images\logo-booksInSpade_Grey.png" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
@@ -321,6 +322,7 @@
     <Content Include="Static\Login.js" />
     <Content Include="Static\Register.js" />
     <Content Include="Static\TransactionDetail.js" />
+    <Content Include="Static\TransactionHistory.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

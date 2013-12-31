@@ -1,45 +1,94 @@
-﻿.lbl {
-    font-weight:bold;
-    padding:2px;
+﻿.no-trans-container {
+    text-align:left;
 }
+
+.no-trans-btn-desc {
+    font-weight:bold;
+}
+
+.no-trans-btn-buysell {
+    width:200px; 
+    float:left;
+    margin-left:3px;
+}
+
+#needToBuySell {
+    font: 15px arial bold;
+    color: #666;
+	line-height: 40px;
+    text-align: left;
+    margin-top: 15px;
+    z-index: 99995;
+}
+
+    #needToBuySell a {
+        text-decoration:none;
+    }
+
 
 .item-container {
     text-align:left;
     width:800px;
 }
 
+
+.trans-history {
+    height:350px;
+}
+
 .item-title {
     padding-bottom:2px;
     font-weight:bold;
     font-size:15px;
+    font-family: Calibri;
+    float:left;
+    width:25%;
 }
 
-.isbn-course > .BookDetail {
-    float:none;
-    display:inline-block;
+.item-isbn, .item-course, 
+.item-price, .item-price {
+    width:25%;
+    float:left;
+    text-align:center;
+    font-size:13px;
 }
 
-.prices > .BookDetail {
-    float:none;
-    display:inline-block;
+.list-header {
+    font-weight:bold;
     font-size:15px;
+    padding-left:7px;
 }
+
+.history-header {
+    font-size: 24px;
+    font-weight: bold; 
+    font-family: Calibri;
+    margin-bottom: 10px;
+    padding-bottom:10px;
+    padding-top:10px;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.create-post {
+    text-align:right;
+    float:right;
+}
+
+/*.details > .BookDetail {
+    float:none;
+    display:inline-block;
+    font-size:12px;
+}*/
+
 
 .user-history {
     list-style:none;
 }
 
-.BookDetail {
-    text-align:center;
-}
-
-.history-containter {
-    text-align:center; 
-    width:900px;
-}
-
 .container {
     text-align:center;
+    width:900px;
 }
 
     .SearchResults {
@@ -49,6 +98,8 @@
         margin-bottom: 0;
         margin-left: 0;
 	    overflow-y: scroll;
+        border: 1px solid #e5e5e5;
+        border-top: 2px solid #000;
 
         -webkit-perspective: 400px;
 	       -moz-perspective: 400px;
@@ -60,11 +111,16 @@
         .SearchResults li {
             position: relative;
             text-align: left;
-            padding: 11px 0 11px 12px;
+            vertical-align:middle;
+            padding: 3px 0px 3px 5px;
+            background: #d5e5eb;
+            
             color: #252525;
             font-size: 16px;
             border: 1px solid transparent;
             z-index: 0;
+            width:900px;
+            height:25px;
                 
             -webkit-transform: translateZ(0px);
 		       -moz-transform: translateZ(0px);
@@ -72,17 +128,16 @@
 		         -o-transform: translateZ(0px);
 		            transform: translateZ(0px);
         }
-        
-        .SearchResults li:nth-child(odd) {
-            background: url('../Images/bg_pattern_blue.jpg') repeat;
-        }
 
-@media only screen and (max-width: 1000px) {
-    .isbn-course > .BookDetail {
+            .SearchResults li:hover {
+                /*background-color: #d1eafa;*/ 
+                background-color:#FCF7BF;
+                cursor:pointer;
+            }
+
+
+/*@media only screen and (max-width: 1000px) {
+    .details > .BookDetail {
         font-size:15px;
     }
-
-    .prices > .BookDetail {
-        font-size:15px;
-    }
-}
+}*/
