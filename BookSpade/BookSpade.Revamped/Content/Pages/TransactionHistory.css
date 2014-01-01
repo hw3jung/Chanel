@@ -31,7 +31,6 @@
     width:800px;
 }
 
-
 .trans-history {
     height:350px;
 }
@@ -99,6 +98,7 @@
         margin-left: 0;
 	    overflow-y: scroll;
         border: 1px solid #e5e5e5;
+        
         border-top: 2px solid #000;
 
         -webkit-perspective: 400px;
@@ -114,12 +114,12 @@
             vertical-align:middle;
             padding: 3px 0px 3px 5px;
             background: #d5e5eb;
-            
+            border:1px solid #FFF; 
             color: #252525;
             font-size: 16px;
-            border: 1px solid transparent;
+
             z-index: 0;
-            width:900px;
+            width:876px;
             height:25px;
                 
             -webkit-transform: translateZ(0px);
