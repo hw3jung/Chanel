@@ -285,8 +285,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\bookspadeText.png" />
+    <Content Include="Images\bookspadeText_Blue.png" />
     <Content Include="Images\fb_button-login.png" />
     <Content Include="Images\homeImage_bookStand.png" />
+    <Content Include="Images\homeImage_bookStand_BlueWhite.png" />
     <Content Include="Images\load.gif" />
     <Content Include="Images\logo-booksInSpade.png" />
     <Content Include="Images\logo-booksInSpade_Blue.png" />
