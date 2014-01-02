@@ -3,7 +3,7 @@ using BookSpade.Revamped.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq; 
+using System.Linq;
 
 namespace BookSpade.Revamped.Handlers
 {
@@ -95,7 +95,7 @@ namespace BookSpade.Revamped.Handlers
                     IsDeleted,
                     CreatedDate,
                     ModifiedDate
-                ); 
+                );
             }
 
             return transaction; 
@@ -169,12 +169,25 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        #region ConfirmTransaction
+
+        public static bool ConfirmTransaction(Transaction transaction)
+        {
+            PostHandler.updatePostState(transaction.SellerPostId, 0, 0);
+            PostHandler.updatePostState(transaction.BuyerPostId, 0, 0);
+            UpdateTransaction(transaction.TransactionId, 0, "IsActive");
+
+            return true;
+        }
+
+        #endregion
+
         #region CancelTransaction
 
         public static bool CancelTransaction(Transaction transaction)
         {
-            PostHandler.updatePostState(transaction.SellerPostId, 0, null);
-            PostHandler.updatePostState(transaction.BuyerPostId, 0, null);
+            PostHandler.updatePostState(transaction.SellerPostId, 0);
+            PostHandler.updatePostState(transaction.BuyerPostId, 0);
             UpdateTransaction(transaction.TransactionId, 1, "IsDeleted");
 
             if (CreateForbiddenMatch(transaction.BuyerPostId, transaction.SellerPostId) > 0

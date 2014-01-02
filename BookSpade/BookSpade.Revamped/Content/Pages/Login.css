@@ -10,15 +10,13 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    text-align: center;
 }
 
 #loginContent {
     width: 350px;
-    position: relative;
     display: inline-block;
     vertical-align: middle;
-    margin-bottom: 45px;
+    margin-top: 75px;
     padding: 10px 0 20px 0;
     border: 1px solid #dedcdc;
 }
@@ -98,11 +96,6 @@
     display: inline-block;
     margin: 5px 0 15px;
     vertical-align: middle;
-}
-
-form, fieldset {
-    margin: 0;
-    padding: 0;
 }
 
 .validation-summary-errors {

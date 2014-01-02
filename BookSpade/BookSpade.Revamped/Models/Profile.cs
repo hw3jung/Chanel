@@ -10,18 +10,20 @@ namespace BookSpade.Revamped.Models
         public int ProfileId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string FacebookId { get; set; }
+        public string FacebookLink { get; set; }
 
-        public Profile(int ProfileId, string Name, string Email)
+        public Profile(int profileId, string name, string email, string facebookId, string facebookLink)
         {
-            this.ProfileId = ProfileId;
-            this.Name = Name;
-            this.Email = Email; 
+            this.ProfileId = profileId;
+            this.Name = name;
+            this.Email = email;
+            this.FacebookId = facebookId;
+            this.FacebookLink = facebookLink;
         }
 
         public Profile()
         {
-
         }
-
     }
 }

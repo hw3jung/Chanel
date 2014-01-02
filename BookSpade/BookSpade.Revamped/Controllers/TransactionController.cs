@@ -44,6 +44,7 @@ namespace BookSpade.Revamped.Controllers
         {
             Transaction transaction = TransactionHandler.getTransaction(transactionId);
             TransactionCommentModel model = new TransactionCommentModel(transaction, User.Identity.Name);
+
             return View(model);
         }
 
@@ -51,9 +52,19 @@ namespace BookSpade.Revamped.Controllers
 
         #region newComment
 
-        public JsonResult newComment(string comment, int userId, int OtherUserId, int transactionId)
+        public JsonResult newComment(string comment, ActionBy commentor, int userId, int OtherUserId, int transactionId)
         {
-            Comment newComment = new Comment(-1, comment, userId, ActionBy.Buyer, transactionId, 1, 0, DateTime.Now, DateTime.Now); 
+            Comment newComment = new Comment(
+                -1,
+                comment,
+                userId,
+                commentor,
+                transactionId,
+                1,
+                0,
+                DateTime.Now,
+                DateTime.Now
+            ); 
             CommentHandler.createComment(newComment);
             Profile NotifyUser = ProfileHandler.GetProfile(OtherUserId);
 
@@ -69,7 +80,25 @@ namespace BookSpade.Revamped.Controllers
         public JsonResult setFinalPrice(int transactionId, decimal finalprice)
         {
             TransactionHandler.UpdateTransaction(transactionId, finalprice, "FinalPrice"); 
-            return Json(""); 
+            return Json("");
+        }
+
+        #endregion
+
+        #region ConfirmTransaction
+
+        [HttpPost]
+        public ActionResult ConfirmTransaction(Transaction transaction)
+        {
+            // if final price is different than initial offer, update final price first
+            if (transaction.FinalPrice != null &&
+                transaction.FinalPrice != transaction.InitialPrice)
+            {
+                setFinalPrice(transaction.TransactionId, (decimal)transaction.FinalPrice);
+            }
+
+            TransactionHandler.ConfirmTransaction(transaction);
+            return RedirectToAction("Index", "Home");
         }
 
         #endregion
@@ -80,7 +109,7 @@ namespace BookSpade.Revamped.Controllers
         public ActionResult CancelTransaction(Transaction transaction)
         {
             TransactionHandler.CancelTransaction(transaction);
-            return RedirectToAction("Index", "Home"); 
+            return RedirectToAction("Index", "Home");
         }
 
         #endregion

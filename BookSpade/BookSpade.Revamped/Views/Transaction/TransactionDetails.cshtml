@@ -4,159 +4,176 @@
     ViewBag.Title = "Transaction";
 }
 
+@Styles.Render("~/Content/font-awesome.min.css")
 @Styles.Render("~/Content/Pages/TransactionDetail.css")
 
-
-@Model.Details.FinalPrice
-
-<h1 class="text-center">Your Transaction</h1>
-
-<div class="container">
-  <div class="text-center d-iblock details">
-    <div class="transaction-info">
-      <h4>Details</h4>
-      <div>
-        <div class="d-iblock lbl">
-          Book Title
-        </div>
-        <div class="d-iblock val">
-          @Model.Details.BookTitle
-        </div>
-      </div>
-      <div>
-        <div class="d-iblock lbl">
-          Condition
-        </div>
-        <div class="d-iblock val">
-          @Model.Details.Condition
-        </div>
-      </div>
-      <div>
-        <div class="d-iblock lbl">
-          Course Name
-        </div>
-        <div class="d-iblock val">
-          @Model.Details.CourseName
-        </div>
-      </div>
-      <div>
-        <div class="d-iblock lbl">
-          ISBN
-        </div>
-        <div class="d-iblock val">
-          @Model.Details.ISBN
-        </div>
-      </div>
-      <div>
-        <div class="d-iblock lbl">
-          Store Price
-        </div>
-        <div class="d-iblock val">
-          @Model.Details.StorePrice
-        </div>
-      </div>
-      <div>
-        <div class="d-iblock lbl">
-          Price
-        </div>
-        <div class="d-iblock val">
-          @Model.Details.Price
-        </div>
-      </div>
-    </div>
-    <div>&nbsp;</div>
-    <div class="fprice-cancel">
-      <h4>Your Price</h4>
-      <div>
-        <div class="d-iblock lbl">Final Price</div>
-        <div class="d-iblock price-val">
-          @{
-            if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1) {
-             @Html.TextBox("FinalPrice", Model.Details.FinalPrice, new {id = "txtFinalPrice", @class="input-small", disabled="disabled"}) 
-            }
-            else
-            {
-              @Html.TextBox("FinalPrice", "", new {id = "txtFinalPrice", @class="input-small"}) 
-            }
-          }
-        </div>
-      </div>
-      <div>
-        <div class="d-iblock lbl">&nbsp;</div>
-
-        @{
-          if (Model.Details.FinalPrice.HasValue || (int)Model.UserAction == 1){} 
-          else {
-            <div class="d-iblock prive-val">
-                <button id="confirmPrice" type="button"  class="btn btn-primary" onclick="confirmFinalPrice()">Confirm</button> 
-            </div> 
-          }
-        }
-      </div>
-      <h4>Withdraw</h4>
-      @Html.Partial("_CancelTransaction", Model.Details.transaction)
-    </div>   
-  </div>  
-
-
-  <div id="dvComments" class="d-iblock commentcontainer">
-    <h4>Your thoughts on the deal</h4>
-    @{
-      if (Model.Comments.Count() > 0){
-      <ul id="commentlst" class="comments">
-    
-        @foreach (Comment comment in Model.Comments)
+<div id="transactionDetailsContainer">
+  <div id="transactionDetailsContent">
+    <h1>Your Transaction</h1>
+    <div id="contentSection">
+      <div class="user-info">
+        @if (Model.UserFacebookId != null)
         {
-          @Html.Partial("_TransactionComment", comment); 
+          <img src="http://graph.facebook.com/@Model.UserFacebookId/picture?width=500&height=500" class="img-rounded" />
+        }
+        else
+        {
+          <img src="~/Images/default-user.jpg" />
         }
 
-      </ul>
-      } else {
-       <h4>There are no comments to display</h4> 
-       <ul id="commentlst"  class="SearchResults wave height-auto"></ul>
-      }
-    }
-    
-    <div class="d-iblock">
-      <div class="d-iblock">
-        <textarea id="txtNewComment" class="message comment-new" name="NewComment" rows="4" cols="10" maxlength="225"></textarea>
+        <div class="user-info-name">
+          You
+        </div>
       </div>
-      <div class="d-iblock">
-        <span class="countdown"></span>
+      <div id="transactionInfo">
+        <div class="details-block">
+          <div class="details-label">
+            Title
+          </div>
+          <div class="details-value">
+            @Model.Details.BookTitle
+          </div>
+        </div>
+
+        <div class="details-block">
+          <div class="details-label">
+            Book Condition
+          </div>
+          <div class="details-value">
+            @Model.Details.Condition
+          </div>
+        </div>
+
+        <div class="details-block">
+          <div class="details-label">
+            Course Name
+          </div>
+          <div class="details-value">
+            @Model.Details.CourseName
+          </div>
+        </div>
+
+        <div class="details-block">
+          <div class="details-label">
+            ISBN
+          </div>
+          <div class="details-value">
+            @Model.Details.ISBN
+          </div>
+        </div>
+
+        <div class="details-block">
+          <div class="details-label">
+            BookStore Price
+          </div>
+          <div class="details-value">
+            $@Model.Details.StorePrice
+          </div>
+        </div>
+
+        <div class="details-block">
+          <div class="details-label">
+            Initial Offer
+          </div>
+          <div class="details-value">
+            $@Model.Details.Price
+          </div>
+        </div>
+      </div>
+      <div class="user-info">
+        @if (Model.CounterPartyFacebookId != null)
+        {
+          <img src="http://graph.facebook.com/@Model.CounterPartyFacebookId/picture?width=500&height=500" class="img-rounded" />
+        }
+        else
+        {
+          <img src="~/Images/default-user.jpg" />
+        }
+
+        <div class="user-info-name">
+          @Model.CounterPartyDisplayName
+        </div>
       </div>
     </div>
-    <div>
-      <div class="d-iblock">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-      <div class="d-iblock">
-       <button id="submit" type="submit" class="blue-button comment-submit" onclick="newComment()">Submit</button> 
+    <div id="interactionSection">
+      <div id="actions">
+        @Html.Partial("_TransactionActions", Model.Details.transaction)
+      </div>
+
+      <div id="comments">
+        <div id="showComments">
+          <div id="commentAngleLabel">Show Chat</div>
+          <i id="commentAngle" class="fa fa-angle-down"></i>
+        </div>
+        <div id="commentArea">
+          <div id="commentContainer" class="d-iblock">
+            <ul id="commentList">
+              @foreach (Comment comment in Model.Comments)
+              {
+                @Html.Partial("_TransactionComment", comment); 
+              }
+            </ul>
+
+            <textarea id="sendComment" name="NewComment" rows="1" cols="10" maxlength="225"></textarea>
+            <div id="commentAction">
+              <button id="submitComment" type="submit" class="blue-button comment-submit" onclick="newComment()">Send Message</button>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 @section Scripts {
    @Scripts.Render("~/Scripts/stroll.min.js")
+
   <script type="text/javascript">
 
-    function newComment() {
-      var Comment = $("#txtNewComment").val();
+    var comments_shown = false;
 
-      $('#dvComments ul').append(
-        $('<li class=\"buyer-comment\">').append(
-              "<span class=\"commentor\">" + "@(Model.profile.Name)" + "</span><br />" + 
-              "<span>" + Comment + "</span>"
-        )
+    function toggleComments() {
+      if (comments_shown) {
+        $("#commentAngle").removeClass("fa-angle-up");
+        $("#commentAngle").addClass("fa-angle-down");
+        $("#commentAngleLabel").text("Show Chat");
+        $("#commentArea").slideUp(function () {
+          comments_shown = false;
+        });
+      } else {
+        $("#commentAngle").removeClass("fa-angle-down");
+        $("#commentAngle").addClass("fa-angle-up");
+        $("#commentAngleLabel").text("Hide Chat");
+        $("#commentArea").slideDown(function () {
+          comments_shown = true;
+        });
+      }
+    }
+
+    function newComment() {
+      var Comment = $("#sendComment").val();
+
+      // syntax here should match that of _TransactionComment
+      $("#commentContainer ul").append(
+        "<li class=\"user-comment\">" +
+          "<div class=\"user-bubble\">" +
+            "<span>" + Comment + "</span>" +
+          "</div>" +
+        "</li>"
       );
 
-      $('#commentlst').scrollTop(10000000);
-      $("#txtNewComment").val("");
+      $('#commentList').scrollTop(10000000);
+      $("#sendComment").val("");
       updateCountdown();
 
       $.ajax({
         url: '@Url.Action("newComment", "Transaction")',
         data: {
           comment: Comment,
+          commentor: "@(Model.UserAction)",
           userId: "@(Model.UserId)",
-          OtherUserId: "@(Model.OtherPartyId)",
+          OtherUserId: "@(Model.CounterPartyId)",
           transactionId: "@(Model.Details.transaction.TransactionId)"
         },
         type: 'POST',
@@ -166,12 +183,33 @@
       });
     }
 
+    // Unused
     function updateCountdown() {
-      var remainig = 225 - $('.message').val().length;
-      $('.countdown').text(remainig); 
-
+      var remaining = 225 - $('#sendComment').val().length;
+      $('#countdown').text(remaining);
     }
 
+    function confirmTransactionModal() {
+      $('#confirmationModal').modal({});
+    }
+
+    function cancelTransactionModal() {
+      $('#cancellationModal').modal({});
+    }
+
+    function confirmTransaction() {
+      var finalPrice = $("#confirmFinalPrice").val();
+      $("#FinalPrice").val(finalPrice);
+      $('#confirmationModal').modal('hide');
+      $("#confirmTransactionForm").submit();
+    }
+
+    function cancelTransaction() {
+      $('#cancellationModal').modal('hide');
+      $("#cancelTransactionForm").submit();
+    }
+
+    // Unused
     function confirmFinalPrice() {
       var finalprice = $("#txtFinalPrice").val();
 
@@ -190,13 +228,20 @@
       });
     }
 
+    //updateCountdown();
+    //$('#sendComment').change(updateCountdown);
+    //$('#sendComment').keyup(updateCountdown);
+
     $(function () {
-      updateCountdown();
-      $('.message').change(updateCountdown);
-      $('.message').keyup(updateCountdown);
+      $("#showComments").click(toggleComments);
 
-      $('#commentlst').scrollTop(10000000);
+      $("#confirmTransaction").click(confirmTransactionModal);
+      $("#cancelTransaction").click(cancelTransactionModal);
 
+      $("#proceedConfirmTransaction").click(confirmTransaction);
+      $("#proceedCancelTransaction").click(cancelTransaction);
+
+      $('#commentList').scrollTop(10000000);
     });
 
    </script>

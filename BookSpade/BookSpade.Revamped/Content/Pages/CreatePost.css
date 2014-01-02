@@ -1,4 +1,8 @@
-﻿#new-post-wrapper:before {
+﻿div.body {
+    padding-bottom: 36px; /* 36px for the footer; padding customized for this page only */
+}
+
+#new-post-wrapper:before {
     display: inline-block;
     vertical-align: middle;
     content: '';
@@ -10,20 +14,17 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    text-align: center;
 }
 
 #new-post {
-    position: relative;
-    height: 525px;
     display: inline-block;
-    vertical-align: middle;
-    margin-top: 10px;
+    margin-top: 45px;
+    margin-left: 85px;
 }
 
-.common-fields.span5 {
-    margin-left: 0;
+.common-fields {
     margin-top: 30px;
+    width: 470px;
 }
 
 .common-fields .control-label,
@@ -52,6 +53,10 @@
             margin-bottom: -5px;
         }
 
+        .common-fields .control-group:nth-last-of-type(3) .controls {
+            margin-top: 1px;
+        }
+
     .common-fields .controls input,
     .new-book .controls input {
         width: 234px;
@@ -62,20 +67,18 @@
         margin-top: 3px;
     }
 
-.new-book.span5 {
+.new-book {
     display: none;
     padding-top: 30px;
-}
-
-.row-fluid .span5 {
-    width: 500px;
 }
 
 .submit-form {
     display: inline-block;
     text-align: left;
-    width: 450px;
+    width: 470px;
     margin-bottom: 222px;
+    padding-left: 10px;
+    padding-top: 5px;
 }
 
 #ActionBy {
@@ -84,6 +87,10 @@
 
 #BookCondition {
     width: 248px;
+}
+
+#Price {
+    width: 207px;
 }
 
 #IsNegotiable {
@@ -100,8 +107,8 @@
     font-weight: bold; 
     font-family: Calibri;
     margin-bottom: 10px;
+    margin-left: 2px;
     text-align: left;
-    padding-left: 45px;
     vertical-align: bottom;
 }
 
@@ -117,10 +124,10 @@
     margin-top: 10px;
 }
 
-.book-list.span5 {
-    float: none;
+.book-list {
     display: inline-block;
     vertical-align: top;
+    margin-right: 40px;
 }
 
 /*
@@ -181,7 +188,7 @@
     padding: 10px 0;
 }
 
-@media only screen and (max-width: 993px) {
+/*@media only screen and (max-width: 993px) {
     .submit-form {
         margin-bottom: 15px !important;
     }
@@ -198,4 +205,4 @@
     #newBookButton {
         margin-top: -85px !important;
     }
-}
+}*/

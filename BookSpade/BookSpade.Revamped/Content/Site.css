@@ -1,9 +1,9 @@
 ﻿html {
-    background-color: #e2e2e2;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
+    min-width: 1024px;
 }
 
 body {
@@ -16,13 +16,21 @@ body {
     height: 100%;
 }
 
-.container-fluid {
+/*.container-fluid {
     height: 100%;
-    padding:0;
+    padding:0;*/
+
+#bodyContainer {
+    min-height: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 div.body {
-    height: 87.8%;
+    height: 87.4%;
+    padding: 0 20px 86px 20px; /* 86px bottom is 36px (footer) + 50px (for whitespace cushion) */
+    text-align: center;
 }
 
 .float-left {
@@ -31,6 +39,11 @@ div.body {
 
 .float-right {
     float: right;
+}
+
+form, fieldset {
+    margin: 0;
+    padding: 0;
 }
 
 fieldset {
@@ -89,7 +102,8 @@ fieldset {
 
 #loginHome {
     text-align: right;
-    padding: 13px 0 0 0;
+    padding-top: 13px;
+    padding-right: 6px;
     height: 37px;
 }
 
@@ -263,10 +277,11 @@ tr.pager td {
 /******************************************************************/
 /***************************** header *****************************/
 /******************************************************************/
-header.row-fluid {
+header {
     float: left;
     width: 200px;
     margin-top: 10px;
+    margin-left: 7px;
 }
 
 .header-wrapper {
@@ -274,8 +289,6 @@ header.row-fluid {
     height:60px;
     background-color:#676767;
     width:100%;
-    padding-right:6px;
-    right:10px;
     padding-top:4px;
     border-bottom:2px solid #c8c8c8;
 }
@@ -285,38 +298,27 @@ header.row-fluid {
 /******************************************************************/
 
 footer{
-    position: fixed;
+    position: absolute;
+    height: 22px;
     bottom: 0;
-    left: 0;
 	width: 100%;
     padding: 7px 0;
 	color: #666;
     font-size: 16px;
     background-color: rgba(0, 12, 0, 0.7);
-    z-index: 10003;
 }
 
-footer ul {
+#footerContent {
     text-align: center;
     margin: 0;
-    height: 20px;
 }
 
-footer ul li{
-	float: right; 
-	display: table;
-	list-style: none;
-	padding: 0 10px 0 10px;
+#footerContent .footer-link{
+	display: inline-block;
+    margin: 0 10px;
+	padding: 0 10px;
+    color: #D5E5EB;
 }
-
-    footer.row-fluid .span2 {
-        width: inherit;
-        margin: 0;
-        padding: 0 20px;
-        float: none;
-        display: inline-block;
-        color: #D5E5EB;
-    }
 
 footer a:link, footer a:active, footer a:visited{
 	font: 16px calibri;
@@ -357,7 +359,8 @@ footer a:hover {
 
 .blue-button,
 .green-button,
-.red-button {
+.red-button,
+.grey-button {
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -380,6 +383,10 @@ footer a:hover {
     background: #D5402B;
 }
 
+.grey-button {
+    background: #ccc;
+}
+
 .blue-button:hover {
     background: #36a9e1;
 }
@@ -390,6 +397,10 @@ footer a:hover {
 
 .red-button:hover {
     background: #D50707;
+}
+
+.grey-button:hover {
+    background: #bbb;
 }
 
 /*-------------------------------------------------------------

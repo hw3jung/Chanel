@@ -191,9 +191,11 @@ function clickNegotiatePrice() {
     }
 }
 
-// Attach event handlers
-$("#BookSearch").keyup(searchBookList);
-$("#BookList li").click(clickBookListItem);
-$("#newBookButton").click(clickNewBookButton);
-$("#ActionBy").change(changePostType);
-$("#IsNegotiable").click(clickNegotiatePrice);
+$(function () {
+    // Attach event handlers
+    $("#BookSearch").keyup(searchBookList);
+    $("#BookList li").click(clickBookListItem);
+    $("#newBookButton").click(clickNewBookButton);
+    $("#ActionBy").change(changePostType);
+    $("#IsNegotiable").click(clickNegotiatePrice);
+});

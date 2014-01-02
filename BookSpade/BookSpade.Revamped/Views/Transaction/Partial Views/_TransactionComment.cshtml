@@ -2,18 +2,20 @@
 
 @{
 
-  if (Model.ActionBy == BookSpade.Revamped.Utilities.ActionBy.Buyer) {
-    <li class="buyer-comment">
-          <span><b>@Model.CommentatorProfile.Name</b></span>
-          <div class="buyer-bubble">
-             <span>@Model.comment</span>
-          </div>
-    </li>
-  } else {
-    <li class="seller-comment">
-          <span class="commentor" >@Model.CommentatorProfile.Name</span>
-          <br />
+  if (Model.CommentByCurrentUser)
+  {
+    <li class="user-comment">
+      <div class="user-bubble">
           <span>@Model.comment</span>
+      </div>
+    </li>
+  }
+  else
+  {
+    <li class="counterparty-comment">
+      <div class="counterparty-bubble">       
+        <span>@Model.comment</span>
+      </div>
     </li>
   }
 }

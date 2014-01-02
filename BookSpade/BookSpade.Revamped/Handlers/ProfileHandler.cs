@@ -48,8 +48,8 @@ namespace BookSpade.Revamped.Handlers
         //by Id
         #region GetProfile
 
-        public static Profile GetProfile(int userId){
-
+        public static Profile GetProfile(int userId)
+        {
             Profile profile = null;
 
             try
@@ -62,8 +62,10 @@ namespace BookSpade.Revamped.Handlers
                     DataRow row = dt.Rows[0];
                     string name = Convert.ToString(row["DisplayName"]);
                     string email = Convert.ToString(row["UserName"]);
-                    
-                    profile = new Profile(userId, name, email);
+                    string facebookId = row["FacebookId"] is DBNull ? null : Convert.ToString(row["FacebookId"]);
+                    string facebookLink = row["FacebookLink"] is DBNull ? null : Convert.ToString(row["FacebookLink"]);
+
+                    profile = new Profile(userId, name, email, facebookId, facebookLink);
                 }
             }
             catch (Exception ex)
@@ -80,22 +82,24 @@ namespace BookSpade.Revamped.Handlers
         //by Email
         #region GetProfile
 
-        public static Profile GetProfile(string Email) //in B.S. UserName == Email 
+        public static Profile GetProfile(string email) //in B.S. UserName == Email 
         {
             Profile profile = null;
 
             try
             {
                 DataAccess DAL = new DataAccess();
-                DataTable dt = DAL.select(String.Format("UserName = '{0}'", Email), "UserProfile", NumRows : 1);
+                DataTable dt = DAL.select(String.Format("UserName = '{0}'", email), "UserProfile", NumRows: 1);
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    int ProfileId = Convert.ToInt32(row["UserId"]); 
-                    string DisplayName = Convert.ToString(row["DisplayName"]);
-
-                    profile = new Profile(ProfileId, DisplayName, Email);
+                    int profileId = Convert.ToInt32(row["UserId"]); 
+                    string displayName = Convert.ToString(row["DisplayName"]);
+                    string facebookId = row["FacebookId"] is DBNull ? null : Convert.ToString(row["FacebookId"]);
+                    string facebookLink = row["FacebookLink"] is DBNull ? null : Convert.ToString(row["FacebookLink"]);
+                    
+                    profile = new Profile(profileId, displayName, email, facebookId, facebookLink);
                 }
             }
             catch (Exception ex)
@@ -131,6 +135,33 @@ namespace BookSpade.Revamped.Handlers
             }
 
             return profileId;
+        }
+
+        #endregion
+
+        #region GetFacebookId
+
+        public static string GetFacebookId(int userId) //in B.S. UserName == Email 
+        {
+            string facebookId = null;
+
+            try
+            {
+                DataAccess DAL = new DataAccess();
+                DataTable dt = DAL.select(String.Format("UserId = '{0}'", userId), "UserProfile", NumRows: 1, ColumnNames: new string[] { "FacebookId" });
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    facebookId = row["FacebookId"] is DBNull ? null : Convert.ToString(row["FacebookId"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write("ERROR: An error occured in retrieving the facebook id for user --- " + ex.Message);
+            }
+
+            return facebookId;
         }
 
         #endregion

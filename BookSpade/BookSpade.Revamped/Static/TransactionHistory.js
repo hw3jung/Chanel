@@ -1,3 +1,1 @@
-﻿
-stroll.bind('.trans-history ul');
-
+﻿stroll.bind('#historyContainer ul');

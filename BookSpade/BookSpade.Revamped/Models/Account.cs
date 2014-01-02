@@ -25,6 +25,7 @@ namespace BookSpade.Revamped.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string DisplayName { get; set; }
+        public string FacebookId { get; set; }
         public string FacebookLink { get; set; }
         public string FacebookEmail { get; set; }
     }
@@ -38,6 +39,7 @@ namespace BookSpade.Revamped.Models
 
         public string ExternalLoginData { get; set; }
         public string DisplayName { get; set; }
+        public string FacebookId { get; set; }
         public string FacebookLink { get; set; }
         public string FacebookEmail { get; set; }
     }

@@ -258,6 +258,7 @@ namespace BookSpade.Revamped.Controllers
                     UserName = result.UserName,
                     ExternalLoginData = loginData,
                     DisplayName = result.ExtraData["name"],
+                    FacebookId = result.ExtraData["id"],
                     FacebookLink = result.ExtraData["link"],
                     FacebookEmail  = result.UserName
                 });
@@ -294,6 +295,7 @@ namespace BookSpade.Revamped.Controllers
                         {
                             UserName = model.UserName,
                             DisplayName = model.DisplayName,
+                            FacebookId = model.FacebookId,
                             FacebookLink = model.FacebookLink,
                             FacebookEmail = model.FacebookEmail
                         });

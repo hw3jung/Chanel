@@ -1,184 +1,272 @@
-﻿textarea {
-    width:400px;
+﻿#transactionDetailsContainer:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: '';
+    height: 100%;
+    margin-right: -0.25em;
 }
 
-.countdown {
-    font-weight:bold; 
-    font-size:10px;
+#transactionDetailsContainer {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }
 
-.height-auto {
-    height:auto;
+#transactionDetailsContent {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
 }
 
-.comment-spade {
-    width:35px;
-    height:auto;
+.user-info {
+    display: inline-block;
+    margin: 0 70px;
 }
 
-.commentcontainer {
-    width:490px;
-    height:475px;
-    bottom:0;
-    font-size:14px;
-    float:right;
+.user-info img {
+    width: 220px;
+    height: 220px;
+
+    border-top-left-radius: 50px;
+    -moz-border-radius-topleft: 50px;
+    -khtml-border-radius-topleft: 50px;
+    -webkit-border-radius-topleft: 50px;
+    -o-border-radius-topleft: 50px;
+
+    border-top-right-radius: 50px;
+    -moz-border-radius-topright: 50px;
+    -khtml-border-radius-topright: 50px;
+    -webkit-border-radius-topright: 50px;
+    -o-border-radius-topright: 50px;
+
+    border-bottom-left-radius: 50px;
+    -moz-border-radius-bottomleft: 50px;
+    -khtml-border-radius-bottomleft: 50px;
+    -webkit-border-radius-bottomleft: 50px;
+    -o-border-radius-bottomleft: 50px;
+
+    border-bottom-right-radius: 50px;
+    -moz-border-radius-bottomright: 50px;
+    -khtml-border-radius-bottomright: 50px;
+    -webkit-border-radius-bottomright: 50px;
+    -o-border-radius-bottomright: 50px;
 }
 
-.text-center {
-    text-align:center;
+.user-info-name {
+    margin-top: 5px;
+    font-size: 16px;
 }
 
-.container {
-    text-align:left;
-    width:1030px;
+#transactionInfo {
+    display: inline-block;
+    vertical-align: top;
+    width: 335px;
+}
+
+    #transactionInfo .details-block {
+        border-bottom: 1px solid #dddddd;
+        margin: 15px 0;
+        padding-bottom: 2px;
+    }
+
+        #transactionInfo .details-block:first-child {
+            margin-top: 3px;
+        }
+
+    #transactionInfo .details-label {
+        display: inline-block;
+        width: 115px;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    #transactionInfo .details-value {
+        display: inline-block;
+        width: 210px;
+        font-size: 14px;
+        text-align: right;
+    }
+
+.transactionAction {
+    display: inline-block;
+}
+
+#confirmTransaction {
+    margin-left: 7px;
+}
+
+#confirmationWarning {
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.modal {
+    width: auto;
+}
+
+#cancellationModal {
+    width: 366px;
+}
+
+.modal-body {
+    text-align: left;
+    padding: 20px;
+}
+
+#confirmationModal .modal-body {
+    padding-bottom: 10px;
+}
+
+.control-group {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+    .control-group label {
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .control-group .add-on {
+        vertical-align: bottom;
+    }
+
+#confirmationModal {
+    top: 35%;
+    left: 57%;
+}
+
+#cancellationModal {
+    top: 38%;
+    left: 57%;
+}
+
+#showComments {
+    display: inline-block;
+    width: 150px;
+    cursor: pointer;
+}
+
+    #showComments:hover #commentAngle {
+        color: #609EC6;
+    }
+
+#commentAngleLabel {
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+#commentAngle {
+    margin-top: -7px;
+    font-size: 40px;
+    color: #bbbaba;
+}
+
+#commentArea {
+    display: none;
+    margin-top: 15px;
+}
+
+#commentList {
+    height: 300px;
+    background-color: #EDEFF4;
+    overflow-y: scroll;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 7px 3px;
+    margin: 0;
+}
+
+form {
+    margin-bottom: 0;
+}
+
+#commentContainer {
+    width: 450px;
+    height: 410px;
+    font-size: 14px;
+    margin-left: 10px;
 }
 
 .d-iblock {
-    display:inline-block;
+    display: inline-block;
 }
 
-.lbl {
-    font-weight:bold;
-    width:100px;
-}
-
-.val {
-    width:385px;
-}
-
-.price-val {
-    width:300px;
-}
-
-.details {
-     width:500px;
-     text-align:left;
-     vertical-align:top;
-}
-
-.transaction-info {
-    width:490px;
-    padding:10px;
-    vertical-align:top;
-}
-
-.fprice-cancel {
-    width:490px;
-    padding:10px;
-    vertical-align:top;
-}
-
-
-/*.SearchResults {
-        position: relative;
-        width: 100%;
-        height: 62%;
-        margin-bottom: 0;
-        margin-left: 0;
-	    overflow-y: scroll;
-
-        -webkit-perspective: 400px;
-	       -moz-perspective: 400px;
-	        -ms-perspective: 400px;
-	         -o-perspective: 400px;
-	            perspective: 400px;
-    }
-    
-        .SearchResults li {
-            position: relative;
-            text-align: left;
-            padding: 11px 0 11px 12px;
-            color: #252525;
-            font-size: 16px;  
-            z-index: 0;
-                
-            -webkit-transform: translateZ(0px);
-		       -moz-transform: translateZ(0px);
-		        -ms-transform: translateZ(0px);
-		         -o-transform: translateZ(0px);
-		            transform: translateZ(0px);
-        }
-*/
-
-
-/* Comments --------------------------------*/
-
-.comments {
-    padding:0px;
-}
-
-.commentor {
-    font-weight:bold;
-}
-
-.buyer-comment,
-.seller-comment {
+.user-comment,
+.counterparty-comment {
     list-style-type: none;
-    border: 1px solid #fff;
+    padding: 5px;
+}
+
+.user-comment {
+    text-align: left;
     padding-left:10px;
+}
+
+.counterparty-comment {
+    text-align: right;
     padding-right:10px;
-    padding-top:5px;
-    padding-bottom:5px;
 }
 
-.buyer-comment {
-    text-align:right;
-}
+.user-bubble,
+.counterparty-bubble {
+    display: inline-block;
+    max-width: 376px;
+    word-wrap: break-word;
+    padding: 8px 15px;
+    line-height: 22px;
 
-.seller-comment {
-    text-align:left; 
-}
+    border-top-left-radius: 25px;
+    -moz-border-radius-topleft: 25px;
+    -khtml-border-radius-topleft: 25px;
+    -webkit-border-radius-topleft: 25px;
+    -o-border-radius-topleft: 25px;
 
-.seller-bubble {
-    background-color:rgba(241, 97, 30, 0.51); 
-    width:auto;
-}
-
-.buyer-bubble {
-    background-color:#d5e5eb;
+    border-top-right-radius: 25px;
+    -moz-border-radius-topright: 25px;
+    -khtml-border-radius-topright: 25px;
+    -webkit-border-radius-topright: 25px;
+    -o-border-radius-topright: 25px;
 
     border-bottom-left-radius: 25px;
     -moz-border-radius-bottomleft: 25px;
     -khtml-border-radius-bottomleft: 25px;
     -webkit-border-radius-bottomleft: 25px;
     -o-border-radius-bottomleft: 25px;
+
+    border-bottom-right-radius: 25px;
+    -moz-border-radius-bottomright: 25px;
+    -khtml-border-radius-bottomright: 25px;
+    -webkit-border-radius-bottomright: 25px;
+    -o-border-radius-bottomright: 25px;
 }
 
-.cancel-transaction, .comment-submit {
-    padding-right:10px;
-    padding-left:10px;
+.counterparty-bubble {
+    background-color: #FCFCFC;
 }
 
-/* Comments End --------------------------------*/
-
-@media only screen and (max-width: 996px) {
-    .commentcontainer {
-        width:400px;
-    }
-
-    .val .price-val {
-        display:compact;   
-    }
-
-    .transaction-info .fprice-cancel {
-        display:compact;
-        margin: 0 !important;
-        vertical-align:top !important;       
-    }
-
-    .transaction-info {
-        width:auto;
-    }
-
-    .fprice-cancel {
-        width: auto;
-    }
-
-    .details {
-     width:auto;
-     text-align:left;
-     vertical-align:top !important;
-     background-color:rgba(255, 255, 255, 0.3);
-    }
+.user-bubble {
+    background-color:#d5e5eb;
 }
 
+#sendComment {
+    width: 438px;
+    font-size: 14px;
+    margin: 0;
+
+    border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    -khtml-border-radius-topleft: 0;
+    -webkit-border-radius-topleft: 0;
+    -o-border-radius-topleft: 0;
+
+    border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    -khtml-border-radius-topright: 0;
+    -webkit-border-radius-topright: 0;
+    -o-border-radius-topright: 0;
+}
+
+#commentAction {
+    margin-top: 15px;
+}

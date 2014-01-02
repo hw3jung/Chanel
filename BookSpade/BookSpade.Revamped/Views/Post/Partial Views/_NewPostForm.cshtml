@@ -16,7 +16,7 @@
       
   <fieldset class="form-horizontal">
     @Html.Partial("_AddBookPartial")
-    <div class="common-fields span5" style="@ViewBag.CommonFieldsStyle">
+    <div class="common-fields" style="@ViewBag.CommonFieldsStyle">
       <!-- Select Basic -->
       <div class="control-group">
         <label class="control-label">I want to</label>
@@ -37,7 +37,7 @@
 
       <!-- Text input-->
       <div class="control-group">
-        <label class="control-label">
+        <label class="control-label" for="Price">
           @{
               if (Model.ActionBy == BookSpade.Revamped.Utilities.ActionBy.Buyer)
               {
@@ -50,7 +50,10 @@
           }
         </label>
         <div class="controls">
-          @Html.TextBoxFor(m => m.Price, new { @class = "input-xlarge", @placeholder = "e.g. 100", @Value = ""})
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            @Html.TextBoxFor(m => m.Price, new { @class = "input-xlarge", @placeholder = "e.g. 100", @Value = ""})
+          </div>
           
         </div>
       </div>

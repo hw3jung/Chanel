@@ -1,0 +1,76 @@
+﻿@model Transaction
+
+<div class="transactionAction">
+  @using (Html.BeginForm("ConfirmTransaction", "Transaction", FormMethod.Post, new { id = "confirmTransactionForm" }))
+  {
+    <div>
+      <button id="confirmTransaction" type="button" class="green-button">
+        Confirm Transaction
+      </button> 
+    </div>
+   
+    @Html.HiddenFor(x => x.TransactionId);
+    @Html.HiddenFor(x => x.SellerId);
+    @Html.HiddenFor(x => x.SellerPostId);
+    @Html.HiddenFor(x => x.BuyerId);
+    @Html.HiddenFor(x => x.BuyerPostId);
+    @Html.HiddenFor(x => x.FinalPrice);
+  }
+</div>
+
+<div class="transactionAction">
+  @using (Html.BeginForm("CancelTransaction", "Transaction", FormMethod.Post, new { id = "cancelTransactionForm" }))
+  {
+    <div>
+      <button id="cancelTransaction" type="button" class="red-button">
+        Cancel Transaction
+      </button>
+    </div>
+   
+    @Html.HiddenFor(x => x.TransactionId);
+    @Html.HiddenFor(x => x.SellerId);
+    @Html.HiddenFor(x => x.SellerPostId);
+    @Html.HiddenFor(x => x.BuyerId);
+    @Html.HiddenFor(x => x.BuyerPostId);
+  }
+</div>
+
+<div id="confirmationWarning">
+  This transaction will be automatically confirmed in @Model.DaysRemaining days.
+</div>
+
+ 
+<!-- Confirm Transaction Modal -->
+<div id="confirmationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <div class="modal-body">
+    We hope your transaction went smoothly!
+    <br />
+    Please let us know of the final price you traded at.
+
+    <div class="control-group">
+      <label class="control-label" for="confirmFinalPrice">Final price</label>
+      <div class="input-prepend">
+        <span class="add-on">$</span>
+        <input class="input-medium" id="confirmFinalPrice" name="confirmFinalPrice" type="text" value="@Model.InitialPrice">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="grey-button" data-dismiss="modal" aria-hidden="true">Back</button>
+    <button id="proceedConfirmTransaction" class="green-button">Confirm Transaction</button>
+  </div>
+</div>
+
+<!-- Cancel Transaction Modal -->
+<div id="cancellationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <div class="modal-body">
+    <b>WARNING!! </b>
+    You will be matched with someone else for this book.
+  </div>
+  <div class="modal-footer">
+    <button class="grey-button" data-dismiss="modal" aria-hidden="true">Back</button>
+    <button id="proceedCancelTransaction" class="red-button">Cancel Transaction</button>
+  </div>
+</div>

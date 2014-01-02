@@ -1,4 +1,5 @@
-﻿using BookSpade.Revamped.Utilities;
+﻿using BookSpade.Revamped.Handlers;
+using BookSpade.Revamped.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace BookSpade.Revamped.Models
         public DateTime ModifiedDate { get; set; }
 
         public Profile CommentatorProfile { get; set; }
+        public bool CommentByCurrentUser { get; set; }
 
         public Comment(
             int commentId,
@@ -41,7 +43,7 @@ namespace BookSpade.Revamped.Models
             IsDeleted = isDeleted;
             CreatedDate = createdDate;
             ModifiedDate = modifiedDate;
-            CommentatorProfile = BookSpade.Revamped.Handlers.ProfileHandler.GetProfile(UserId);
+            CommentatorProfile = ProfileHandler.GetProfile(UserId);
         }
     }
 }

@@ -7,4 +7,6 @@
     }
 }
 
-$("#UserName").change(validateEmail);
+$(function () {
+    $("#UserName").change(validateEmail);
+});

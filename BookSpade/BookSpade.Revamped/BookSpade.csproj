@@ -192,6 +192,7 @@
     <Compile Include="RazorEngineCustomized.cs" />
     <Compile Include="Utilities\BookQueueSingleton.cs" />
     <Compile Include="Utilities\EnumsUtility.cs" />
+    <Compile Include="Utilities\Globals.cs" />
     <Compile Include="Utilities\Matchmaker.cs" />
     <Compile Include="Utilities\QueueWorker.cs" />
     <Compile Include="Utilities\SelectListUtility.cs" />
@@ -203,11 +204,14 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\effects\qtip2\jquery.qtip.css" />
     <Content Include="Content\effects\qtip2\jquery.qtip.min.css" />
     <Content Include="Content\effects\stroll\stroll.css" />
     <Content Include="Content\effects\stroll\stroll.min.css" />
     <Content Include="Content\effects\tooltip\closeBtn.gif" />
     <Content Include="Content\effects\tooltip\tooltip.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\bg_pattern.jpg" />
     <Content Include="Content\Images\bg_pattern_blue.jpg" />
     <Content Include="Content\Images\bg_pattern_dark.jpg" />
@@ -283,9 +287,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\bookspadeText.png" />
     <Content Include="Images\bookspadeText_Blue.png" />
+    <Content Include="Images\default-user.jpg" />
     <Content Include="Images\fb_button-login.png" />
     <Content Include="Images\homeImage_bookStand.png" />
     <Content Include="Images\homeImage_bookStand_BlueWhite.png" />
@@ -296,6 +302,10 @@
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\AsmaPatel.pubxml" />
     <None Include="Properties\PublishProfiles\BookSpadeProd.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
@@ -375,7 +385,7 @@
     <Content Include="Views\Transaction\TransactionDetails.cshtml" />
     <Content Include="Views\Transaction\Partial Views\_TransactionComment.cshtml" />
     <Content Include="Views\Post\Partial Views\_NewPostForm.cshtml" />
-    <Content Include="Views\Transaction\Partial Views\_CancelTransaction.cshtml" />
+    <Content Include="Views\Transaction\Partial Views\_TransactionActions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

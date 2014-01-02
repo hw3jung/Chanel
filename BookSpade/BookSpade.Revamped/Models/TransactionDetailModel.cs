@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BookSpade.Revamped.Handlers;
-using BookSpade.Revamped.Utilities; 
+using BookSpade.Revamped.Utilities;
 
 namespace BookSpade.Revamped.Models
 {
@@ -19,7 +19,7 @@ namespace BookSpade.Revamped.Models
 
         public Post SellerPost { get; set; }
         public Post BuyerPost { get; set; }
-        public Transaction transaction { get; set; } 
+        public Transaction transaction { get; set; }
 
         public TransactionDetailModel(Transaction transaction)
         {

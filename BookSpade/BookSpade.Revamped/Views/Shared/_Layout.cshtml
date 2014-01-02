@@ -27,41 +27,37 @@
         </script>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="header-wrapper">
-              <header class="row-fluid">
-                  <div class="headerWrapper" >
-                      <div class="logoWrapper">
-                          <a href="@Url.Action("Index", "Home")">
-                              <img src="@(Url.Content("~/Images/logo-booksInSpade_Blue.png"))" />
-                          </a>
-                      </div>
-                  </div>
-              </header>
-              <div id="loginHome" class="row-fluid">
-                  <section id="login">
-                      <div>@Html.Partial("_LoginPartial")</div>
-                  </section>
-              </div>
+        <div id="bodyContainer">
+          <div class="header-wrapper">
+            <header>
+                <div class="headerWrapper">
+                    <div class="logoWrapper">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="@(Url.Content("~/Images/logo-booksInSpade_Blue.png"))" />
+                        </a>
+                    </div>
+                </div>
+            </header>
+            <div id="loginHome">
+                <section id="login">
+                    <div>@Html.Partial("_LoginPartial")</div>
+                </section>
             </div>
-            <div class="pipe"></div>
-            <div class="body row-fluid">
-              @RenderBody()
+          </div>
+          <div class="pipe"></div>
+          <div class="body">
+            @RenderBody()
+          </div>
+          <footer>
+            <div id="footerContent">
+              <!--Links and legal disclaimer goes here-->
+              <div class="footer-link">BookSpade &copy; @DateTime.Now.Year</div>
+              <div class="footer-link">@Html.ActionLink("Home", "Index", "Home")</div>
+              <div class="footer-link">@Html.ActionLink("About", "About", "Home")</div>
+              <div class="footer-link">@Html.ActionLink("Contact", "Contact", "Home")</div>
+              <div class="footer-link"><a href="#" class="reportbug">Report a Bug</a></div>
             </div>
-            <footer class="row-fluid">
-                <!--Links and legal disclaimer goes here-->
-                <ul>
-                    <li class="span2">BookSpade &copy; @DateTime.Now.Year</li>
-
-                    <li class="span2">@Html.ActionLink("Home", "Index", "Home")</li>
-                
-                    <li class="span2">@Html.ActionLink("About", "About", "Home")</li>
-
-                    <li class="span2">@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    <li class="span2"><a href="#" class="reportbug">Report a Bug</a></li>
-                </ul>
-            </footer>
+          </footer>
         </div>
 
         @Scripts.Render("~/bundles/modernizr")
