@@ -12,13 +12,19 @@
     height: 100%;
 }
 
-#loginContent {
-    width: 350px;
+#loginWrapper {
+    width: 330px;
     display: inline-block;
     vertical-align: middle;
-    margin-top: 75px;
-    padding: 10px 0 20px 0;
+    margin-top: 80px;
+    padding: 10px 0 15px 0;
     border: 1px solid #dedcdc;
+}
+
+#loginContent {
+    width: 264px;
+    display: inline-block;
+    text-align: left;
 }
 
 #loginSection {
@@ -73,7 +79,6 @@
 
 #socialLoginForm {
     display: inline-block;
-    margin-right: 88px;
 }
 
     #socialLoginForm h2 {
@@ -92,12 +97,10 @@
     display: inline;
 }
 
-.divider {
-    display: inline-block;
-    margin: 5px 0 15px;
-    vertical-align: middle;
-}
-
 .validation-summary-errors {
     width: 250px;
+}
+
+h1 {
+    margin-top: 10px;
 }

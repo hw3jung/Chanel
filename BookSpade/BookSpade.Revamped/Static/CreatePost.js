@@ -173,10 +173,10 @@ function changePostType() {
 
     if (value == "Buyer") {
         $("#matchButton").text("Match Me With a Seller!");
-        $("#Price").parent().siblings('.control-label').text("I'm willing to pay (at most)");
+        $("#Price").parent().parent().siblings('.control-label').text("I'm willing to pay (at most)");
     } else if (value == "Seller") {
         $("#matchButton").text("Match Me With a Buyer!");
-        $("#Price").parent().siblings('.control-label').text("I'd like to receive (at least)");
+        $("#Price").parent().parent().siblings('.control-label').text("I'd like to receive (at least)");
     }
 }
 

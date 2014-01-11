@@ -4,35 +4,40 @@
 @Styles.Render("~/Content/Pages/Register.css")
 
 <div id="registerContainer">
-  <div id="registerContent">
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
-    {
-        @Html.AntiForgeryToken()
+  <div id="registerWrapper">
+    <div id="registerContent">
+      @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
+      {
+          @Html.AntiForgeryToken()
 
-        <hgroup id="title">
-            <h1>Sign Up</h1>
-        </hgroup>
+          <hgroup id="title">
+              <h1>Sign Up</h1>
+          </hgroup>
       
-        <fieldset>
-            <div>
-                @Html.LabelFor(m => m.DisplayName)
-                @Html.TextBoxFor(m => m.DisplayName)
-            </div>
-            <div>
-                @Html.LabelFor(m => m.UserName)
-                @Html.EditorFor(m => m.UserName)
-            </div>
-            <div>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </div>
-            <div>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </div>
-            <input type="submit" value="Register" />
-        </fieldset>
-    }
+          <fieldset>
+              <div>
+                  @Html.LabelFor(m => m.DisplayName)
+                  @Html.TextBoxFor(m => m.DisplayName)
+              </div>
+              <div>
+                  @Html.LabelFor(m => m.UserName)
+                  @Html.EditorFor(m => m.UserName)
+              </div>
+              <div>
+                  @Html.LabelFor(m => m.Password)
+                  @Html.PasswordFor(m => m.Password)
+              </div>
+              <div>
+                  @Html.LabelFor(m => m.ConfirmPassword)
+                  @Html.PasswordFor(m => m.ConfirmPassword)
+              </div>
+              <button id="registerButton" class="blue-button">Register</button>
+          </fieldset>
+      }
+
+      <div class="bs-divider"></div>
+      @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+    </div>
   </div>
 </div>
 

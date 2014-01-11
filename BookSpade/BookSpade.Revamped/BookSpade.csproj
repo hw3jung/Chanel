@@ -218,6 +218,7 @@
     <Content Include="Content\Images\bg_pattern_grey.jpg" />
     <Content Include="Content\Images\BookStack.png" />
     <Content Include="Content\Images\bs_btn_login.png" />
+    <Content Include="Content\Images\divider.png" />
     <Content Include="Content\Images\login-with-facebook.png" />
     <Content Include="Content\Images\MarketBuy.png" />
     <Content Include="Content\Images\marketpriceBG.png" />
@@ -333,7 +334,7 @@
     <Content Include="Static\ExternalLoginConfirmation.js" />
     <Content Include="Static\Login.js" />
     <Content Include="Static\Register.js" />
-    <Content Include="Static\TransactionDetail.js" />
+    <Content Include="Static\TransactionDetails.js" />
     <Content Include="Static\TransactionHistory.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

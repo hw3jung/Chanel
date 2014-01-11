@@ -1,4 +1,8 @@
-﻿#transactionDetailsContainer:before {
+﻿div.body {
+    padding-bottom: 78px;
+}
+
+#transactionDetailsContainer:before {
     display: inline-block;
     vertical-align: middle;
     content: '';
@@ -145,6 +149,7 @@
     display: inline-block;
     width: 150px;
     cursor: pointer;
+    margin-top: 30px;
 }
 
     #showComments:hover #commentAngle {
@@ -153,7 +158,6 @@
 
 #commentAngleLabel {
     font-size: 14px;
-    margin-top: 30px;
 }
 
 #commentAngle {
@@ -183,7 +187,6 @@ form {
 
 #commentContainer {
     width: 450px;
-    height: 410px;
     font-size: 14px;
     margin-left: 10px;
 }
@@ -270,3 +273,16 @@ form {
 #commentAction {
     margin-top: 15px;
 }
+
+#completedButton,
+#cancelledButton {
+    cursor: default;
+}
+
+    #completedButton:hover {
+        background: #6BC257;
+    }
+
+    #cancelledButton:hover {
+        background: #D5402B;
+    }

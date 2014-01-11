@@ -7,7 +7,7 @@
 }
 
 body {
-    font-size: .85em;
+    font-size: 0;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
@@ -25,11 +25,13 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    font-size: 14px;
 }
 
 div.body {
     height: 87.4%;
-    padding: 0 20px 86px 20px; /* 86px bottom is 36px (footer) + 50px (for whitespace cushion) */
+    padding: 0 20px 68px 20px; /* 86px bottom is 36px (footer) + 50px (for whitespace cushion) */
     text-align: center;
 }
 
@@ -105,6 +107,11 @@ fieldset {
     padding-top: 13px;
     padding-right: 6px;
     height: 37px;
+}
+
+#userGreeting {
+    display: inline-block;
+    margin-right: 2px;
 }
 
 #logoutForm {
@@ -351,6 +358,19 @@ footer a:hover {
 
 .Hide {
     display: none;
+}
+
+/*-------------------------------------------------------------
+  Bookspade Miscelleneous Styles
+ -------------------------------------------------------------*/
+
+h1 {
+    font-family: Calibri;
+}
+
+.bs-divider {
+    border-top: 1px solid #ccc;
+    text-align: left;
 }
 
 /*-------------------------------------------------------------

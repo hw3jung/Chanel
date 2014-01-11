@@ -4,45 +4,47 @@
 @Styles.Render("~/Content/Pages/Login.css")
 
 <div id="loginContainer">
-  <div id="loginContent">
-    <section id="loginSection">
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm" }))
-    {
-        @Html.AntiForgeryToken()
+  <div id="loginWrapper">
+    <div id="loginContent">
+      <section id="loginSection">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <hgroup class="title">
-            <h1>Welcome</h1>
-        </hgroup>
+            <hgroup class="title">
+                <h1>Welcome</h1>
+            </hgroup>
   
-        <fieldset>
-            <div>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </div>
-            <div>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-            <div class="remember">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </div>
-            <input type="submit" value="Log in" />
+            <fieldset>
+                <div>
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="remember">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                </div>
+                <input type="submit" value="Log in" />
       
-            @Html.ValidationSummary(true)
+                @Html.ValidationSummary(true)
 
-            <div class="register">
-                @Html.ActionLink("Register", "Register") if you don't have an account.
-            </div>
-        </fieldset>
-    }
-    </section>
+                <div class="register">
+                    @Html.ActionLink("Register", "Register") if you don't have an account.
+                </div>
+            </fieldset>
+        }
+      </section>
 
-    <section class="social" id="socialLoginForm">
-        @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-    </section>
+      <section id="socialLoginForm" class="social">
+          @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+      </section>
+    </div>
   </div>
 </div>
 
