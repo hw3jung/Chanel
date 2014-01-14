@@ -26,12 +26,12 @@ namespace BookSpade.Revamped.DAL
     public class DataAccess
     {
         String[] WhiteListOfTableNames = new String[] { "Posts", "CourseInfo", "TextBooks", "Transactions", "TransactionHistory", "UserProfile", "TransactionComments" };
+        private static string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString(); 
 
         #region insert
 
         public int insert(Dictionary<string, object> ColumnValuePairs, string TableName)
         {
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
             int newId = -1;
             using (SqlCommand command = conn.CreateCommand())
@@ -105,7 +105,6 @@ namespace BookSpade.Revamped.DAL
         {
             ColumnNames = ColumnNames ?? new string[] { "*" };
 
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             SqlConnection conn = new SqlConnection(connString);
             DataTable dt = new DataTable();
             SqlCommand cmd = conn.CreateCommand();
@@ -174,7 +173,7 @@ namespace BookSpade.Revamped.DAL
         // WhereClause is either empty or of the form column=value etc
         public void delete(string WhereClause, string TableName)
         {
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+           
             SqlConnection conn = new SqlConnection(connString);
             SqlCommand command = new SqlCommand();
             command = conn.CreateCommand();
@@ -210,7 +209,7 @@ namespace BookSpade.Revamped.DAL
         // WhereClause is either empty or of the form column=value etc
         public void update(string TableName, string WhereClause, Dictionary<string, object> newColumnValues)
         {
-            string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            
             SqlConnection conn = new SqlConnection(connString);
             SqlCommand command = new SqlCommand();
             command = conn.CreateCommand();
@@ -251,6 +250,36 @@ namespace BookSpade.Revamped.DAL
             {
                 conn.Close();
             }
+        }
+
+        #endregion
+
+        #region ExecuteStoredProc
+
+        public DataTable ExecuteStoredProc(string ProcName)
+        {
+            
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                using (SqlCommand command = new SqlCommand(ProcName, conn))
+                using(SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    da.Fill(dt); 
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+
+            }
+            return dt; 
+
         }
 
         #endregion

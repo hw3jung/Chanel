@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using BookSpade.Revamped.Models;
 using BookSpade.Revamped.DAL;
 using System.Data;
@@ -26,6 +25,7 @@ namespace BookSpade.Revamped.Handlers
                 TransactionComment.Add("ActionBy", (int)comment.ActionBy);
                 TransactionComment.Add("TransactionId ", comment.TransactionId);
                 TransactionComment.Add("Comment", comment.comment);
+                TransactionComment.Add("ReminderSent", 0);
                 TransactionComment.Add("IsActive", 1);
                 TransactionComment.Add("IsDeleted", 0);
                 TransactionComment.Add("CreatedDate", DateTime.Now);
@@ -66,5 +66,26 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        #region reminderMail 
+        
+        public static void commentReminderMail()
+        {
+            MailService.Service1 smail = new MailService.Service1();
+
+            DataAccess da = new DataAccess();
+            DataTable dt = da.ExecuteStoredProc("getUsersToEmail");
+            dt.AsEnumerable().ToList().ForEach(x =>
+                    smail.SendNetMailMessage(
+                        Convert.ToString(x["UserName"]),
+                        Convert.ToString(x["DisplayName"]),
+                        String.Format("BookSpade: {0} has sent you a message! ", Convert.ToString(x["Commentor_DisplayName"])),
+                        String.Format("{0} has sent you a message: <br/> '{1}'",
+                            Convert.ToString(x["Commentor_DisplayName"]),
+                            Convert.ToString(x["Comment"]))
+                        )
+                   );  
+        }
+
+        #endregion
     }
 }

@@ -24,11 +24,11 @@ namespace BookSpade.Revamped
 
             OAuthWebSecurity.RegisterFacebookClient(
                 //Development App
-                appId: "361893360608838",
-                appSecret: "574c926b35bc16581be0bb40963a8762"
+                //appId: "361893360608838",
+                //appSecret: "574c926b35bc16581be0bb40963a8762"
                 //Production App
-                //appId: "410278782401754",
-                //appSecret: "4d0fd841a025dd908191f50b86ec90f7"
+                appId: "410278782401754",
+                appSecret: "4d0fd841a025dd908191f50b86ec90f7"
              );
             //OAuthWebSecurity.RegisterGoogleClient();
         }
