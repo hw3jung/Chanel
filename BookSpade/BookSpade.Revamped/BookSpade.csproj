@@ -209,15 +209,6 @@
     <Compile Include="Utilities\Matchmaker.cs" />
     <Compile Include="Utilities\QueueWorker.cs" />
     <Compile Include="Utilities\SelectListUtility.cs" />
-    <Compile Include="Web References\MailService.asmx.cs">
-      <DependentUpon>MailService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Web References\MailService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
@@ -359,8 +350,6 @@
     <Content Include="Static\Login.js" />
     <Content Include="Static\Register.js" />
     <Content Include="Static\TransactionHistory.js" />
-    <Content Include="Web References\MailService.asmx" />
-    <Content Include="Web References\MailService\MailService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -417,42 +406,12 @@
     <Content Include="Views\UserMailer\GoodBye.cshtml" />
     <Content Include="Views\Shared\_MailLayout.cshtml" />
     <Content Include="Views\Mail\Index.cshtml" />
-    <Content Include="Web References\MailService\MailService.wsdl" />
-    <Content Include="Web References\MailService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MailService\MailService.csproj">
-      <Project>{e9f7e02a-2574-4830-bee7-5897df570838}</Project>
-      <Name>MailService</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:7547/MailService.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\MailService\</RelPath>
-      <UpdateFromURL>http://localhost:7547/MailService.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>BookSpade_Revamped_MailService_Service1</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -70,15 +70,14 @@ namespace BookSpade.Revamped.Handlers
         
         public static void commentReminderMail()
         {
-            MailService.Service1 smail = new MailService.Service1();
-
+            EmailUtil mailUtil = new EmailUtil(); 
             DataAccess da = new DataAccess();
             DataTable dt = da.ExecuteStoredProc("getUsersToEmail");
             dt.AsEnumerable().ToList().ForEach(x =>
-                    smail.SendNetMailMessage(
+                    mailUtil.SendNetMailMessage(
                         Convert.ToString(x["UserName"]),
                         Convert.ToString(x["DisplayName"]),
-                        String.Format("BookSpade: {0} has sent you a message! ", Convert.ToString(x["Commentor_DisplayName"])),
+                        String.Format("{0} has sent you a message! ", Convert.ToString(x["Commentor_DisplayName"])),
                         String.Format("{0} has sent you a message: <br/> '{1}'",
                             Convert.ToString(x["Commentor_DisplayName"]),
                             Convert.ToString(x["Comment"]))

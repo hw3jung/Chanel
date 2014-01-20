@@ -225,7 +225,7 @@ namespace BookSpade.Revamped.Controllers
             AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
             if (!result.IsSuccessful)
             {
-                return RedirectToAction("ExternalLoginFailure");
+                return RedirectToAction("ExternalLoginFailure", result.Error.ToString());
             }
 
             if (result.ExtraData.Keys.Contains("accesstoken"))
@@ -322,9 +322,9 @@ namespace BookSpade.Revamped.Controllers
         // GET: /Account/ExternalLoginFailure
 
         [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
+        public ActionResult ExternalLoginFailure(string error)
         {
-            return View();
+            return View(error);
         }
 
         [AllowAnonymous]

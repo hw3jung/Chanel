@@ -22,15 +22,5 @@ namespace BookSpade.Revamped.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:7547/MailService.asmx")]
-        public string BookSpade_Revamped_MailService_Service1 {
-            get {
-                return ((string)(this["BookSpade_Revamped_MailService_Service1"]));
-            }
-        }
     }
 }
