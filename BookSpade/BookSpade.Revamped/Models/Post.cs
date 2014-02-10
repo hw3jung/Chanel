@@ -12,7 +12,7 @@ namespace BookSpade.Revamped.Models
         public int UserId { get; set; }
         public int TextBookId { get; set; }
         public ActionBy ActionBy { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         public BookCondition BookCondition { get; set; }
         public int IsTransacting { get; set; }
         public int IsActive { get; set; }
@@ -25,7 +25,7 @@ namespace BookSpade.Revamped.Models
                 int userId,
                 int textBookId,
                 ActionBy actionBy,
-                decimal price,
+                int price,
                 BookCondition bookCondition,
                 int isTransacting,
                 int isActive,

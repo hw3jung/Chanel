@@ -3,22 +3,12 @@ using System;
 using System.Web.Mvc;
 using System.Net.Mail; 
 
-namespace BookSpade.Revamped
+namespace BookSpade.Revamped.Utilities
 {
-    public class EmailUtil : Controller
+    public class EmailUtility
     {
-        public EmailUtil()
+        public static void SendEmail(string To, string Name, string Subject, string Body)
         {
-            
-        }
-        public EmailUtil(string email, string Name, string subject, string body)
-        {
-            SendNetMailMessage(email, Name, subject, body);
-        }
-
-        public void SendNetMailMessage(string To, string Name, string Subject, string Body)
-        {
-
             string fBody = "Hi " + Name + ", ";
             fBody += "<br/>";
             fBody += "<br/>";
@@ -27,7 +17,7 @@ namespace BookSpade.Revamped
             fBody += "<br/>";
             fBody += "Thank You,";
             fBody += "<br/>";
-            fBody += "BookSpade Team";
+            fBody += "The BookSpade Team";
 
             MailAddress addrfrom = new MailAddress("info@bookspade.com", "BookSpade");
             MailAddress addrto = new MailAddress(To);

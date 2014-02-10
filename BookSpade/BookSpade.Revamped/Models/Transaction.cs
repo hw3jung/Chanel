@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using BookSpade.Revamped.Utilities;
 
 namespace BookSpade.Revamped.Models
@@ -14,12 +15,18 @@ namespace BookSpade.Revamped.Models
         public int BuyerId { get; set; } 
         public int SellerPostId { get; set; }
         public int BuyerPostId { get; set; }
-        public decimal? FinalPrice { get; set; }
-        public decimal InitialPrice { get; set; }
+        public int? FinalPrice { get; set; }
+        public int? ConfirmPrice { get; set; }
+        public int InitialPrice { get; set; }
+        public Confirmed Confirmed { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public ActionBy CurrentUser { get; set; }
+        public bool ConfirmedByCurrentUser { get; set; }
+        public string CounterPartyName { get; set; }
 
         // how many days are left before this transaction is auto confirmed
         // default transaction period is 14 days
@@ -32,8 +39,10 @@ namespace BookSpade.Revamped.Models
             int buyerId,
             int sellerPostId,
             int buyerPostId,
-            decimal? finalPrice,
-            decimal initialPrice,
+            int? finalPrice,
+            int? confirmPrice,
+            int initialPrice,
+            Confirmed confirmed,
             int isActive,
             int isDeleted,
             DateTime createdDate,
@@ -47,7 +56,9 @@ namespace BookSpade.Revamped.Models
             this.SellerPostId = sellerPostId;
             this.BuyerPostId = buyerPostId;
             this.FinalPrice = finalPrice;
+            this.ConfirmPrice = confirmPrice;
             this.InitialPrice = initialPrice;
+            this.Confirmed = confirmed; 
             this.IsActive = isActive;
             this.IsDeleted = isDeleted;
             this.CreatedDate = createdDate;

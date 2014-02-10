@@ -1,4 +1,9 @@
-﻿div.body {
+﻿html {
+    overflow-y: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
+div.body {
     padding-bottom: 78px;
 }
 
@@ -107,6 +112,10 @@
 .modal {
     width: auto;
 }
+
+    .modal button {
+        margin-top: 3px;
+    }
 
 #cancellationModal {
     width: 366px;

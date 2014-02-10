@@ -11,11 +11,11 @@
             </div>
 
             <div id="needToBuySell">
-                <a href="@(Url.Action("Create", "Post", new { isBuy = true }))" title="Buy Textbooks">
+                <a href="@(Url.Action("Create", "Post", new { postType = "Buy" }))" title="Buy Textbooks">
                     <div class="buttonBuySell blue-button">Buy</div>
                 </a>
 
-                <a href="@(Url.Action("Create", "Post", new { isBuy = false }))" title="Sell Textbooks">
+                <a href="@(Url.Action("Create", "Post", new { postType = "Sell" }))" title="Sell Textbooks">
                     <div class="buttonBuySell blue-button">Sell</div>
                 </a>
             </div>
@@ -25,9 +25,4 @@
         </div>
     </div>
 </div>
-
-@*<div class="home">
-    <a class="header" href="@(Url.Action("GetMarketPostsByisBuy", "Market", new { isBuy = false }))" title="Buy Textbooks">Buy</a>
-    <a class="header" href="@(Url.Action("GetMarketPostsByisBuy", "Market", new { isBuy = true }))" title="Sell Textbooks">Sell</a>
-</div>*@
 

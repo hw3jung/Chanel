@@ -29,8 +29,10 @@ namespace BookSpade.Revamped.Utilities
          */
         public static void Match(Post newPost)
         {
-            int postId = PostHandler.createPost(newPost);
-            newPost.PostId = postId;
+            if (!PostHandler.isPostAvailable(newPost.PostId))
+            {
+                return;
+            }
 
             Post matchingPost = PostHandler.findMatchingPost(newPost);
             if (matchingPost != null)
@@ -41,8 +43,7 @@ namespace BookSpade.Revamped.Utilities
                 int buyerUserId = -1;
                 int sellerUserId = -1;
 
-             
-                decimal initialPrice;
+                int initialPrice;
 
                 if (newPost.ActionBy == ActionBy.Buyer)
                 {
@@ -74,21 +75,23 @@ namespace BookSpade.Revamped.Utilities
                     sellerPostId,
                     buyerPostId,
                     null,
+                    null,
                     initialPrice,
+                    0,
                     1,
                     0,
                     DateTime.Now,
                     DateTime.Now
                 );
 
+                PostHandler.updatePostState(newPost.PostId, 1);
+                PostHandler.updatePostState(matchingPost.PostId, 1);
+
                 int transactionId = TransactionHandler.CreateTransaction(newTransaction);
                 newTransaction.TransactionId = transactionId;
 
                 TransactionHandler.CreateTransactionHistory(transactionId, buyerUserId);
                 TransactionHandler.CreateTransactionHistory(transactionId, sellerUserId);
-
-                PostHandler.updatePostState(newPost.PostId, 1);
-                PostHandler.updatePostState(matchingPost.PostId, 1);
             }
         }
     }

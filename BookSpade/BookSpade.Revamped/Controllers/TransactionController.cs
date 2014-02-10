@@ -43,8 +43,31 @@ namespace BookSpade.Revamped.Controllers
         public ActionResult TransactionDetails(int transactionId)
         {
             Transaction transaction = TransactionHandler.getTransaction(transactionId);
-            TransactionCommentModel model = new TransactionCommentModel(transaction, User.Identity.Name);
 
+            Profile buyer = ProfileHandler.GetProfile(transaction.BuyerId);
+            Profile seller = ProfileHandler.GetProfile(transaction.SellerId);
+            if (User.Identity.Name == buyer.Email)
+            {
+                transaction.CurrentUser = ActionBy.Buyer;
+                transaction.CounterPartyName = seller.Name;
+            }
+            else
+            {
+                transaction.CurrentUser = ActionBy.Seller;
+                transaction.CounterPartyName = buyer.Name;
+            }
+
+            if ((transaction.CurrentUser == ActionBy.Buyer && transaction.Confirmed == Confirmed.ByBuyer)
+                || (transaction.CurrentUser == ActionBy.Seller && transaction.Confirmed == Confirmed.BySeller))
+            {
+                transaction.ConfirmedByCurrentUser = true;
+            }
+            else
+            {
+                transaction.ConfirmedByCurrentUser = false;
+            }
+
+            TransactionCommentModel model = new TransactionCommentModel(transaction, User.Identity.Name);
             return View(model);
         }
 
@@ -72,29 +95,17 @@ namespace BookSpade.Revamped.Controllers
 
         #endregion
 
-        #region setFinalPrice
-
-        public JsonResult setFinalPrice(int transactionId, decimal finalprice)
-        {
-            TransactionHandler.UpdateTransaction(transactionId, finalprice, "FinalPrice"); 
-            return Json("");
-        }
-
-        #endregion
-
         #region ConfirmTransaction
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ConfirmTransaction(Transaction transaction)
         {
-            // if final price is different than initial offer, update final price first
-            if (transaction.FinalPrice != null &&
-                transaction.FinalPrice != transaction.InitialPrice)
+            if (ModelState.IsValid)
             {
-                setFinalPrice(transaction.TransactionId, (decimal)transaction.FinalPrice);
+                TransactionHandler.ConfirmTransaction(transaction);
             }
 
-            TransactionHandler.ConfirmTransaction(transaction);
             return RedirectToAction("Index", "Home");
         }
 
@@ -105,7 +116,11 @@ namespace BookSpade.Revamped.Controllers
         [HttpPost]
         public ActionResult CancelTransaction(Transaction transaction)
         {
-            TransactionHandler.CancelTransaction(transaction);
+            if (ModelState.IsValid)
+            {
+                TransactionHandler.CancelTransaction(transaction);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 

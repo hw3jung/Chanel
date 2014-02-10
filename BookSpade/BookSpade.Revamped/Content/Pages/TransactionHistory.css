@@ -22,60 +22,55 @@
 }
 
     #needToBuySell a {
-        text-decoration:none;
+        text-decoration: none;
     }
 
-
 .item-container {
-    text-align:left;
-    width:800px;
+    text-align: left;
 }
 
 .item-title {
-    padding-bottom:2px;
-    font-weight:bold;
-    font-size:15px;
-    font-family: Calibri;
-    float:left;
-    width:25%;
+    width: 250px;
+    float: left;
+    font-size: 13px;
+    margin-left: 10px;
+    margin-right: 20px;
+    text-align: left;
+    font-style: italic;
 }
 
-.item-isbn, .item-course, 
-.item-price, .item-price {
-    width:25%;
-    float:left;
-    text-align:center;
-    font-size:13px;
+    #list-header .item-title {
+        font-style: normal;
+    }
+
+.item-info {
+    width: 100px;
+    float: left;
+    font-size: 13px;
+    text-align: center;
+    margin-left: 11px;
 }
 
 #list-header {
-    font-weight:bold;
-    font-size:15px;
-    padding-left:7px;
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 7px;
 }
 
 #history-header {
     font-size: 24px;
-    font-weight: bold; 
-    font-family: Calibri;
-    margin-bottom: 10px;
-    padding-bottom:10px;
-    padding-top:10px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
     text-align: left;
     vertical-align: bottom;
+    font-family: Calibri;
 }
 
 .create-post {
     text-align:right;
     float:right;
 }
-
-/*.details > .BookDetail {
-    float:none;
-    display:inline-block;
-    font-size:12px;
-}*/
-
 
 .user-history {
     list-style:none;
@@ -88,9 +83,9 @@
 }
 
 #historyContainer {
-    width:900px;
+    width: 770px;
     display: inline-block;
-    height: 400px;
+    height: 470px;
     margin-top: 35px;
 }
 
@@ -113,9 +108,11 @@
     }
     
         .SearchResults li {
+            width: 746px;
+            height: 25px;
             position: relative;
             text-align: left;
-            vertical-align:middle;
+            vertical-align: middle;
             padding: 3px 0px 3px 5px;
             background: #d5e5eb;
             border:1px solid #FFF; 
@@ -123,8 +120,6 @@
             font-size: 16px;
 
             z-index: 0;
-            width:876px;
-            height:25px;
                 
             -webkit-transform: translateZ(0px);
 		       -moz-transform: translateZ(0px);
@@ -139,9 +134,45 @@
                 cursor:pointer;
             }
 
+.t-pending,
+.t-complete,
+.t-cancelled {
+    height: 21px;
+    margin-top: 1px;
 
-/*@media only screen and (max-width: 1000px) {
-    .details > .BookDetail {
-        font-size:15px;
-    }
-}*/
+    border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -khtml-border-radius-topleft: 5px;
+    -webkit-border-radius-topleft: 5px;
+    -o-border-radius-topleft: 5px;
+
+    border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -khtml-border-radius-topright: 5px;
+    -webkit-border-radius-topright: 5px;
+    -o-border-radius-topright: 5px;
+
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -khtml-border-radius-bottomleft: 5px;
+    -webkit-border-radius-bottomleft: 5px;
+    -o-border-radius-bottomleft: 5px;
+
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -khtml-border-radius-bottomright: 5px;
+    -webkit-border-radius-bottomright: 5px;
+    -o-border-radius-bottomright: 5px;
+}
+
+.t-pending {
+    background: #ccc; 
+}
+
+.t-complete {
+    background: #6BC257;
+}
+
+.t-cancelled {
+    background: #D5402B;
+}

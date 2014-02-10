@@ -19,38 +19,6 @@ function toggleComments() {
     }
 }
 
-function newComment() {
-    var Comment = $("#sendComment").val();
-
-    // syntax here should match that of _TransactionComment
-    $("#commentContainer ul").append(
-      "<li class=\"user-comment\">" +
-        "<div class=\"user-bubble\">" +
-          "<span>" + Comment + "</span>" +
-        "</div>" +
-      "</li>"
-    );
-
-    $('#commentList').scrollTop(10000000);
-    $("#sendComment").val("");
-    updateCountdown();
-
-    $.ajax({
-        url: '@Url.Action("newComment", "Transaction")',
-        data: {
-            comment: Comment,
-            commentor: "@(Model.UserAction)",
-            userId: "@(Model.UserId)",
-            OtherUserId: "@(Model.CounterPartyId)",
-            transactionId: "@(Model.Details.transaction.TransactionId)"
-        },
-        type: 'POST',
-        success: function (result) {
-
-        }
-    });
-}
-
 // Unused
 function updateCountdown() {
     var remaining = 225 - $('#sendComment').val().length;
@@ -77,7 +45,7 @@ function cancelTransaction() {
     $("#cancelTransactionForm").submit();
 }
 
-// Unused
+/* // Unused
 function confirmFinalPrice() {
     var finalprice = $("#txtFinalPrice").val();
 
@@ -95,6 +63,7 @@ function confirmFinalPrice() {
         }
     });
 }
+*/
 
 //updateCountdown();
 //$('#sendComment').change(updateCountdown);

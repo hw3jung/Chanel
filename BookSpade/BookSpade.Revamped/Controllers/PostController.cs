@@ -24,7 +24,7 @@ namespace BookSpade.Revamped.Controllers
         // GET: /Post/Create
 
         [Authorize]
-        public ActionResult Create(bool isBuy)
+        public ActionResult Create(string postType)
         {
             IEnumerable<Textbook> textBookCollection = TextbookHandler.getAllTextbooks();
 
@@ -50,7 +50,7 @@ namespace BookSpade.Revamped.Controllers
 
             var viewModel = new CreatePostModel()
             {
-                ActionBy = isBuy ? ActionBy.Buyer : ActionBy.Seller,
+                ActionBy = postType == "Buy" ? ActionBy.Buyer : ActionBy.Seller,
                 BookCondition = BookCondition.Excellent,
                 PostTypes = SelectListUtility.getPostTypes(),
                 BookConditions = SelectListUtility.getBookConditions(),
@@ -65,7 +65,7 @@ namespace BookSpade.Revamped.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreatePostModel model)
+        public ActionResult CreatePost(CreatePostModel model)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace BookSpade.Revamped.Controllers
                 }
                 
                 int profileId = ProfileHandler.GetProfileId(User.Identity.Name);
-                decimal price = model.Price;
+                int price = model.Price;
                 ActionBy actionBy = model.ActionBy;
 
                 if (model.IsNegotiable)
@@ -129,6 +129,8 @@ namespace BookSpade.Revamped.Controllers
                     DateTime.Now
                 );
 
+                int postId = PostHandler.createPost(newPost);
+                newPost.PostId = postId;
                 Task.Run(() => QueueWorker.AddPost(newPost));
 
                 // TODO: redirect to special "you've successfully created post" page

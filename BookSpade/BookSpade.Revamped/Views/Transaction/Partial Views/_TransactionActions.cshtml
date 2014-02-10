@@ -1,6 +1,6 @@
 ﻿@model Transaction
 
-@if (Model.IsActive == 1 && Model.IsDeleted == 0)
+@if (Model.IsActive == 1 && Model.IsDeleted == 0 && !Model.ConfirmedByCurrentUser)
 {
   <div class="transactionAction">
     @using (Html.BeginForm("ConfirmTransaction", "Transaction", FormMethod.Post, new { id = "confirmTransactionForm" }))
@@ -17,6 +17,8 @@
       @Html.HiddenFor(x => x.BuyerId);
       @Html.HiddenFor(x => x.BuyerPostId);
       @Html.HiddenFor(x => x.FinalPrice);
+      
+      @Html.HiddenFor(x => x.CurrentUser);
     }
   </div>
 
@@ -34,6 +36,8 @@
       @Html.HiddenFor(x => x.SellerPostId);
       @Html.HiddenFor(x => x.BuyerId);
       @Html.HiddenFor(x => x.BuyerPostId);
+
+      @Html.HiddenFor(x => x.CurrentUser);
     }
   </div>
 
@@ -60,7 +64,16 @@
         <label class="control-label" for="confirmFinalPrice">Final price</label>
         <div class="input-prepend">
           <span class="add-on">$</span>
-          <input class="input-medium" id="confirmFinalPrice" name="confirmFinalPrice" type="text" value="@Model.InitialPrice">
+          @if (Model.FinalPrice != null)
+          {
+            <input class="input-medium" id="confirmFinalPrice" name="confirmFinalPrice" type="text"
+              value="@Model.FinalPrice">
+          }
+          else
+          {
+            <input class="input-medium" id="confirmFinalPrice" name="confirmFinalPrice" type="text"
+              value="@Model.InitialPrice">
+          }
         </div>
       </div>
     </div>
@@ -82,11 +95,14 @@
       <button id="proceedCancelTransaction" class="red-button">Cancel Transaction</button>
     </div>
   </div>
-
+}
+else if (Model.IsActive == 1 && Model.IsDeleted == 0)
+{
+  <div>You've already confirmed this transaction.<br />Please wait for @Model.CounterPartyName to confirm so we can close the transaction.</div>
 }
 else if (Model.IsActive == 0)
 {
-  <button id="completedButton" class="green-button" disabled>Transaction Complete</button>
+  <button id="completedButton" class="green-button" disabled>Transaction Completed</button>
 }
 else if (Model.IsDeleted == 1)
 {

@@ -20,6 +20,14 @@ namespace BookSpade.Revamped.Utilities
         Excellent   = 5
     }
 
+    public enum Confirmed
+    {
+        ByNone = 0,
+        ByBuyer = 1,
+        BySeller = 2,
+        ByBoth = 3
+    }
+
     public sealed class EnumsUtility
     {
     }

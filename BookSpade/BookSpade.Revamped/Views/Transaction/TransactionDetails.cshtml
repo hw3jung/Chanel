@@ -9,7 +9,7 @@
 
 <div id="transactionDetailsContainer">
   <div id="transactionDetailsContent">
-    <h1>Your Transaction</h1>
+    <h1>My Transaction</h1>
     <div id="contentSection">
       <div class="user-info">
         @if (Model.UserFacebookId != null)
@@ -22,7 +22,7 @@
         }
 
         <div class="user-info-name">
-          You
+          Me
         </div>
       </div>
       <div id="transactionInfo">
@@ -135,4 +135,39 @@
 
 @section Scripts {
   @Scripts.Render("~/bundles/transactionDetails")
+  <script type="text/javascript">
+    function newComment() {
+      var Comment = $("#sendComment").val();
+      if (Comment.length == 0) {
+        return;
+      }
+
+      // syntax here should match that of _TransactionComment
+      $("#commentContainer ul").append(
+        "<li class=\"user-comment\">" +
+          "<div class=\"user-bubble\">" +
+            "<span>" + Comment + "</span>" +
+          "</div>" +
+        "</li>"
+      );
+
+      $('#commentList').scrollTop(10000000);
+      $("#sendComment").val("");
+      updateCountdown();
+
+      $.ajax({
+        url: '@Url.Action("newComment", "Transaction")',
+        data: {
+          comment: Comment,
+          commentor: "@(Model.UserAction)",
+              userId: "@(Model.UserId)",
+            OtherUserId: "@(Model.CounterPartyId)",
+            transactionId: "@(Model.Details.transaction.TransactionId)"
+          },
+        type: 'POST',
+        success: function (result) {
+        }
+      });
+    }
+  </script>
 }

@@ -62,7 +62,7 @@ namespace BookSpade.Revamped.Handlers
                     int profileId = Convert.ToInt32(row["UserId"]);
                     int textbookId = Convert.ToInt32(row["TextBookId"]);
                     ActionBy actionBy = (ActionBy)Convert.ToInt32(row["ActionBy"]);
-                    decimal price = Convert.ToDecimal(row["Price"]);
+                    int price = Convert.ToInt32(row["Price"]);
                     BookCondition bookCondition = (BookCondition)Convert.ToInt32(row["BookCondition"]);
                     int isTransacting = Convert.ToInt32(row["IsTransacting"]);
                     int isActive = Convert.ToInt32(row["IsActive"]);
@@ -92,6 +92,7 @@ namespace BookSpade.Revamped.Handlers
 
             return post; 
         }
+
         #endregion
 
         #region updatePostState
@@ -120,6 +121,36 @@ namespace BookSpade.Revamped.Handlers
             }
 
             return success;
+        }
+
+        #endregion
+
+        #region isPostAvailable
+
+        public static bool isPostAvailable(int postId)
+        {
+            bool availableForMatching = false;
+
+            try
+            {
+                DataAccess da = new DataAccess();
+                DataTable dt = da.select(String.Format("PostId = '{0}' AND IsDeleted = 0", postId), "Posts", NumRows: 1);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    int isTransacting = Convert.ToInt32(row["IsTransacting"]);
+                    int isActive = Convert.ToInt32(row["IsActive"]);
+
+                    availableForMatching = isTransacting == 0 && isActive == 1;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write("ERROR: Could not check post state with the given post id --- " + e.Message);
+            }
+
+            return availableForMatching;
         }
 
         #endregion
@@ -171,7 +202,7 @@ namespace BookSpade.Revamped.Handlers
                     int profileId = Convert.ToInt32(row["UserId"]);
                     int textBookId = Convert.ToInt32(row["TextBookId"]);
                     ActionBy actionBy = (ActionBy)Convert.ToInt32(row["ActionBy"]);
-                    decimal price = Convert.ToDecimal(row["Price"]);
+                    int price = Convert.ToInt32(row["Price"]);
                     BookCondition bookCondition = (BookCondition)Convert.ToInt32(row["BookCondition"]);
                     int isTransacting = Convert.ToInt32(row["IsTransacting"]);
                     int isActive = Convert.ToInt32(row["IsActive"]);

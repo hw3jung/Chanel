@@ -70,19 +70,19 @@ namespace BookSpade.Revamped.Handlers
         
         public static void commentReminderMail()
         {
-            EmailUtil mailUtil = new EmailUtil(); 
             DataAccess da = new DataAccess();
             DataTable dt = da.ExecuteStoredProc("getUsersToEmail");
             dt.AsEnumerable().ToList().ForEach(x =>
-                    mailUtil.SendNetMailMessage(
-                        Convert.ToString(x["UserName"]),
-                        Convert.ToString(x["DisplayName"]),
-                        String.Format("{0} has sent you a message! ", Convert.ToString(x["Commentor_DisplayName"])),
-                        String.Format("{0} has sent you a message: <br/> '{1}'",
-                            Convert.ToString(x["Commentor_DisplayName"]),
-                            Convert.ToString(x["Comment"]))
-                        )
-                   );  
+                EmailUtility.SendEmail(
+                    Convert.ToString(x["UserName"]),
+                    Convert.ToString(x["DisplayName"]),
+                    String.Format("{0} has sent you a message! ",
+                        Convert.ToString(x["Commentor_DisplayName"])),
+                    String.Format("{0} has sent you a message: <br/> '{1}'",
+                        Convert.ToString(x["Commentor_DisplayName"]),
+                        Convert.ToString(x["Comment"]))
+                )
+            );
         }
 
         #endregion

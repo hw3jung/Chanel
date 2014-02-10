@@ -369,8 +369,13 @@ h1 {
     font-family: Calibri;
 }
 
-.bs-divider {
+.bs-divider-horizontal {
     border-top: 1px solid #ccc;
+    text-align: left;
+}
+
+.bs-divider-vertical {
+    border-left: 1px solid #ccc;
     text-align: left;
 }
 

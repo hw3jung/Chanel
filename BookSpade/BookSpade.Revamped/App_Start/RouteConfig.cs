@@ -13,6 +13,20 @@ namespace BookSpade.Revamped
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Create Post page
+            routes.MapRoute(
+                name: "CreatePost",
+                url: "Post/Create/{postType}",
+                defaults: new { controller = "Post", action = "Create", postType = "Buy" }
+            );
+            
+            // Transaction Details page
+            routes.MapRoute(
+                name: "TransactionDetails",
+                url: "Transaction/TransactionDetails/{transactionId}",
+                defaults: new { controller = "Transaction", action = "TransactionDetails" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

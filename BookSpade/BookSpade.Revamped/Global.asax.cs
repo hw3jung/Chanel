@@ -16,7 +16,7 @@ namespace BookSpade.Revamped
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        private const string DummyCacheItemKey = "JaySucks"; 
+        private const string DummyCacheItemKey = "AsmaSucks"; 
 
         protected void Application_Start()
         {

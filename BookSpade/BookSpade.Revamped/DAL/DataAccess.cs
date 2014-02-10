@@ -170,13 +170,12 @@ namespace BookSpade.Revamped.DAL
         #endregion
 
         #region delete
+
         // WhereClause is either empty or of the form column=value etc
-        public void delete(string WhereClause, string TableName)
+        public void delete(string TableName, string WhereClause)
         {
-           
             SqlConnection conn = new SqlConnection(connString);
-            SqlCommand command = new SqlCommand();
-            command = conn.CreateCommand();
+            SqlCommand command = conn.CreateCommand();
 
             try
             {
@@ -191,7 +190,6 @@ namespace BookSpade.Revamped.DAL
                 command.CommandText = deleteCommand;
                 conn.Open();
                 command.ExecuteNonQuery();
-
             }
             catch (Exception e)
             {
@@ -206,13 +204,12 @@ namespace BookSpade.Revamped.DAL
         #endregion
 
         #region update
+
         // WhereClause is either empty or of the form column=value etc
         public void update(string TableName, string WhereClause, Dictionary<string, object> newColumnValues)
         {
-            
             SqlConnection conn = new SqlConnection(connString);
-            SqlCommand command = new SqlCommand();
-            command = conn.CreateCommand();
+            SqlCommand command = conn.CreateCommand();
             try
             {
                 StringBuilder updateCommand = new StringBuilder("UPDATE ").Append(TableName).Append(" SET ");

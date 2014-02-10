@@ -25,7 +25,7 @@ namespace BookSpade.Revamped.Models
 
         public ActionBy ActionBy { get; set; }
             
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         public BookCondition BookCondition { get; set; }
         public bool IsNegotiable { get; set; }

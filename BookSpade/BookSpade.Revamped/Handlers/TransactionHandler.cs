@@ -1,9 +1,11 @@
 ﻿using BookSpade.Revamped.DAL;
 using BookSpade.Revamped.Models;
+using BookSpade.Revamped.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BookSpade.Revamped.Handlers
 {
@@ -25,8 +27,9 @@ namespace BookSpade.Revamped.Handlers
                 Transaction.Add("BuyerId", transaction.BuyerId);
                 Transaction.Add("SellerPostId", transaction.SellerPostId);
                 Transaction.Add("BuyerPostId", transaction.BuyerPostId);
-                Transaction.Add("FinalPrice", transaction.FinalPrice == null ? (object)DBNull.Value : transaction.FinalPrice);//transaction.FinalPrice);
+                Transaction.Add("FinalPrice", transaction.FinalPrice == null ? (object)DBNull.Value : transaction.FinalPrice);
                 Transaction.Add("InitialPrice", transaction.InitialPrice);
+                Transaction.Add("Confirmed", transaction.Confirmed);
                 Transaction.Add("IsActive", transaction.IsActive);
                 Transaction.Add("IsDeleted", transaction.IsDeleted);
                 Transaction.Add("CreatedDate", transaction.CreatedDate);
@@ -75,8 +78,10 @@ namespace BookSpade.Revamped.Handlers
                 int BuyerId = Convert.ToInt32(row["BuyerId"]);
                 int SellerPostId = Convert.ToInt32(row["SellerPostId"]);
                 int BuyerPostId = Convert.ToInt32(row["BuyerPostId"]);
-                decimal? FinalPrice = row["FinalPrice"] is DBNull ? (decimal?)null : Convert.ToDecimal(row["FinalPrice"]);
-                decimal InitialPrice = Convert.ToDecimal(row["InitialPrice"]);
+                int? FinalPrice = row["FinalPrice"] is DBNull ? (int?)null : Convert.ToInt32(row["FinalPrice"]);
+                int? ConfirmPrice = row["ConfirmPrice"] is DBNull ? (int?)null : Convert.ToInt32(row["ConfirmPrice"]);
+                int InitialPrice = Convert.ToInt32(row["InitialPrice"]);
+                Confirmed Confirmed = (Confirmed) Convert.ToInt32(row["Confirmed"]);
                 int IsActive = Convert.ToInt32(row["IsActive"]);
                 int IsDeleted = Convert.ToInt32(row["IsDeleted"]);
                 DateTime CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
@@ -90,7 +95,9 @@ namespace BookSpade.Revamped.Handlers
                     SellerPostId,
                     BuyerPostId,
                     FinalPrice,
+                    ConfirmPrice,
                     InitialPrice,
+                    Confirmed,
                     IsActive,
                     IsDeleted,
                     CreatedDate,
@@ -145,8 +152,10 @@ namespace BookSpade.Revamped.Handlers
                                                             Convert.ToInt32(x["BuyerId"]),
                                                             Convert.ToInt32(x["SellerPostId"]),
                                                             Convert.ToInt32(x["BuyerPostId"]),
-                                                            x["FinalPrice"] is DBNull ? (decimal?)null : Convert.ToDecimal(x["FinalPrice"]),
-                                                            Convert.ToDecimal(x["InitialPrice"]),
+                                                            x["FinalPrice"] is DBNull ? (int?) null : Convert.ToInt32(x["FinalPrice"]),
+                                                            x["ConfirmPrice"] is DBNull ? (int?)null : Convert.ToInt32(x["ConfirmPrice"]),
+                                                            Convert.ToInt32(x["InitialPrice"]),
+                                                            (Confirmed) Convert.ToInt32(x["Confirmed"]),
                                                             Convert.ToInt32(x["IsActive"]),
                                                             Convert.ToInt32(x["IsDeleted"]),
                                                             Convert.ToDateTime(x["CreatedDate"]),
@@ -159,11 +168,9 @@ namespace BookSpade.Revamped.Handlers
 
         #region UpdateTransaction
 
-        public static void UpdateTransaction(int transactionId, object value, string column)
+        public static void UpdateTransaction(int transactionId, Dictionary<string, object> updateDictionary)
         {
             DataAccess da = new DataAccess();
-            Dictionary<string, object> updateDictionary = new Dictionary<string,object>();
-            updateDictionary.Add(column, value);
             da.update("Transactions", String.Format("TransactionId = {0}", transactionId), updateDictionary);
         }
 
@@ -173,10 +180,78 @@ namespace BookSpade.Revamped.Handlers
 
         public static bool ConfirmTransaction(Transaction transaction)
         {
-            PostHandler.updatePostState(transaction.SellerPostId, 0, 0);
-            PostHandler.updatePostState(transaction.BuyerPostId, 0, 0);
-            UpdateTransaction(transaction.TransactionId, 0, "IsActive");
+            Dictionary<string, object> updateDictionary = new Dictionary<string, object>();
 
+            if (transaction.FinalPrice != null && transaction.Confirmed == Confirmed.ByNone)
+            {
+                updateDictionary.Add("FinalPrice", (int)transaction.FinalPrice);
+                
+                Profile buyer = ProfileHandler.GetProfile(transaction.BuyerId);
+                Profile seller = ProfileHandler.GetProfile(transaction.SellerId);
+
+                Textbook book = TextbookHandler.getTextbook(transaction.TextbookId);
+                if (transaction.CurrentUser == ActionBy.Buyer)
+                {
+                    updateDictionary.Add("Confirmed", (int)Confirmed.ByBuyer);
+                    EmailUtility.SendEmail(
+                        Convert.ToString(seller.Email),
+                        Convert.ToString(seller.Name),
+                        "Please confirm your transaction",
+                        String.Format("Item: {0}<br/>{1} has confirmed a transaction with you!<br/>" +
+                            "Please confirm it yourself to finalize the transaction.",
+                            book.BookTitle,
+                            buyer.Name)
+                    );
+                }
+                else
+                {
+                    updateDictionary.Add("Confirmed", (int)Confirmed.BySeller);
+                    EmailUtility.SendEmail(
+                        Convert.ToString(buyer.Email),
+                        Convert.ToString(buyer.Name),
+                        "Please confirm your transaction",
+                        String.Format("Item: {0}<br/>{1} has confirmed a transaction with you!<br/>" +
+                            "Please confirm it yourself to finalize the transaction.",
+                            book.BookTitle,
+                            seller.Name)
+                    );
+                }
+            }
+            else if (transaction.FinalPrice != null)
+            {
+                updateDictionary.Add("ConfirmPrice", (int)transaction.FinalPrice);
+                updateDictionary.Add("Confirmed", (int)Confirmed.ByBoth);
+                updateDictionary.Add("IsActive", 0);
+
+                PostHandler.updatePostState(transaction.SellerPostId, 0, 0);
+                PostHandler.updatePostState(transaction.BuyerPostId, 0, 0);
+
+                Profile buyer = ProfileHandler.GetProfile(transaction.BuyerId);
+                Profile seller = ProfileHandler.GetProfile(transaction.SellerId);
+
+                Textbook book = TextbookHandler.getTextbook(transaction.TextbookId);
+                EmailUtility.SendEmail(
+                    Convert.ToString(buyer.Email),
+                    Convert.ToString(buyer.Name),
+                    "Your transaction is now complete",
+                    String.Format("Item: {0}<br/>Your transaction with {1} has finalized.<br/>" +
+                        "Thank you for using BookSpade!",
+                        book.BookTitle,
+                        seller.Name)
+                );
+
+                EmailUtility.SendEmail(
+                    Convert.ToString(seller.Email),
+                    Convert.ToString(seller.Name),
+                    "Your transaction is now complete",
+                    String.Format("Item: {0}<br/>Your transaction with {1} has finalized.<br/>" +
+                        "Thank you for using BookSpade!",
+                        book.BookTitle,
+                        buyer.Name)
+                );
+            }
+            
+            UpdateTransaction(transaction.TransactionId, updateDictionary);
             return true;
         }
 
@@ -186,15 +261,49 @@ namespace BookSpade.Revamped.Handlers
 
         public static bool CancelTransaction(Transaction transaction)
         {
-            PostHandler.updatePostState(transaction.SellerPostId, 0);
-            PostHandler.updatePostState(transaction.BuyerPostId, 0);
-            UpdateTransaction(transaction.TransactionId, 1, "IsDeleted");
+            bool success = CreateForbiddenMatch(transaction.BuyerPostId, transaction.SellerPostId) > 0
+                && CreateForbiddenMatch(transaction.SellerPostId, transaction.BuyerPostId) > 0;
 
-            if (CreateForbiddenMatch(transaction.BuyerPostId, transaction.SellerPostId) > 0
-                && CreateForbiddenMatch(transaction.SellerPostId, transaction.BuyerPostId) > 0)
-                return true;
-            else
-                return false;
+            if (success)
+            {
+                Dictionary<string, object> updateDictionary = new Dictionary<string, object>();
+                updateDictionary.Add("IsDeleted", 1);
+                UpdateTransaction(transaction.TransactionId, updateDictionary);
+
+                PostHandler.updatePostState(transaction.SellerPostId, 0);
+                PostHandler.updatePostState(transaction.BuyerPostId, 0);
+
+                Profile buyer = ProfileHandler.GetProfile(transaction.BuyerId);
+                Profile seller = ProfileHandler.GetProfile(transaction.SellerId);
+
+                Textbook book = TextbookHandler.getTextbook(transaction.TextbookId);
+                EmailUtility.SendEmail(
+                    Convert.ToString(buyer.Email),
+                    Convert.ToString(buyer.Name),
+                    "Your transaction has been cancelled",
+                    String.Format("Item: {0}</br>{1} has cancelled the transaction with you!<br/>" +
+                        "We'll try to match you with someone else for this item.",
+                        book.BookTitle,
+                        seller.Name)
+                );
+
+                EmailUtility.SendEmail(
+                    Convert.ToString(seller.Email),
+                    Convert.ToString(seller.Name),
+                    "Your transaction has been cancelled",
+                    String.Format("Item: {0}<br/>{1} has cancelled the transaction with you!<br/>" +
+                        "We'll try to match you with someone else for this item.",
+                        book.BookTitle,
+                        buyer.Name)
+                );
+
+                Post sellerPost = PostHandler.getPost(transaction.SellerPostId);
+                Post buyerPost = PostHandler.getPost(transaction.BuyerPostId);
+                Task.Run(() => QueueWorker.AddPost(sellerPost));
+                Task.Run(() => QueueWorker.AddPost(buyerPost));
+            }
+
+            return success;
         }
 
         #endregion

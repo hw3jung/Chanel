@@ -172,7 +172,7 @@
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="DAL\DataAccess.cs" />
-    <Compile Include="EmailUtil.cs" />
+    <Compile Include="Utilities\EmailUtility.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,6 +211,8 @@
     <Compile Include="Utilities\SelectListUtility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap3\bootstrap-theme3.min.css" />
+    <Content Include="Content\bootstrap3\bootstrap3.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -231,6 +233,7 @@
     <Content Include="Content\Images\bg_pattern_grey.jpg" />
     <Content Include="Content\Images\BookStack.png" />
     <Content Include="Content\Images\bs_btn_login.png" />
+    <Content Include="Content\Images\divider.png" />
     <Content Include="Content\Images\login-with-facebook.png" />
     <Content Include="Content\Images\MarketBuy.png" />
     <Content Include="Content\Images\marketpriceBG.png" />
@@ -301,6 +304,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\bookspadeText.png" />
     <Content Include="Images\bookspadeText_Blue.png" />
@@ -311,6 +315,7 @@
     <Content Include="Images\logo-booksInSpade.png" />
     <Content Include="Images\logo-booksInSpade_Blue.png" />
     <Content Include="Images\logo-booksInSpade_Grey.png" />
+    <Content Include="Scripts\bootstrap3\bootstrap3.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\common.js" />
@@ -318,6 +323,9 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\AsmaPatel.pubxml" />
     <None Include="Properties\PublishProfiles\BookSpadeProd.pubxml" />
     <Content Include="Properties\Settings.settings">
@@ -349,6 +357,7 @@
     <Content Include="Static\ExternalLoginConfirmation.js" />
     <Content Include="Static\Login.js" />
     <Content Include="Static\Register.js" />
+    <Content Include="Static\TransactionDetails.js" />
     <Content Include="Static\TransactionHistory.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

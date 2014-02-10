@@ -26,10 +26,11 @@
       </div>
     } else {
       <div id="list-header" class="item-container">
-        <div class="item-title">Book Title</div>      
-        <div class="item-isbn">ISBN</div>
-        <div class="item-course">Course</div>
-        <div class="item-price">Initial Price</div>
+        <div class="item-title">Book Title</div>
+        <div class="item-info">ISBN</div>
+        <div class="item-info">Course</div>
+        <div class="item-info">Initial Price</div>
+        <div class="item-info">Status</div>
       </div>
       <ul class="user-history SearchResults wave">
         @{
@@ -48,8 +49,8 @@
   <script type="text/javascript">
      $(function() {
           $('.SearchResults li').on("click", function () {
-              var transId = $(this).attr('id');
-              window.location = '@(Url.Content("TransactionDetails"))' + '?transactionId=' + transId;
+              var transId = $(this).attr('data-id');
+              window.location = '@(Url.Content("TransactionDetails"))' + '/' + transId;
           }); 
      });
   </script>

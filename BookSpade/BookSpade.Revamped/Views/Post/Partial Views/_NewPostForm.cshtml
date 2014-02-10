@@ -11,7 +11,8 @@
     }
 }
 
-@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { id = "createPostForm" })) {
+@using (Html.BeginForm("CreatePost", "Post", FormMethod.Post, new { id = "createPostForm" }))
+{
   @Html.AntiForgeryToken()
       
   <fieldset class="form-horizontal">

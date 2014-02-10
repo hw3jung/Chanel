@@ -1,15 +1,30 @@
 ﻿@model TransactionDetailModel
 
-<li id="@(Model.transaction.TransactionId)" bookTitle ="@(Model.BookTitle)"> 
+<li data-id="@(Model.transaction.TransactionId)">
   <div class="item-container">
-    <div class="item-title">@Model.BookTitle</div>      
-    <div class="item-isbn">@Model.ISBN</div>
-    <div class="item-course">@Model.CourseName</div>
-    <div class="item-price">@Model.Price</div>
+    <div class="item-title One-line Truncate" title="@Model.BookTitle">@Model.BookTitle</div>
+    <div class="item-info">@Model.ISBN</div>
+    <div class="item-info">@Model.CourseName</div>
+    <div class="item-info">@Model.Price</div>
+
+    @if (Model.transaction.IsActive == 1 && Model.transaction.IsDeleted == 0)
+    {
+      <div class="item-info t-pending">
+        Pending
+      </div>
+    }
+    else if (Model.transaction.IsActive == 0)
+    {
+      <div class="item-info t-complete">
+        Complete
+      </div>
+    }
+    else if (Model.transaction.IsDeleted == 1)
+    {
+      <div class="item-info t-cancelled">
+        Cancelled
+      </div>
+    }
+
   </div>
 </li>
-
-
-
-
-
