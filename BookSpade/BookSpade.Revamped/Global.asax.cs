@@ -16,7 +16,7 @@ namespace BookSpade.Revamped
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        private const string DummyCacheItemKey = "AsmaSucks"; 
+        private const string DummyCacheItemKey = "KevinSucks"; 
 
         protected void Application_Start()
         {
@@ -69,9 +69,8 @@ namespace BookSpade.Revamped
         {
             try
             {
-                CommentHandler.commentReminderMail(); 
-                //EmailUtil mailUtil = new EmailUtil();
-                //mailUtil.SendNetMailMessage("asma.patel@hotmail.com", "asma.patel@hotmail.com", "HAIAIAI", "le sigh fkin Jay");
+                CommentHandler.commentReminderMail();
+                TransactionHandler.AutoConfirmTransaction(); 
             }
             catch (Exception ex)
             {

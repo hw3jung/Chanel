@@ -324,6 +324,53 @@ namespace BookSpade.Revamped.Handlers
 
         #endregion
 
+        #region AutoConfirmEmails
+
+        public static void AutoConfirmEmails(string BuyerEmail, string Buyer, string SellerEmail, string Seller)
+        {
+            EmailUtility.SendEmail(
+                    BuyerEmail,
+                    Buyer,
+                    String.Format("Transaction Confirmed!"),
+                    String.Format("Your transaction with {0} has been confirmed in our system.<br /> We assume that your transaction has occured and you just forgot to confirm with us. ",
+                        Seller)
+                    );
+
+            EmailUtility.SendEmail(
+                   SellerEmail,
+                   Seller,
+                   String.Format("Transaction Confirmed!"),
+                   String.Format("Your transaction with {0} has been confirmed in our system.<br /> We assume that your transaction has occured and you just forgot to confirm with us. ",
+                       Buyer)
+                   );
+        }
+
+        #endregion
+
+        #region AutoConfirmTransaction 
+
+        /// ** VALUES SET ** 
+        /// After 14 day since a transaction has occured set the following:
+        /// PostTable: IsActive = 0, IsTransacting = 0 [for each participant]
+        /// Transaction Table: IsActive = 0, confirmed = 3
+        /// 
+
+        public static void AutoConfirmTransaction()
+        {
+            DataAccess da = new DataAccess();
+            DataTable dt = da.ExecuteStoredProc("AutoConfirmTransaction");
+
+            dt.AsEnumerable().ToList().ForEach(x =>
+                AutoConfirmEmails(
+                    Convert.ToString(x["BuyerEmail"]),
+                    Convert.ToString(x["Buyer"]), 
+                    Convert.ToString(x["SellerEmail"]),
+                    Convert.ToString(x["Seller"])
+                    )
+                ); 
+        }
+
+        #endregion
 
     }
 }
