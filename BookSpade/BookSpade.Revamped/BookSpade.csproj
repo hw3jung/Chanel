@@ -415,6 +415,8 @@
     <Content Include="Views\UserMailer\GoodBye.cshtml" />
     <Content Include="Views\Shared\_MailLayout.cshtml" />
     <Content Include="Views\Mail\Index.cshtml" />
+    <Content Include="Views\Account\validate.cshtml" />
+    <Content Include="Views\Account\ValidateRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

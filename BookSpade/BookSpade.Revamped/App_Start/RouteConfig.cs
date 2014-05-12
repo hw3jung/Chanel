@@ -27,6 +27,13 @@ namespace BookSpade.Revamped
                 defaults: new { controller = "Transaction", action = "TransactionDetails" }
             );
 
+            // Validation
+            routes.MapRoute(
+                name: "AccountValidation",
+                url: "Account/validate/{token}",
+                defaults: new { controller = "Account", action = "validate", token = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

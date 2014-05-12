@@ -10,7 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using BookSpade.Revamped.Filters;
 using BookSpade.Revamped.Models;
-using BookSpade.Revamped.Handlers; 
+using BookSpade.Revamped.Handlers;
+using BookSpade.Revamped.Utilities; 
 
 namespace BookSpade.Revamped.Controllers
 {
@@ -36,7 +37,9 @@ namespace BookSpade.Revamped.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid 
+                && ProfileHandler.ConfirmValidation(model.UserName) 
+                && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe)) 
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -80,13 +83,21 @@ namespace BookSpade.Revamped.Controllers
                 // Attempt to register the user
                 try
                 {
+                    var validationGuid = Guid.NewGuid(); 
+
                     WebSecurity.CreateUserAndAccount(
                         model.UserName,
                         model.Password,
-                        new { DisplayName = model.DisplayName });
+                        new { DisplayName = model.DisplayName, ValidationToken = validationGuid, IsValid = false });
 
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    EmailUtility.SendEmail(
+                        model.UserName,
+                        model.DisplayName,
+                        "Thank you for signing up for BookSpade!",
+                        string.Format("Confirm your registration by clicking <a href=\"http://localhost:26793/Account/validate/{0}\" > here </a>", validationGuid)
+                    );
+
+                    return View("ValidateRequest"); 
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -96,6 +107,28 @@ namespace BookSpade.Revamped.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult validate(Guid Token)
+        {
+            try
+            {
+                var profile = ProfileHandler.ValidateProfile(Token);
+
+                if (profile != null) 
+                {
+                    //Log the user in 
+                    FormsAuthentication.SetAuthCookie(profile.Email, true); 
+                }
+                
+            }
+            catch (Exception ex) 
+            {
+                Console.Write("Error occured in validating account."); 
+            }
+
+            return View(); 
         }
 
         //

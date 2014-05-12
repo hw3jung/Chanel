@@ -165,5 +165,73 @@ namespace BookSpade.Revamped.Handlers
         }
 
         #endregion
+
+        #region ValidateProfile
+
+        //User clicked on link
+        //We shall update the database to validate his/her account using the provided token
+        public static Profile ValidateProfile(Guid Token){
+
+            Profile profile = null;
+
+            try
+            {
+                var DAL = new DataAccess();
+                var dt = DAL.select(String.Format("ValidationToken = '{0}'", Token), "UserProfile", NumRows: 1);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    var updateDictionary = new Dictionary<string, object>();
+                    
+                    updateDictionary.Add("IsValid", true); 
+
+                    DAL.update("UserProfile", "ValidationToken = '{0}'", updateDictionary); 
+
+                    var row = dt.Rows[0];
+                    var UserName = Convert.ToString(row["UserName"]); 
+                    var profileId = Convert.ToInt32(row["UserId"]);
+                    var displayName = Convert.ToString(row["DisplayName"]);
+                    var facebookId = row["FacebookId"] is DBNull ? null : Convert.ToString(row["FacebookId"]);
+                    var facebookLink = row["FacebookLink"] is DBNull ? null : Convert.ToString(row["FacebookLink"]);
+
+                    profile = new Profile(profileId, displayName, UserName, facebookId, facebookLink);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write("ERROR: An error occured in retrieving the user profile --- " + ex.Message);
+            }
+
+            return profile;
+        }
+
+        #endregion
+
+        #region ConfirmValidation
+
+        //Confirm Validation -> Checks to see if the user has confirmed using the token
+        //If a user that hasn't confirmed tries to log in we will send them an incorrect username or password error
+
+        public static bool ConfirmValidation(string Email)
+        {
+            try
+            {
+                var DAL = new DataAccess();
+                var dt = DAL.select(String.Format("UserName = '{0}' AND IsValid = '1' ", Email), "UserProfile", NumRows: 1);
+
+                return dt.Rows.Count > 0; 
+              
+            }
+            catch (Exception ex)
+            {
+                Console.Write("ERROR: An error occured in retrieving the user profile --- " + ex.Message);
+            }
+
+            return false; //uh oh .. 
+        }
+
+
+        #endregion
+
     }
 }
